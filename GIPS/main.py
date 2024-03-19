@@ -18,11 +18,12 @@ def main(payload_path, signature_path, stopword_path, virtual_vector_path, big_g
     payloads = [x[0] for x in payloads_data]
 
     # 빅 그룹 식별
-    minhashed_virtual_vectors = MV2(payloads, window_size, K, M)
+    minhashed_virtual_vectors = MV2(payloads=payloads, window_size=window_size, K=K, M=M)
     with open(virtual_vector_path, 'wb') as f:
         pickle.dump(minhashed_virtual_vectors, f)
 
-    big_group_indices = JIG(minhashed_virtual_vectors, thetaJ)
+    big_group_indices = JIG(vectors=minhashed_virtual_vectors, thetaJ=thetaJ)
+    print(len(big_group_indices))
     with open(big_group_path, 'wb') as f:
         pickle.dump(big_group_indices, f)
 
@@ -36,9 +37,10 @@ def main(payload_path, signature_path, stopword_path, virtual_vector_path, big_g
             non_big_group_paylaods.append(payload)
 
     # 시그니처 생성
-    cluster_signatures = SG2(big_group_payloads, window_size,
-                             vector_size, eps, minpts, ngram, hh1_size, hh2_size, ratio)
-    stopwords = AWL(non_big_group_paylaods, hh1_size, hh2_size, ratio)
+    cluster_signatures = SG2(payloads=big_group_payloads, window_size=window_size,
+                             vector_size=vector_size, eps=eps, minpts=minpts, ngram=ngram, 
+                             hh1_size=hh1_size, hh2_size=hh2_size, ratio=ratio)
+    stopwords = AWL(payloads=non_big_group_paylaods, ngram=ngram, hh1_size=hh1_size, hh2_size=hh2_size, ratio=ratio)
 
     # save results
     with open(signature_path, 'wb') as f:
