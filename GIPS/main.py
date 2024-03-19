@@ -2,16 +2,16 @@ import pickle
 
 from core.MV2 import MV2
 from core.JIG import JIG
-from core.SG2 import SG2 
+from core.SG2 import SG2
 from core.AWL import AWL
 
 
 def main(payload_path, signature_path, stopword_path, virtual_vector_path, big_group_path,
-         window_size, K, M, # MV2 파라미터
+         window_size, K, M,  # MV2 파라미터
          thetaJ,  # JIG 파라미터
-         vector_size, eps, minpts, ngram, hh1_size, hh2_size, ratio # SG2, AWL 파라미터
-        ):
-    
+         vector_size, eps, minpts, ngram, hh1_size, hh2_size, ratio  # SG2, AWL 파라미터
+         ):
+
     with open(payload_path, 'rb') as f:
         payloads_data = pickle.load(f)
 
@@ -34,12 +34,13 @@ def main(payload_path, signature_path, stopword_path, virtual_vector_path, big_g
             big_group_payloads.append(payload)
         else:
             non_big_group_paylaods.append(payload)
-    
+
     # 시그니처 생성
-    cluster_signatures = SG2(big_group_payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_size, ratio)
+    cluster_signatures = SG2(big_group_payloads, window_size,
+                             vector_size, eps, minpts, ngram, hh1_size, hh2_size, ratio)
     stopwords = AWL(non_big_group_paylaods, hh1_size, hh2_size, ratio)
 
-     # save results
+    # save results
     with open(signature_path, 'wb') as f:
         pickle.dump(cluster_signatures, f)
     with open(stopword_path, 'wb') as f:
@@ -58,7 +59,6 @@ if __name__ == '__main__':
     M = 4096
     thetaJ = 0.6
 
-
     window_size = 3
     vector_size = 512
     eps = 0.6
@@ -72,4 +72,3 @@ if __name__ == '__main__':
          virtual_vector_path=virtual_vector_path, big_group_path=big_group_indices_path,
          window_size=window_size, vector_size=vector_size, K=K, M=M, thetaJ=thetaJ,
          eps=eps, minpts=minpts, ngram=ngram, hh1_size=hh2_size, hh2_size=hh2_size, ratio=ratio)
-    

@@ -7,6 +7,8 @@ window_size: CDC(cotent defined chuncking)으로 청킹하는 모듈
 K: minhash의 개수
 M: bitmap의 사이즈
 '''
+
+
 def MV2(payloads, window_size, K, M):
     '''
     의사 코드

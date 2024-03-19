@@ -1,5 +1,6 @@
 from collections import OrderedDict
 
+
 class HeavyHitter:
 
     def __init__(self, vector_size: int = 512) -> None:
@@ -35,7 +36,7 @@ class HeavyHitter:
             return 0
 
         # replace
-        
+
         smallest_key = self.inverted_items[self.alpha].popitem(last=False)
         self.items.pop(smallest_key[0])
 
@@ -61,6 +62,7 @@ class HeavyHitter:
                 if string1 != string2 and string1 in string2:
                     self.items[string1] += self.items[string2]
 
+
 def DHH(
     packets: list,
     k: int = 4,
@@ -81,7 +83,7 @@ def DHH(
 
         h = len(packet)
         for i in range(h - k + 1):
-            chunk = packet[i : i + k]
+            chunk = packet[i: i + k]
             count = heavy_hitter1.update(chunk)
             if count > 0:  # case : chunk is in heavy_hiter_1 already
                 if s_temp == "":
@@ -108,12 +110,13 @@ def DHH(
                 temp_count = 0
                 s_temp = ""
 
-        ### append code
+        # append code
         if s_temp != "" and s_temp not in signset:
             heavy_hitter2.update(s_temp)
 
     heavy_hitter2.fixSubstringFrequency()
     return sorted(list(heavy_hitter2.items.items()), key=lambda x: -x[1])
+
 
 def THH(
     packets: list,
@@ -141,7 +144,7 @@ def THH(
 
         h = len(packet)
         for i in range(h - k + 1):
-            chunk = packet[i : i + k]
+            chunk = packet[i: i + k]
             counter1 = hh1.update(chunk)
 
             if counter1 > 0:
@@ -178,14 +181,14 @@ def THH(
             if counter2 > ratio * strings_counter:
                 signature_set.add(s_temp)
                 strings_counter = counter2
-            
+
         if len(signature_set) != 0:
             tmp = set()
             for sign in signature_set:
                 if sign in hh2.items.keys():
                     tmp.add(sign)
             a = '---'.join(sorted(list(tmp)))
-            if len(a)!=0:
+            if len(a) != 0:
                 hh3.update(a)
 
     hh2.fixSubstringFrequency()
@@ -212,5 +215,7 @@ def THH(
 
     return ans
 
+
 if __name__ == '__main__':
-    print(DHH(packets=['httphttp'] * 30 + ['httpttp']*20, ratio=0.1, deduplication=True))
+    print(DHH(packets=['httphttp'] * 30 + ['httpttp']
+          * 20, ratio=0.1, deduplication=True))

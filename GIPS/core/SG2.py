@@ -12,6 +12,8 @@ vector_size: 해싱을 위한 비트맵사이즈
 eps, minpts: DBSACN 하이퍼 파라미터
 ngram, hh1_size, hh2_size, ratiob: DHH하이퍼 파라미터
 '''
+
+
 def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_size, ratio):
     '''
     fine_vectors <= 배열
