@@ -25,3 +25,16 @@ def MV2(payloads, window_size, K, M):
 
     minhashed_virtual_vectors 반환
     '''
+    minhashed_virtual_vectors = []
+    for payload in payloads:
+        chunks = AEchunking(payload, window_size)
+        print(chunks)
+        encode_pos = minHash(chunks, K)
+        print(encode_pos)
+        print(len(encode_pos))
+        vector = np.zeros(M)
+        for pos in encode_pos:
+            vector[pos % M] = 1
+        minhashed_virtual_vectors.append(vector)
+
+    return minhashed_virtual_vectors

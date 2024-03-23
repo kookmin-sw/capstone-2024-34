@@ -58,3 +58,42 @@ def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_si
 
     cluster_signature 반환
     '''
+    fine_vectors = []
+    for payload in payloads:
+        chunks = AEchunking(payload, window_size)
+        vector = np.zeros(vector_size)
+        for chunk in chunks:
+            idx = int(hashlib.md5(chunk.encode()).hexdigest(),
+                      16) % vector_size
+            vector[idx] += 1
+
+        fine_vectors.append(vector)
+
+    model = DBSCAN(eps=1-eps, min_samples=minpts, metric='cosine', n_jobs=None)
+    model.fit(fine_vectors)
+
+    cluster_labels = model.labels_
+    print("labels:")
+    print(cluster_labels)
+    cluster_dict = {}
+    for payload, cluster in zip(payloads, cluster_labels):
+        if cluster == -1:
+            continue
+        if cluster not in cluster_dict.keys():
+            cluster_dict[cluster] = []
+        cluster_dict[cluster].append(payload)
+
+    cluster_signature = {}
+    for cluster_label in cluster_dict.keys():
+        payloads = cluster_dict[cluster_label]
+        signatures = DHH(
+            packets=payloads,
+            k=ngram,
+            hh1_size=hh1_size,
+            hh2_size=hh2_size,
+            ratio=ratio,
+            deduplication=True,
+        )
+        cluster_signature[cluster_label] = (signatures, len(payloads))
+
+    return cluster_signature
