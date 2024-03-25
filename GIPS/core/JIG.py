@@ -42,3 +42,22 @@ def JIG(vectors, thetaJ):
 
     big_group_indices 반환
     '''
+
+    M = len(vectors)
+    MV = np.zeros(M) 
+    big_group_indices = set()
+
+    for idx, vector in enumerate(vectors):
+        MV += vector
+        thetaC = IORA(MV)
+        reatio = 0
+        k = np.sum(vector)
+
+        for idxV, bit in enumerate(vector):
+            if bit == 1 and MV[idxV] > thetaC:
+                reatio += 1
+
+        if k != 0 and reatio / k > thetaJ:
+            big_group_indices.add(idx)
+
+    return big_group_indices
