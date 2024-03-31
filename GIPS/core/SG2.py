@@ -2,8 +2,11 @@ import hashlib
 from sklearn.cluster import DBSCAN
 import numpy as np
 
-from core.HH import DHH
+from core.HH import THH, DHH
 from core.utils import AEchunking
+
+from tqdm import tqdm
+
 
 '''
 payloads: JIG에서 구한 빅그룹
@@ -12,9 +15,7 @@ vector_size: 해싱을 위한 비트맵사이즈
 eps, minpts: DBSACN 하이퍼 파라미터
 ngram, hh1_size, hh2_size, ratiob: DHH하이퍼 파라미터
 '''
-
-
-def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_size, ratio):
+def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_size, hh3_size, ratio):
     '''
     fine_vectors <= 배열
     for payload in payloads:
@@ -58,3 +59,51 @@ def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_si
 
     cluster_signature 반환
     '''
+    fine_vectors = []
+
+    print('chunking')
+    for payload in tqdm(payloads):
+        chunks = AEchunking(payload, window_size)
+        vector = np.zeros(vector_size, dtype=np.int8)
+        for chunk in chunks:
+            idx = int(hashlib.md5(chunk.encode()).hexdigest(),16) % vector_size
+            vector[idx] += 1;
+
+        fine_vectors.append(vector)
+
+    print('start DBSCAN')
+    model = DBSCAN(eps=1-eps, min_samples=minpts, metric='cosine', n_jobs=8)
+    model.fit(fine_vectors)
+    print('end DBSCAN')
+
+    cluster_labels = model.labels_
+
+    cluster_dict = dict()
+    for payload, label in zip(payloads, cluster_labels):
+        if label == -1:
+            continue
+
+        if label not in cluster_dict.keys():
+            cluster_dict[label] = []
+        cluster_dict[label].append(payload)
+
+    
+    print('make signature')
+    cluster_signature = dict()
+    for cluster_label in tqdm(cluster_dict.keys()):
+        payloads = cluster_dict[cluster_label]
+
+        signatures = THH(
+            packets = payloads,
+            k = ngram,
+            hh1_size = hh1_size,
+            hh2_size = hh2_size,
+            hh3_size = hh3_size,
+            ratio = ratio,
+            deduplication = True,
+        )
+
+        cluster_signature[cluster_label] = signatures
+    print('end signature')
+
+    return cluster_signature

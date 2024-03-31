@@ -1,5 +1,6 @@
 import math
 import numpy as np
+from tqdm import tqdm
 
 
 def IORA(sum_vector_): # 이해 가능한 사람은 공유해주세요
@@ -42,3 +43,24 @@ def JIG(vectors, thetaJ):
 
     big_group_indices 반환
     '''
+    M = len(vectors[0])
+    MV = np.zeros(M, dtype=np.int32)
+    big_group_indices = []
+
+    print('checking big group')
+    for doc in tqdm(range(len(vectors))):
+        vector = vectors[doc]
+        MV += vector
+
+        encode_pos = set(np.nonzero(vector)[0])
+
+        thetaC = IORA(MV)
+        big_counter_pos = set(np.where(MV > thetaC)[0])
+
+        overlap_set = encode_pos & big_counter_pos
+        overlap_ratio = len(overlap_set) / len(encode_pos)
+
+        if overlap_ratio >= thetaJ:
+            big_group_indices.append(doc)
+
+    return big_group_indices
