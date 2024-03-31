@@ -18,12 +18,6 @@ def AEchunking(doc, W):
         window += word
         window_count += 1
 
-    # parser = list(re.split('[/=?%&;:"<> ]', doc))
-
-    # for i in parser:
-    #     if i != '':
-    #         chunks.append(i)
-
     if len(window) != 0:
         chunks.append(window)
     return chunks

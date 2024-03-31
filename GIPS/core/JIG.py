@@ -43,22 +43,24 @@ def JIG(vectors, thetaJ):
 
     big_group_indices 반환
     '''
+    M = len(vectors[0])
+    MV = np.zeros(M, dtype=np.int32)
+    big_group_indices = []
 
-    M = len(vectors)
-    MV = np.zeros(M) 
-    big_group_indices = set()
-
-    for idx, vector in enumerate(vectors):
+    print('checking big group')
+    for doc in tqdm(range(len(vectors))):
+        vector = vectors[doc]
         MV += vector
+
+        encode_pos = set(np.nonzero(vector)[0])
+
         thetaC = IORA(MV)
-        reatio = 0
-        k = np.sum(vector)
+        big_counter_pos = set(np.where(MV > thetaC)[0])
 
-        for idxV, bit in enumerate(vector):
-            if bit == 1 and MV[idxV] > thetaC:
-                reatio += 1
+        overlap_set = encode_pos & big_counter_pos
+        overlap_ratio = len(overlap_set) / len(encode_pos)
 
-        if k != 0 and reatio / k > thetaJ:
-            big_group_indices.add(idx)
+        if overlap_ratio >= thetaJ:
+            big_group_indices.append(doc)
 
     return big_group_indices
