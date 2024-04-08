@@ -210,3 +210,5 @@ pyrightconfig.json
 tempCodeRunnerFile.py
 
 /GIPS/iotpot
+
+/vectorDB/chroma
