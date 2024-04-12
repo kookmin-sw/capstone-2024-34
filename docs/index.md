@@ -25,3 +25,9 @@ permalink: /
 <object data="./assets/files/capstone_t34_mid_pt.pdf" type="application/pdf" alt="midterm pt" width="100%" height="480" >
 <p>PDF 파일을 불러오는 데 실패했습니다.</p>
 </object>
+
+## 중간 보고서
+
+<object data="./assets/files/capstone_t34_mid_report.pdf" type="application/pdf" alt="midterm pt" width="100%" height="640" >
+<p>PDF 파일을 불러오는 데 실패했습니다.</p>
+</object>
