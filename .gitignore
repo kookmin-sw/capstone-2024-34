@@ -209,6 +209,8 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python,macos
 tempCodeRunnerFile.py
 
+# Refer to the link for the dataset and run it. Don't upload
 /GIPS/iotpot
 
+# The dataset is stored in the vector DB
 /vectorDB/chroma
