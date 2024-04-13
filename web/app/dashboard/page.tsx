@@ -1,4 +1,5 @@
 import DigitalClock from "@components/dashboard/clock";
+import TrafficGraph from "@components/dashboard/graphs";
 import { mockTableData } from "./mockData/table";
 import moment from "moment";
 
@@ -335,8 +336,9 @@ export default function Dashboard() {
                             </p>
                           </div>
                         </div>
-                        <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center">
-                          그래프 라이브러리 삽입 영역
+                        <div className="px-6 py-4 grid gap-3 md:flex md:justify-center md:items-center">
+                          {/* 그래프 라이브러리 삽입 영역 */}
+                          <TrafficGraph/>
                         </div>
                       </div>
                     </div>
