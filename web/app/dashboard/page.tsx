@@ -1,6 +1,7 @@
 import DigitalClock from "@components/dashboard/clock";
 import { mockTableData } from "./mockData/table";
 import moment from "moment";
+import WordCloud from "@components/wordcloud/wordcloud";
 
 export default function Dashboard() {
   return (
@@ -361,7 +362,7 @@ export default function Dashboard() {
                           </div>
                         </div>
                         <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center">
-                          워드 클라우드 삽입 영역
+                          <WordCloud />
                         </div>
                       </div>
                     </div>
