@@ -347,9 +347,9 @@ export default function Dashboard() {
             {/* 주요 시그니처 워드 클라우드 */}
             <div className="w-full h-full">
               <div className="flex flex-col w-full h-full">
-                <div className=" ">
-                  <div className="min-w-full inline-block align-middle">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                <div className="h-full">
+                  <div className="min-w-full inline-block align-middle h-full">
+                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden flex flex-col h-full">
                       <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
                         <div>
                           <h2 className="text-xl font-semibold text-gray-800">
@@ -360,7 +360,7 @@ export default function Dashboard() {
                           </p>
                         </div>
                       </div>
-                      <div className="py-4 grid gap-3 md:flex md:justify-between md:items-center">
+                      <div className="py-4 grid gap-3 md:flex md:justify-between md:items-center flex-1">
                         <WordCloud />
                       </div>
                     </div>
