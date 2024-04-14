@@ -2,55 +2,55 @@ import { WordCloudData } from "@customTypes/mock/wordcloud";
 
 export const mockWordCloudData: WordCloudData[] = [
   {
-    text: "told",
+    text: "password",
+    value: 100,
+  },
+  {
+    text: "sh",
+    value: 55,
+  },
+  {
+    text: "admin",
     value: 64,
   },
   {
-    text: "mistake",
-    value: 11,
+    text: "tftp",
+    value: 80,
   },
   {
-    text: "thought",
-    value: 16,
+    text: "login",
+    value: 59,
   },
   {
-    text: "bad",
-    value: 17,
+    text: "ping",
+    value: 70,
   },
   {
-    text: "correct",
-    value: 10,
+    text: "host",
+    value: 49,
   },
   {
-    text: "day",
-    value: 54,
+    text: "pong",
+    value: 85,
   },
   {
-    text: "prescription",
-    value: 12,
-  },
-  {
-    text: "time",
-    value: 77,
-  },
-  {
-    text: "thing",
+    text: "https",
     value: 45,
   },
   {
-    text: "left",
-    value: 19,
+    text: "adir",
+    value: 54,
   },
   {
-    text: "pay",
-    value: 13,
+    text: "local",
+    value: 31,
   },
   {
-    text: "people",
+    text: "GET",
     value: 32,
   },
   {
-    text: "month",
+    text: "POST",
     value: 22,
   },
   {
@@ -58,89 +58,85 @@ export const mockWordCloudData: WordCloudData[] = [
     value: 35,
   },
   {
-    text: "review",
-    value: 24,
+    text: "root",
+    value: 79,
   },
   {
     text: "call",
     value: 38,
   },
   {
-    text: "doctor",
+    text: "script",
     value: 70,
   },
   {
-    text: "asked",
-    value: 26,
+    text: "command",
+    value: 53,
   },
   {
-    text: "finally",
-    value: 14,
+    text: "alert",
+    value: 40,
   },
   {
-    text: "insurance",
-    value: 29,
+    text: "src",
+    value: 39,
   },
   {
-    text: "week",
+    text: "document",
     value: 41,
   },
   {
-    text: "called",
+    text: "return",
     value: 49,
   },
   {
-    text: "problem",
-    value: 20,
+    text: "cookie",
+    value: 76,
   },
   {
-    text: "going",
+    text: "write",
     value: 59,
   },
   {
-    text: "help",
+    text: "location",
     value: 49,
   },
   {
-    text: "felt",
+    text: "herf",
     value: 45,
   },
   {
-    text: "discomfort",
-    value: 11,
+    text: "open",
+    value: 35,
   },
   {
-    text: "lower",
-    value: 22,
+    text: "getRuntime()",
+    value: 55,
   },
   {
-    text: "severe",
-    value: 12,
+    text: ".exec",
+    value: 88,
   },
   {
-    text: "free",
-    value: 38,
+    text: "/bin/busybox",
+    value: 44,
   },
   {
-    text: "better",
+    text: "echo",
     value: 54,
   },
   {
-    text: "muscle",
-    value: 14,
-  },
-  {
-    text: "neck",
-    value: 41,
+    text: "arch armv7",
+    value: 46,
   },
   {
     text: "root",
-    value: 24,
+    value: 90,
   },
   {
-    text: "adjustment",
-    value: 16,
-  },
+    text: "security=low",
+    value: 68,
+  }, // 나머진 더미값
   {
     text: "therapy",
     value: 29,
@@ -159,15 +155,15 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "chiropractor",
-    value: 35,
+    value: 13,
   },
   {
     text: "treatment",
-    value: 59,
+    value: 25,
   },
   {
     text: "tooth",
-    value: 32,
+    value: 11,
   },
   {
     text: "chiropractic",
@@ -175,15 +171,15 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "dr",
-    value: 77,
+    value: 24,
   },
   {
     text: "relief",
-    value: 19,
+    value: 9,
   },
   {
     text: "shoulder",
-    value: 26,
+    value: 27,
   },
   {
     text: "nurse",
@@ -195,11 +191,11 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "hour",
-    value: 35,
+    value: 30,
   },
   {
     text: "wait",
-    value: 38,
+    value: 2,
   },
   {
     text: "hospital",
@@ -215,7 +211,7 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "appointment",
-    value: 49,
+    value: 15,
   },
   {
     text: "medical",
@@ -227,15 +223,15 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "office",
-    value: 64,
+    value: 18,
   },
   {
     text: "care",
-    value: 54,
+    value: 23,
   },
   {
     text: "minute",
-    value: 29,
+    value: 20,
   },
   {
     text: "waiting",
@@ -243,11 +239,11 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "patient",
-    value: 59,
+    value: 19,
   },
   {
     text: "health",
-    value: 49,
+    value: 18,
   },
   {
     text: "alternative",
@@ -263,7 +259,7 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "symptom",
-    value: 29,
+    value: 14,
   },
   {
     text: "internal",
@@ -271,7 +267,7 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "prescribed",
-    value: 26,
+    value: 13,
   },
   {
     text: "acupuncturist",
@@ -279,7 +275,7 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "pain",
-    value: 64,
+    value: 21,
   },
   {
     text: "integrative",
@@ -295,7 +291,7 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "physician",
-    value: 41,
+    value: 14,
   },
   {
     text: "herbal",
@@ -307,198 +303,6 @@ export const mockWordCloudData: WordCloudData[] = [
   },
   {
     text: "chinese",
-    value: 32,
-  },
-  {
-    text: "acupuncture",
-    value: 45,
-  },
-  {
-    text: "prescribe",
-    value: 14,
-  },
-  {
-    text: "medication",
-    value: 38,
-  },
-  {
-    text: "western",
-    value: 35,
-  },
-  {
-    text: "sure",
-    value: 38,
-  },
-  {
-    text: "work",
-    value: 64,
-  },
-  {
-    text: "smile",
-    value: 17,
-  },
-  {
-    text: "teeth",
-    value: 26,
-  },
-  {
-    text: "pair",
-    value: 11,
-  },
-  {
-    text: "wanted",
-    value: 20,
-  },
-  {
-    text: "frame",
-    value: 13,
-  },
-  {
-    text: "lasik",
-    value: 10,
-  },
-  {
-    text: "amazing",
-    value: 41,
-  },
-  {
-    text: "fit",
-    value: 14,
-  },
-  {
-    text: "happy",
-    value: 22,
-  },
-  {
-    text: "feel",
-    value: 49,
-  },
-  {
-    text: "glasse",
-    value: 19,
-  },
-  {
-    text: "vision",
-    value: 12,
-  },
-  {
-    text: "pressure",
-    value: 16,
-  },
-  {
-    text: "find",
-    value: 29,
-  },
-  {
-    text: "experience",
-    value: 59,
-  },
-  {
-    text: "year",
-    value: 70,
-  },
-  {
-    text: "massage",
-    value: 35,
-  },
-  {
-    text: "best",
-    value: 54,
-  },
-  {
-    text: "mouth",
-    value: 20,
-  },
-  {
-    text: "staff",
-    value: 64,
-  },
-  {
-    text: "gum",
-    value: 10,
-  },
-  {
-    text: "chair",
-    value: 12,
-  },
-  {
-    text: "ray",
-    value: 22,
-  },
-  {
-    text: "dentistry",
-    value: 11,
-  },
-  {
-    text: "canal",
-    value: 13,
-  },
-  {
-    text: "procedure",
-    value: 32,
-  },
-  {
-    text: "filling",
-    value: 26,
-  },
-  {
-    text: "gentle",
-    value: 19,
-  },
-  {
-    text: "cavity",
-    value: 17,
-  },
-  {
-    text: "crown",
-    value: 14,
-  },
-  {
-    text: "cleaning",
-    value: 38,
-  },
-  {
-    text: "hygienist",
-    value: 24,
-  },
-  {
-    text: "dental",
-    value: 59,
-  },
-  {
-    text: "charge",
-    value: 24,
-  },
-  {
-    text: "cost",
-    value: 29,
-  },
-  {
-    text: "charged",
-    value: 13,
-  },
-  {
-    text: "spent",
-    value: 17,
-  },
-  {
-    text: "paying",
-    value: 14,
-  },
-  {
-    text: "pocket",
-    value: 12,
-  },
-  {
-    text: "dollar",
-    value: 11,
-  },
-  {
-    text: "business",
-    value: 32,
-  },
-  {
-    text: "refund",
-    value: 10,
+    value: 23,
   },
 ];
