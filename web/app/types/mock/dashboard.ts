@@ -5,3 +5,7 @@ export interface FileResultTableData {
   result: string;
   reason: string;
 }
+export interface TrafficGraphData {
+  type: string;
+  count: number;
+}
