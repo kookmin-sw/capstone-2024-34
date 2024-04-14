@@ -26,7 +26,7 @@ const WordCloud = () => {
   }, [iteration]);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full max-w-full">
       <ReactWordcloud words={mockWordCloudData} options={options} />
     </div>
   );
