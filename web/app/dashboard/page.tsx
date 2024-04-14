@@ -1,7 +1,7 @@
 import DigitalClock from "@components/dashboard/clock";
 import { mockTableData } from "./mockData/table";
 import moment from "moment";
-import WordCloud from "@components/wordcloud/wordcloud";
+import WordCloud from "@components/dashboard/wordcloud";
 
 export default function Dashboard() {
   return (
