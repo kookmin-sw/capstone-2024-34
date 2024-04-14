@@ -21,7 +21,7 @@ const WordCloud = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIteration(iteration + 1);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
   }, [iteration]);
 
