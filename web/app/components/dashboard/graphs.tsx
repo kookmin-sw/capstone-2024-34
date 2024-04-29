@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import ApexCharts from "apexcharts";
-import { mockGraphData } from "../../dashboard/mockData/graph";
+import { mockGraphData } from "../../(page)/dashboard/mockData/graph";
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,

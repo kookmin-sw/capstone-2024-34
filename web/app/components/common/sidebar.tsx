@@ -2,6 +2,7 @@ import {
   CodeBracketSquareIcon,
   ChartBarSquareIcon,
 } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function SideBar() {
   return (
@@ -323,6 +324,81 @@ export default function SideBar() {
                     href="#"
                   >
                     Link 3
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li className="hs-accordion" id="analyze-accordion">
+            <button
+              type="button"
+              className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="flex-shrink-0 size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
+                />
+              </svg>
+              파일 분석
+              <svg
+                className="hs-accordion-active:block ms-auto hidden size-4"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m18 15-6-6-6 6" />
+              </svg>
+              <svg
+                className="hs-accordion-active:hidden ms-auto block size-4"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+
+            <div
+              id="analyze-accordion-child"
+              className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+            >
+              <ul className="pt-2 ps-2">
+                <li>
+                  <Link
+                    className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    href="/analyze/file/pe"
+                  >
+                    PE 파일 분석
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    href="#"
+                  >
+                    문서 파일 분석
                   </a>
                 </li>
               </ul>

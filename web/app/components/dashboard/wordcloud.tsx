@@ -6,7 +6,7 @@ import ReactWordcloud from "react-wordcloud";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
 
-import { mockWordCloudData } from "../../dashboard/mockData/words";
+import { mockWordCloudData } from "../../(page)/dashboard/mockData/words";
 import { MinMaxPair } from "react-wordcloud";
 
 const options = {
