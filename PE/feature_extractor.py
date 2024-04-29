@@ -24,7 +24,8 @@ __LIST_OF_DLLS = {
     'GDI32.DLL', # GDI Client DLL
     'GROUP.DLL', # policy support
     'HYPERTERM.DLL', # Terminal DLL
-    'KERNL32.DLL', # Windows NT BASE API Client DLL
+    # 'KERNL32.DLL', # Windows NT BASE API Client DLL
+    'KERNEL32.DLL', # Windows NT BASE API Client DLL
     'LZ32.DLL', # LZ Expand/Compress API DLL
     'MAPI.DLL', # Mail / Exchange component
     'MAPI32.DLL', # Extended MAPI 1.0 for Windows NT
