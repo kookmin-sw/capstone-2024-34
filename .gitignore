@@ -214,3 +214,6 @@ tempCodeRunnerFile.py
 
 # The dataset is stored in the vector DB
 /vectorDB/chroma
+
+# private malware dataset
+/PE/datasets/
