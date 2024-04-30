@@ -81,8 +81,9 @@ def DHH(
         s_temp = ""
         temp_count = 0
 
-        for i in packet:
-            chunk = i
+        h = len(packet)
+        for i in range(h - k + 1):
+            chunk = packet[i: i + k]
             count = heavy_hitter1.update(chunk)
             if count > 0:  # case : chunk is in heavy_hiter_1 already
                 if s_temp == "":
@@ -90,7 +91,7 @@ def DHH(
                     temp_count = count
                 else:
                     if count > ratio * temp_count:
-                        s_temp = chunk
+                        s_temp += packet[i + k - 1]
                         temp_count = count
                     else:
                         # reset
@@ -141,9 +142,9 @@ def THH(
         signature_set = set()
         local_signset = set()
 
-        # h = len(packet)
-        for i in packet:
-            chunk = i
+        h = len(packet)
+        for i in range(h - k + 1):
+            chunk = packet[i: i + k]
             counter1 = hh1.update(chunk)
 
             if counter1 > 0:
@@ -152,7 +153,7 @@ def THH(
                     temp_counter = counter1
                 else:
                     if counter1 > ratio * temp_counter:
-                        s_temp += ''
+                        s_temp += chunk[-1]
                         temp_counter = counter1
                     else:
                         if s_temp != '' and (s_temp not in local_signset):
@@ -216,8 +217,5 @@ def THH(
 
 
 if __name__ == '__main__':
-    packets = [['http' for _ in range(30)] for _ in range(30)]
-    print(packets[0][0])
-
-    print(THH(packets=packets, ratio=0.1, deduplication=True))
-    print(DHH(packets=packets, ratio=0.1, deduplication=True))
+    print(DHH(packets=['httphttp'] * 30 + ['httpttp']
+          * 20, ratio=0.1, deduplication=True))
