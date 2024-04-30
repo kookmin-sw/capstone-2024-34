@@ -211,14 +211,14 @@ tempCodeRunnerFile.py
 
 # Refer to the link for the dataset and run it. Don't upload
 /GIPS/iotpot/*
-!/GIPS/iotpot/.gitkeep
+!/GIPS/iotpot/README.md
 
 # The dataset is stored in the vector DB
 /vectorDB/chroma/*
-!/vectorDB/chroma/.gitkeep
+!/vectorDB/chroma/README.md
 
 # private malware dataset
 /PE/datasets/PE_malware/*
-!/PE/datasets/PE_malware/.gitkeep
+!/PE/datasets/PE_malware/README.md
 /PE/datasets/pkl/*
-!/PE/datasets/pkl/.gitkeep
+!/PE/datasets/pkl/README.md
