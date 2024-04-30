@@ -14,11 +14,11 @@ const DigitalClock = () => {
   }, []);
 
   const formattedDateTime = moment(currentDateTime).format(
-    "YYYY-MM-DD A hh:mm:ss"
+    "YYYY-MM-DD A hh:mm:ss",
   );
 
   return (
-    <p className="text-2xl text-right font-semibold pb-2">
+    <p className="pb-2 text-right text-2xl font-semibold">
       {formattedDateTime}
     </p>
   );
