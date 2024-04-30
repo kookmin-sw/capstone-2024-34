@@ -218,3 +218,4 @@ tempCodeRunnerFile.py
 # private malware dataset
 /PE/datasets/PE_malware/*
 /PE/datasets/pkl/*
+/PE/datasets/*
