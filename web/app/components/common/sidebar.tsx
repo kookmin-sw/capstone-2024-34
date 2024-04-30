@@ -1,14 +1,10 @@
-import {
-  CodeBracketSquareIcon,
-  ChartBarSquareIcon,
-} from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export default function SideBar() {
   return (
     <div
       id="application-sidebar-dark"
-      className="hs-overlay [--auto-close:lg] hs-overlay-open:translate-x-0 -translate-x-full transition-all duration-300 transform hidden fixed top-0 start-0 bottom-0 z-[60] w-64 bg-gray-900 border-e border-gray-800 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-slate-700 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500"
+      className="hs-overlay fixed bottom-0 start-0 top-0 z-[60] hidden w-64 -translate-x-full transform overflow-y-auto border-e border-gray-800 bg-gray-900 pb-10 pt-7 transition-all duration-300 [--auto-close:lg] hs-overlay-open:translate-x-0 lg:bottom-0 lg:end-auto lg:block lg:translate-x-0 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-slate-700 [&::-webkit-scrollbar]:w-2"
     >
       <div className="px-6">
         <a
@@ -22,13 +18,13 @@ export default function SideBar() {
       </div>
 
       <nav
-        className="hs-accordion-group p-6 w-full flex flex-col flex-wrap"
+        className="hs-accordion-group flex w-full flex-col flex-wrap p-6"
         data-hs-accordion-always-open
       >
         <ul className="space-y-1.5">
           <li>
             <a
-              className="flex items-center gap-x-3 py-2 px-2.5 bg-gray-700 text-sm text-white rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-600"
+              className="flex items-center gap-x-3 rounded-lg bg-gray-700 px-2.5 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
               href="#"
             >
               <svg
@@ -37,7 +33,7 @@ export default function SideBar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="flex-shrink-0 size-5"
+                className="size-5 flex-shrink-0"
               >
                 <path
                   strokeLinecap="round"
@@ -52,7 +48,7 @@ export default function SideBar() {
           <li className="hs-accordion" id="users-accordion">
             <button
               type="button"
-              className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+              className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +56,7 @@ export default function SideBar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="flex-shrink-0 size-5"
+                className="size-5 flex-shrink-0"
               >
                 <path
                   strokeLinecap="round"
@@ -70,7 +66,7 @@ export default function SideBar() {
               </svg>
               탐지규칙 생성
               <svg
-                className="hs-accordion-active:block ms-auto hidden size-4"
+                className="ms-auto hidden size-4 hs-accordion-active:block"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -84,7 +80,7 @@ export default function SideBar() {
                 <path d="m18 15-6-6-6 6" />
               </svg>
               <svg
-                className="hs-accordion-active:hidden ms-auto block size-4"
+                className="ms-auto block size-4 hs-accordion-active:hidden"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -101,7 +97,7 @@ export default function SideBar() {
 
             <div
               id="users-accordion-child"
-              className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             >
               <ul
                 className="hs-accordion-group ps-3 pt-2"
@@ -110,11 +106,11 @@ export default function SideBar() {
                 <li className="hs-accordion" id="users-accordion-sub-1">
                   <button
                     type="button"
-                    className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
                   >
                     Sub Menu 1
                     <svg
-                      className="hs-accordion-active:block ms-auto hidden size-4"
+                      className="ms-auto hidden size-4 hs-accordion-active:block"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -128,7 +124,7 @@ export default function SideBar() {
                       <path d="m18 15-6-6-6 6" />
                     </svg>
                     <svg
-                      className="hs-accordion-active:hidden ms-auto block size-4"
+                      className="ms-auto block size-4 hs-accordion-active:hidden"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -145,12 +141,12 @@ export default function SideBar() {
 
                   <div
                     id="users-accordion-sub-1-child"
-                    className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+                    className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
                   >
-                    <ul className="pt-2 ps-2">
+                    <ul className="ps-2 pt-2">
                       <li>
                         <a
-                          className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                          className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                           href="#"
                         >
                           Link 1
@@ -158,7 +154,7 @@ export default function SideBar() {
                       </li>
                       <li>
                         <a
-                          className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                          className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                           href="#"
                         >
                           Link 2
@@ -166,7 +162,7 @@ export default function SideBar() {
                       </li>
                       <li>
                         <a
-                          className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                          className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                           href="#"
                         >
                           Link 3
@@ -178,11 +174,11 @@ export default function SideBar() {
                 <li className="hs-accordion" id="users-accordion-sub-2">
                   <button
                     type="button"
-                    className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
                   >
                     Sub Menu 2
                     <svg
-                      className="hs-accordion-active:block ms-auto hidden size-4"
+                      className="ms-auto hidden size-4 hs-accordion-active:block"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -196,7 +192,7 @@ export default function SideBar() {
                       <path d="m18 15-6-6-6 6" />
                     </svg>
                     <svg
-                      className="hs-accordion-active:hidden ms-auto block size-4"
+                      className="ms-auto block size-4 hs-accordion-active:hidden"
                       xmlns="http://www.w3.org/2000/svg"
                       width="24"
                       height="24"
@@ -213,12 +209,12 @@ export default function SideBar() {
 
                   <div
                     id="users-accordion-sub-2-child"
-                    className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden ps-2"
+                    className="hs-accordion-content hidden w-full overflow-hidden ps-2 transition-[height] duration-300"
                   >
-                    <ul className="pt-2 ps-2">
+                    <ul className="ps-2 pt-2">
                       <li>
                         <a
-                          className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                          className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                           href="#"
                         >
                           Link 1
@@ -226,7 +222,7 @@ export default function SideBar() {
                       </li>
                       <li>
                         <a
-                          className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                          className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                           href="#"
                         >
                           Link 2
@@ -234,7 +230,7 @@ export default function SideBar() {
                       </li>
                       <li>
                         <a
-                          className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                          className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                           href="#"
                         >
                           Link 3
@@ -250,7 +246,7 @@ export default function SideBar() {
           <li className="hs-accordion" id="account-accordion">
             <button
               type="button"
-              className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+              className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -258,7 +254,7 @@ export default function SideBar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="flex-shrink-0 size-5"
+                className="size-5 flex-shrink-0"
               >
                 <path
                   strokeLinecap="round"
@@ -268,7 +264,7 @@ export default function SideBar() {
               </svg>
               탐지통계 조회
               <svg
-                className="hs-accordion-active:block ms-auto hidden size-4"
+                className="ms-auto hidden size-4 hs-accordion-active:block"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -282,7 +278,7 @@ export default function SideBar() {
                 <path d="m18 15-6-6-6 6" />
               </svg>
               <svg
-                className="hs-accordion-active:hidden ms-auto block size-4"
+                className="ms-auto block size-4 hs-accordion-active:hidden"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -299,12 +295,12 @@ export default function SideBar() {
 
             <div
               id="account-accordion-child"
-              className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             >
-              <ul className="pt-2 ps-2">
+              <ul className="ps-2 pt-2">
                 <li>
                   <a
-                    className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                     href="#"
                   >
                     Link 1
@@ -312,7 +308,7 @@ export default function SideBar() {
                 </li>
                 <li>
                   <a
-                    className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                     href="#"
                   >
                     Link 2
@@ -320,7 +316,7 @@ export default function SideBar() {
                 </li>
                 <li>
                   <a
-                    className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                     href="#"
                   >
                     Link 3
@@ -333,7 +329,7 @@ export default function SideBar() {
           <li className="hs-accordion" id="analyze-accordion">
             <button
               type="button"
-              className="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+              className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -341,7 +337,7 @@ export default function SideBar() {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="flex-shrink-0 size-5"
+                className="size-5 flex-shrink-0"
               >
                 <path
                   strokeLinecap="round"
@@ -351,7 +347,7 @@ export default function SideBar() {
               </svg>
               파일 분석
               <svg
-                className="hs-accordion-active:block ms-auto hidden size-4"
+                className="ms-auto hidden size-4 hs-accordion-active:block"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -365,7 +361,7 @@ export default function SideBar() {
                 <path d="m18 15-6-6-6 6" />
               </svg>
               <svg
-                className="hs-accordion-active:hidden ms-auto block size-4"
+                className="ms-auto block size-4 hs-accordion-active:hidden"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -382,12 +378,12 @@ export default function SideBar() {
 
             <div
               id="analyze-accordion-child"
-              className="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden"
+              className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
             >
-              <ul className="pt-2 ps-2">
+              <ul className="ps-2 pt-2">
                 <li>
                   <Link
-                    className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                     href="/analyze/file/pe"
                   >
                     PE 파일 분석
@@ -395,7 +391,7 @@ export default function SideBar() {
                 </li>
                 <li>
                   <a
-                    className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                     href="#"
                   >
                     문서 파일 분석
@@ -407,7 +403,7 @@ export default function SideBar() {
 
           <li>
             <a
-              className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-400 rounded-lg hover:bg-gray-800 hover:text-white-300 focus:outline-none focus:ring-1 focus:ring-gray-600"
+              className="hover:text-white-300 flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-600"
               href="#"
             >
               <svg
@@ -416,7 +412,7 @@ export default function SideBar() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="flex-shrink-0 size-5"
+                className="size-5 flex-shrink-0"
               >
                 <path
                   strokeLinecap="round"

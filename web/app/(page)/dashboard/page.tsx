@@ -7,61 +7,7 @@ import WordCloud from "@components/dashboard/wordcloud";
 export default function Dashboard() {
   return (
     <div className="w-full">
-      <nav className="sticky top-0 inset-x-0 z-20 bg-white border-y px-4 sm:px-6 md:px-8 lg:hidden">
-        <div className="flex items-center py-4">
-          <button
-            type="button"
-            className="text-gray-500 hover:text-gray-600"
-            data-hs-overlay="#application-sidebar-dark"
-            aria-controls="application-sidebar-dark"
-            aria-label="Toggle navigation"
-          >
-            <span className="sr-only">Toggle Navigation</span>
-            <svg
-              className="size-5"
-              width="16"
-              height="16"
-              fill="currentColor"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
-              />
-            </svg>
-          </button>
-
-          {/* <ol className="ms-3 flex items-center whitespace-nowrap">
-            <li className="flex items-center text-sm text-gray-800 ">
-              Application Layout
-              <svg
-                className="flex-shrink-0 mx-3 overflow-visible size-2.5 text-gray-400 "
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 1L10.6869 7.16086C10.8637 7.35239 10.8637 7.64761 10.6869 7.83914L5 14"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </li>
-            <li
-              className="text-sm font-semibold text-gray-800 truncate"
-              aria-current="page"
-            >
-              Dashboard
-            </li>
-          </ol> */}
-          <div className="px-2 font-semibold">Platform GIPS</div>
-        </div>
-      </nav>
-
-      <div className="w-full h-full min-h-full pt-10 px-4 sm:px-6 md:px-8 lg:ps-72 ">
+      <div className="h-full min-h-full w-full">
         <div className="grid grid-cols-2">
           <header>
             <p className="mb-2 text-sm font-semibold text-blue-600">
@@ -73,20 +19,20 @@ export default function Dashboard() {
             <p className="mt-2 text-lg text-gray-800"></p>
           </header>
 
-          <div className="items-end place-items-end place-self-end">
+          <div className="place-items-end items-end place-self-end">
             <DigitalClock />
           </div>
         </div>
 
         {/* 콘텐츠 영역 */}
-        <div className="mt-5 grid gap-4 sm:gap-6 w-full max-w-full">
+        <div className="mt-5 grid w-full max-w-full gap-4 sm:gap-6">
           {/* 통계카드 영역 */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            <div className="flex flex-col bg-white border shadow-sm rounded-xl">
-              <div className="p-4 md:p-5 flex gap-x-4">
-                <div className="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+          <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
+            <div className="flex flex-col rounded-xl border bg-white shadow-sm">
+              <div className="flex gap-x-4 p-4 md:p-5">
+                <div className="flex size-[46px] flex-shrink-0 items-center justify-center rounded-lg bg-gray-100">
                   <svg
-                    className="flex-shrink-0 size-5 text-gray-600"
+                    className="size-5 flex-shrink-0 text-gray-600"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -112,7 +58,7 @@ export default function Dashboard() {
                     <div className="hs-tooltip">
                       <div className="hs-tooltip-toggle">
                         <svg
-                          className="flex-shrink-0 size-4 text-gray-500"
+                          className="size-4 flex-shrink-0 text-gray-500"
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
                           height="24"
@@ -128,7 +74,7 @@ export default function Dashboard() {
                           <path d="M12 17h.01" />
                         </svg>
                         <span
-                          className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm"
+                          className="hs-tooltip-content invisible absolute z-10 inline-block rounded bg-gray-900 px-2 py-1 text-xs font-medium text-white opacity-0 shadow-sm transition-opacity hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
                           role="tooltip"
                         >
                           The number of daily users
@@ -140,7 +86,7 @@ export default function Dashboard() {
                     <h3 className="text-2xl font-semibold text-gray-800">
                       72,540
                     </h3>
-                    <span className="inline-flex items-center gap-x-1 py-0.5 px-2 rounded-full bg-green-100 text-green-900">
+                    <span className="inline-flex items-center gap-x-1 rounded-full bg-green-100 px-2 py-0.5 text-green-900">
                       <svg
                         className="inline-block size-4 self-center"
                         xmlns="http://www.w3.org/2000/svg"
@@ -165,11 +111,11 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="flex flex-col bg-white border shadow-sm rounded-xl">
-              <div className="p-4 md:p-5 flex gap-x-4">
-                <div className="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+            <div className="flex flex-col rounded-xl border bg-white shadow-sm">
+              <div className="flex gap-x-4 p-4 md:p-5">
+                <div className="flex size-[46px] flex-shrink-0 items-center justify-center rounded-lg bg-gray-100">
                   <svg
-                    className="flex-shrink-0 size-5 text-gray-600"
+                    className="size-5 flex-shrink-0 text-gray-600"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -195,7 +141,7 @@ export default function Dashboard() {
                     <h3 className="text-2xl font-semibold text-gray-800">
                       24,376
                     </h3>
-                    <span className="inline-flex items-center gap-x-1 py-0.5 px-2 rounded-full bg-red-100 text-red-900">
+                    <span className="inline-flex items-center gap-x-1 rounded-full bg-red-100 px-2 py-0.5 text-red-900">
                       <svg
                         className="inline-block size-4 self-center"
                         xmlns="http://www.w3.org/2000/svg"
@@ -220,11 +166,11 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="flex flex-col bg-white border shadow-sm rounded-xl">
-              <div className="p-4 md:p-5 flex gap-x-4">
-                <div className="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+            <div className="flex flex-col rounded-xl border bg-white shadow-sm">
+              <div className="flex gap-x-4 p-4 md:p-5">
+                <div className="flex size-[46px] flex-shrink-0 items-center justify-center rounded-lg bg-gray-100">
                   <svg
-                    className="flex-shrink-0 size-5 text-gray-600"
+                    className="size-5 flex-shrink-0 text-gray-600"
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -257,16 +203,16 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="flex flex-col bg-white border shadow-sm rounded-xl">
-              <div className="p-4 md:p-5 flex gap-x-4">
-                <div className="flex-shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg">
+            <div className="flex flex-col rounded-xl border bg-white shadow-sm">
+              <div className="flex gap-x-4 p-4 md:p-5">
+                <div className="flex size-[46px] flex-shrink-0 items-center justify-center rounded-lg bg-gray-100">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="flex-shrink-0 size-5 text-gray-600"
+                    className="size-5 flex-shrink-0 text-gray-600"
                   >
                     <path
                       strokeLinecap="round"
@@ -284,7 +230,7 @@ export default function Dashboard() {
                     <div className="hs-tooltip">
                       <div className="hs-tooltip-toggle">
                         <svg
-                          className="flex-shrink-0 size-4 text-gray-500"
+                          className="size-4 flex-shrink-0 text-gray-500"
                           xmlns="http://www.w3.org/2000/svg"
                           width="24"
                           height="24"
@@ -300,7 +246,7 @@ export default function Dashboard() {
                           <path d="M12 17h.01" />
                         </svg>
                         <span
-                          className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm"
+                          className="hs-tooltip-content invisible absolute z-10 inline-block rounded bg-gray-900 px-2 py-1 text-xs font-medium text-white opacity-0 shadow-sm transition-opacity hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
                           role="tooltip"
                         >
                           The average pageviews
@@ -319,13 +265,13 @@ export default function Dashboard() {
           </div>
 
           {/* 유입량 통계 & 요 시그니처 워드 클라우드 */}
-          <div className="grid grid-rows-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-rows-1 gap-4 sm:gap-6 md:grid-cols-2">
             {/* 유입량 통계 */}
-            <div className="w-full h-full">
-              <div className="flex flex-col w-full h-full">
-                <div className="min-w-full inline-block align-middle h-full">
-                  <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden h-full">
-                    <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
+            <div className="h-full w-full">
+              <div className="flex h-full w-full flex-col">
+                <div className="inline-block h-full min-w-full align-middle">
+                  <div className="h-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                    <div className="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between">
                       <div>
                         <h2 className="text-xl font-semibold text-gray-800">
                           유입량 통계
@@ -335,7 +281,7 @@ export default function Dashboard() {
                         </p>
                       </div>
                     </div>
-                    <div className="px-6 py-4 grid gap-3 md:flex md:justify-center md:items-center">
+                    <div className="grid gap-3 px-6 py-4 md:flex md:items-center md:justify-center">
                       {/* 그래프 라이브러리 삽입 영역 */}
                       <TrafficGraph />
                     </div>
@@ -345,12 +291,12 @@ export default function Dashboard() {
             </div>
 
             {/* 주요 시그니처 워드 클라우드 */}
-            <div className="w-full h-full">
-              <div className="flex flex-col w-full h-full">
+            <div className="h-full w-full">
+              <div className="flex h-full w-full flex-col">
                 <div className="h-full">
-                  <div className="min-w-full inline-block align-middle h-full">
-                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden flex flex-col h-full">
-                      <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
+                  <div className="inline-block h-full min-w-full align-middle">
+                    <div className="flex h-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                      <div className="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between">
                         <div>
                           <h2 className="text-xl font-semibold text-gray-800">
                             탐지 주요 시그니처
@@ -360,7 +306,7 @@ export default function Dashboard() {
                           </p>
                         </div>
                       </div>
-                      <div className="py-4 grid gap-3 md:flex md:justify-between md:items-center flex-1">
+                      <div className="grid flex-1 gap-3 py-4 md:flex md:items-center md:justify-between">
                         <WordCloud />
                       </div>
                     </div>
@@ -374,9 +320,9 @@ export default function Dashboard() {
           <div className="w-full">
             <div className="flex flex-col">
               <div className=" ">
-                <div className=" min-w-full inline-block align-middle">
-                  <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
-                    <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
+                <div className=" inline-block min-w-full align-middle">
+                  <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                    <div className="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between">
                       <div>
                         <h2 className="text-xl font-semibold text-gray-800">
                           개별파일 검사결과
@@ -386,7 +332,7 @@ export default function Dashboard() {
                         </p>
                       </div>
                     </div>
-                    <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
+                    <div className="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between">
                       <div className="sm:col-span-1">
                         <label
                           htmlFor="hs-as-table-product-review-search"
@@ -399,10 +345,10 @@ export default function Dashboard() {
                             type="text"
                             id="hs-as-table-product-review-search"
                             name="hs-as-table-product-review-search"
-                            className="py-2 px-3 ps-11 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                            className="block w-full rounded-lg border-gray-200 px-3 py-2 ps-11 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                             placeholder="Search"
                           />
-                          <div className="absolute inset-y-0 start-0 flex items-center pointer-events-none ps-4">
+                          <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-4">
                             <svg
                               className="size-4 text-gray-400"
                               xmlns="http://www.w3.org/2000/svg"
@@ -423,10 +369,10 @@ export default function Dashboard() {
                             <button
                               id="hs-as-table-table-export-dropdown"
                               type="button"
-                              className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                              className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
                             >
                               <svg
-                                className="flex-shrink-0 size-3"
+                                className="size-3 flex-shrink-0"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="16"
                                 height="16"
@@ -439,15 +385,15 @@ export default function Dashboard() {
                               내보내기
                             </button>
                             <div
-                              className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-48 z-10 bg-white shadow-md rounded-lg p-2 mt-2"
+                              className="hs-dropdown-menu duration z-10 mt-2 hidden min-w-48 divide-y divide-gray-200 rounded-lg bg-white p-2 opacity-0 shadow-md transition-[opacity,margin] hs-dropdown-open:opacity-100"
                               aria-labelledby="hs-as-table-table-export-dropdown"
                             >
                               <div className="py-2 first:pt-0 last:pb-0">
-                                <span className="block py-2 px-3 text-xs font-medium uppercase text-gray-400">
+                                <span className="block px-3 py-2 text-xs font-medium uppercase text-gray-400">
                                   Options
                                 </span>
                                 <a
-                                  className="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                  className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                   href="#"
                                 >
                                   <svg
@@ -464,7 +410,7 @@ export default function Dashboard() {
                                   Copy
                                 </a>
                                 <a
-                                  className="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                  className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                   href="#"
                                 >
                                   <svg
@@ -482,11 +428,11 @@ export default function Dashboard() {
                                 </a>
                               </div>
                               <div className="py-2 first:pt-0 last:pb-0">
-                                <span className="block py-2 px-3 text-xs font-medium uppercase text-gray-400">
+                                <span className="block px-3 py-2 text-xs font-medium uppercase text-gray-400">
                                   Download options
                                 </span>
                                 <a
-                                  className="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                  className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                   href="#"
                                 >
                                   <svg
@@ -503,7 +449,7 @@ export default function Dashboard() {
                                   Excel
                                 </a>
                                 <a
-                                  className="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                  className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                   href="#"
                                 >
                                   <svg
@@ -522,7 +468,7 @@ export default function Dashboard() {
                                   .CSV
                                 </a>
                                 <a
-                                  className="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                  className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                   href="#"
                                 >
                                   <svg
@@ -549,10 +495,10 @@ export default function Dashboard() {
                             <button
                               id="hs-as-table-table-filter-dropdown"
                               type="button"
-                              className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                              className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
                             >
                               <svg
-                                className="flex-shrink-0 size-3.5"
+                                className="size-3.5 flex-shrink-0"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
                                 height="24"
@@ -568,22 +514,22 @@ export default function Dashboard() {
                                 <path d="M10 18h4" />
                               </svg>
                               필터
-                              <span className="ps-2 text-xs font-semibold text-blue-600 border-s border-gray-200">
+                              <span className="border-s border-gray-200 ps-2 text-xs font-semibold text-blue-600">
                                 1
                               </span>
                             </button>
                             <div
-                              className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-48 z-10 bg-white shadow-md rounded-lg mt-2"
+                              className="hs-dropdown-menu duration z-10 mt-2 hidden min-w-48 divide-y divide-gray-200 rounded-lg bg-white opacity-0 shadow-md transition-[opacity,margin] hs-dropdown-open:opacity-100"
                               aria-labelledby="hs-as-table-table-filter-dropdown"
                             >
                               <div className="divide-y divide-gray-200">
                                 <label
                                   htmlFor="hs-as-filters-dropdown-all"
-                                  className="flex py-2.5 px-3"
+                                  className="flex px-3 py-2.5"
                                 >
                                   <input
                                     type="checkbox"
-                                    className="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                    className="mt-0.5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                                     id="hs-as-filters-dropdown-all"
                                     defaultChecked
                                   />
@@ -593,11 +539,11 @@ export default function Dashboard() {
                                 </label>
                                 <label
                                   htmlFor="hs-as-filters-dropdown-정상"
-                                  className="flex py-2.5 px-3"
+                                  className="flex px-3 py-2.5"
                                 >
                                   <input
                                     type="checkbox"
-                                    className="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                    className="mt-0.5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                                     id="hs-as-filters-dropdown-정상"
                                   />
                                   <span className="ms-3 text-sm text-gray-800">
@@ -606,11 +552,11 @@ export default function Dashboard() {
                                 </label>
                                 <label
                                   htmlFor="hs-as-filters-dropdown-대기"
-                                  className="flex py-2.5 px-3"
+                                  className="flex px-3 py-2.5"
                                 >
                                   <input
                                     type="checkbox"
-                                    className="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                    className="mt-0.5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                                     id="hs-as-filters-dropdown-대기"
                                   />
                                   <span className="ms-3 text-sm text-gray-800">
@@ -619,11 +565,11 @@ export default function Dashboard() {
                                 </label>
                                 <label
                                   htmlFor="hs-as-filters-dropdown-악성"
-                                  className="flex py-2.5 px-3"
+                                  className="flex px-3 py-2.5"
                                 >
                                   <input
                                     type="checkbox"
-                                    className="shrink-0 mt-0.5 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                    className="mt-0.5 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                                     id="hs-as-filters-dropdown-악성"
                                   />
                                   <span className="ms-3 text-sm text-gray-800">
@@ -640,21 +586,21 @@ export default function Dashboard() {
                     <table className="min-w-full divide-y divide-gray-200">
                       <thead className="bg-gray-50">
                         <tr>
-                          <th scope="col" className="ps-6 py-3 text-start">
+                          <th scope="col" className="py-3 ps-6 text-start">
                             <label
                               htmlFor="hs-at-with-checkboxes-main"
                               className="flex"
                             >
                               <input
                                 type="checkbox"
-                                className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                className="shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                                 id="hs-at-with-checkboxes-main"
                               />
                               <span className="sr-only">Checkbox</span>
                             </label>
                           </th>
 
-                          <th scope="col" className="pe-6 py-3 text-start">
+                          <th scope="col" className="py-3 pe-6 text-start">
                             <div className="flex items-center gap-x-2">
                               <span className="text-xs font-semibold uppercase tracking-wide text-gray-800">
                                 번호
@@ -702,14 +648,14 @@ export default function Dashboard() {
                         {mockTableData.map((data, idx) => (
                           <tr key={`data_${idx}`}>
                             <td className="size-px whitespace-nowrap">
-                              <div className="ps-6 py-2">
+                              <div className="py-2 ps-6">
                                 <label
                                   htmlFor="hs-at-with-checkboxes-1"
                                   className="flex"
                                 >
                                   <input
                                     type="checkbox"
-                                    className="shrink-0 border-gray-300 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                    className="shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                                     id="hs-at-with-checkboxes-1"
                                   />
                                   <span className="sr-only">Checkbox</span>
@@ -717,7 +663,7 @@ export default function Dashboard() {
                               </div>
                             </td>
                             <td className="size-px whitespace-nowrap">
-                              <div className="pe-6 py-2">
+                              <div className="py-2 pe-6">
                                 <a
                                   className="text-sm text-blue-600 decoration-2 hover:underline"
                                   href="#"
@@ -730,7 +676,7 @@ export default function Dashboard() {
                               <div className="px-6 py-2">
                                 <span className="text-sm text-gray-600">
                                   {moment(data.date).format(
-                                    "YYYY-MM-DD HH:mm:ss"
+                                    "YYYY-MM-DD HH:mm:ss",
                                   )}
                                 </span>
                               </div>
@@ -745,7 +691,7 @@ export default function Dashboard() {
                             <td className="size-px whitespace-nowrap">
                               <div className="px-6 py-2">
                                 {data.result == "정상" ? (
-                                  <span className="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full">
+                                  <span className="inline-flex items-center gap-x-1 rounded-full bg-teal-100 px-1.5 py-1 text-xs font-medium text-teal-800">
                                     <svg
                                       className="size-2.5"
                                       xmlns="http://www.w3.org/2000/svg"
@@ -759,7 +705,7 @@ export default function Dashboard() {
                                     정상
                                   </span>
                                 ) : data.result == "악성" ? (
-                                  <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                  <span className="inline-flex items-center gap-1.5 rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-800">
                                     <svg
                                       className="size-2.5"
                                       xmlns="http://www.w3.org/2000/svg"
@@ -773,7 +719,7 @@ export default function Dashboard() {
                                     악성
                                   </span>
                                 ) : (
-                                  <span className="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                                  <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-800">
                                     <svg
                                       className="size-2.5"
                                       xmlns="http://www.w3.org/2000/svg"
@@ -799,11 +745,11 @@ export default function Dashboard() {
                               </div>
                             </td>
                             <td className="size-px whitespace-nowrap">
-                              <div className="px-6 py-1.5 flex justify-end">
-                                <div className="group inline-flex items-center divide-x divide-gray-300 border border-gray-300 bg-white shadow-sm rounded-lg transition-all">
+                              <div className="flex justify-end px-6 py-1.5">
+                                <div className="group inline-flex items-center divide-x divide-gray-300 rounded-lg border border-gray-300 bg-white shadow-sm transition-all">
                                   <div className="hs-tooltip inline-block">
                                     <a
-                                      className="hs-tooltip-toggle py-1.5 px-2 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-s-md bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                                      className="hs-tooltip-toggle inline-flex items-center justify-center gap-x-2 rounded-s-md bg-white px-2 py-1.5 text-sm font-semibold text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
                                       href="#"
                                     >
                                       <svg
@@ -818,7 +764,7 @@ export default function Dashboard() {
                                         <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
                                       </svg>
                                       <span
-                                        className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm"
+                                        className="hs-tooltip-content invisible absolute z-10 inline-block rounded bg-gray-900 px-2 py-1 text-xs font-medium text-white opacity-0 shadow-sm transition-opacity hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
                                         role="tooltip"
                                       >
                                         Download PDF
@@ -829,7 +775,7 @@ export default function Dashboard() {
                                     <button
                                       id="hs-table-dropdown-1"
                                       type="button"
-                                      className="hs-dropdown-toggle py-1.5 px-2 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-e-md bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                                      className="hs-dropdown-toggle inline-flex items-center justify-center gap-x-2 rounded-e-md bg-white px-2 py-1.5 text-sm font-semibold text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
                                     >
                                       <svg
                                         className="size-4"
@@ -843,15 +789,15 @@ export default function Dashboard() {
                                       </svg>
                                     </button>
                                     <div
-                                      className="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-40 z-10 bg-white shadow-2xl rounded-lg p-2 mt-2"
+                                      className="hs-dropdown-menu duration z-10 mt-2 hidden min-w-40 divide-y divide-gray-200 rounded-lg bg-white p-2 opacity-0 shadow-2xl transition-[opacity,margin] hs-dropdown-open:opacity-100"
                                       aria-labelledby="hs-table-dropdown-1"
                                     >
                                       <div className="py-2 first:pt-0 last:pb-0">
-                                        <span className="block py-2 px-3 text-xs font-medium uppercase text-gray-400">
+                                        <span className="block px-3 py-2 text-xs font-medium uppercase text-gray-400">
                                           Options
                                         </span>
                                         <a
-                                          className="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                          className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                           href="#"
                                         >
                                           <svg
@@ -868,7 +814,7 @@ export default function Dashboard() {
                                           Copy
                                         </a>
                                         <a
-                                          className="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                          className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                           href="#"
                                         >
                                           <svg
@@ -886,11 +832,11 @@ export default function Dashboard() {
                                         </a>
                                       </div>
                                       <div className="py-2 first:pt-0 last:pb-0">
-                                        <span className="block py-2 px-3 text-xs font-medium uppercase text-gray-400">
+                                        <span className="block px-3 py-2 text-xs font-medium uppercase text-gray-400">
                                           Download options
                                         </span>
                                         <a
-                                          className="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                          className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                           href="#"
                                         >
                                           <svg
@@ -907,7 +853,7 @@ export default function Dashboard() {
                                           Excel
                                         </a>
                                         <a
-                                          className="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                          className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                           href="#"
                                         >
                                           <svg
@@ -926,7 +872,7 @@ export default function Dashboard() {
                                           .CSV
                                         </a>
                                         <a
-                                          className="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                          className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
                                           href="#"
                                         >
                                           <svg
@@ -953,9 +899,9 @@ export default function Dashboard() {
                       </tbody>
                     </table>
 
-                    <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200">
+                    <div className="grid gap-3 border-t border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between">
                       <div className="max-w-sm space-y-3">
-                        <select className="py-2 px-3 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500">
+                        <select className="block w-full rounded-lg border-gray-200 px-3 py-2 pe-9 text-sm focus:border-blue-500 focus:ring-blue-500">
                           <option>1</option>
                           <option>2</option>
                           <option>3</option>
@@ -969,10 +915,10 @@ export default function Dashboard() {
                         <div className="inline-flex gap-x-2">
                           <button
                             type="button"
-                            className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                            className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
                           >
                             <svg
-                              className="flex-shrink-0 size-4"
+                              className="size-4 flex-shrink-0"
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
                               height="24"
@@ -990,11 +936,11 @@ export default function Dashboard() {
 
                           <button
                             type="button"
-                            className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                            className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
                           >
                             Next
                             <svg
-                              className="flex-shrink-0 size-4"
+                              className="size-4 flex-shrink-0"
                               xmlns="http://www.w3.org/2000/svg"
                               width="24"
                               height="24"
