@@ -210,14 +210,16 @@ pyrightconfig.json
 tempCodeRunnerFile.py
 
 # Refer to the link for the dataset and run it. Don't upload
-/GIPS/iotpot
+/GIPS/iotpot/*
+!/GIPS/iotpot/README.md
 
 # The dataset is stored in the vector DB
 /vectorDB/chroma/*
+!/vectorDB/chroma/README.md
 
 # private malware dataset
 /PE/datasets/PE_malware/*
-/PE/datasets/pkl/*
-
+!/PE/datasets/PE_malware/README.md
 /PE/res/PE_big_group.pkl
 /PE/res/PE_virtual_vector.pkl
+!/PE/datasets/pkl/README.md
