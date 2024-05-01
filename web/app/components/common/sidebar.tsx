@@ -3,17 +3,17 @@ import Link from "next/link";
 export default function SideBar() {
   return (
     <div
-      id="application-sidebar-dark"
-      className="hs-overlay fixed bottom-0 start-0 top-0 z-[60] hidden w-64 -translate-x-full transform overflow-y-auto border-e border-gray-800 bg-gray-900 pb-10 pt-7 transition-all duration-300 [--auto-close:lg] hs-overlay-open:translate-x-0 lg:bottom-0 lg:end-auto lg:block lg:translate-x-0 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-slate-500 [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-slate-700 [&::-webkit-scrollbar]:w-2"
+      id="application-sidebar"
+      className="hs-overlay fixed inset-y-0 start-0 z-[60] hidden w-64 -translate-x-full transform border-e border-gray-700 bg-gray-900 transition-all duration-300 [--auto-close:lg] hs-overlay-open:translate-x-0 lg:bottom-0 lg:end-auto lg:block lg:translate-x-0"
     >
-      <div className="px-6">
-        <a
+      <div className="px-6 pt-4">
+        <Link
           className="flex-none text-xl font-bold text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
-          href="#"
+          href="/dashboard"
           aria-label="Brand"
         >
           Platform GIPS
-        </a>
+        </Link>
         <p className="text-white">생성형 침입방지 보안 플랫폼</p>
       </div>
 
@@ -23,9 +23,9 @@ export default function SideBar() {
       >
         <ul className="space-y-1.5">
           <li>
-            <a
+            <Link
               className="flex items-center gap-x-3 rounded-lg bg-gray-700 px-2.5 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
-              href="#"
+              href="/dashboard"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ export default function SideBar() {
                 />
               </svg>
               대시보드
-            </a>
+            </Link>
           </li>
 
           <li className="hs-accordion" id="users-accordion">
