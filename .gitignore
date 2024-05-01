@@ -219,5 +219,5 @@ tempCodeRunnerFile.py
 /PE/datasets/PE_malware/*
 /PE/datasets/pkl/*
 
-/PE/dataset/res/PE_virtual_vector.pkl
-/PE/dataset/res/PE_virtual_vector.pkl
+/PE/res/PE_big_group.pkl
+/PE/res/PE_virtual_vector.pkl
