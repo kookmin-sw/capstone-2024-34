@@ -43,7 +43,7 @@ export default function AnalyzePeFilePage() {
   let [data, setData] = useState<JSON>();
   return (
     <>
-      <div className="w-full">
+      <div className="w-full space-y-4 p-4 sm:space-y-6 sm:p-6">
         <div className="h-full min-h-full w-full">
           {/* 페이지 헤더 */}
           <div className="grid grid-cols-2">

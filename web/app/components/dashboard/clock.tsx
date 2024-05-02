@@ -18,7 +18,10 @@ const DigitalClock = () => {
   );
 
   return (
-    <p className="pb-2 text-right text-2xl font-semibold">
+    <p
+      className="pb-2 text-right text-2xl font-semibold"
+      suppressHydrationWarning={true}
+    >
       {formattedDateTime}
     </p>
   );
