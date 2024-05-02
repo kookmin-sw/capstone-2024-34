@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import React, { useEffect } from "react";
 import ApexCharts from "apexcharts";
-import { mockGraphData } from "../../dashboard/mockData/graph";
+import { mockGraphData } from "../../(page)/dashboard/mockData/graph";
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -10,11 +10,11 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 
 const TrafficGraph: React.FC = () => {
   const values: number[] = mockGraphData.map(
-    (mockGraphData) => mockGraphData.count
+    (mockGraphData) => mockGraphData.count,
   );
 
   const labels: string[] = mockGraphData.map(
-    (mockGraphData) => mockGraphData.type
+    (mockGraphData) => mockGraphData.type,
   );
 
   useEffect(() => {
@@ -97,7 +97,7 @@ const TrafficGraph: React.FC = () => {
   return (
     <div
       id="chart"
-      className="flex flex-col justify-center items-center h-3/4 w-3/4"
+      className="flex h-3/4 w-3/4 flex-col items-center justify-center"
     ></div>
   );
 };

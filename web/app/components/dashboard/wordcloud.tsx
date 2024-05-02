@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ReactWordcloud from "react-wordcloud";
+import ReactWordcloud from "@cyberblast/react-wordcloud";
 
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
 
-import { mockWordCloudData } from "../../dashboard/mockData/words";
-import { MinMaxPair } from "react-wordcloud";
+import { mockWordCloudData } from "../../(page)/dashboard/mockData/words";
+import { MinMaxPair } from "@cyberblast/react-wordcloud";
 
 const options = {
   rotations: 1,
