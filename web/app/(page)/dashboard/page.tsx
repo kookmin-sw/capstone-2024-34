@@ -6,8 +6,8 @@ import WordCloud from "@components/dashboard/wordcloud";
 
 export default function Dashboard() {
   return (
-    <div className="space-y-4 p-4 sm:space-y-6 sm:p-6">
-      <div className="grid grid-cols-2">
+    <div className="w-full space-y-4 p-4 sm:space-y-6 sm:p-6">
+      <div className="grid w-full grid-cols-2">
         <header>
           <p className="mb-2 text-sm font-semibold text-blue-600">Dashboard</p>
           <h1 className="block text-2xl font-bold text-gray-800 sm:text-3xl">
@@ -22,9 +22,9 @@ export default function Dashboard() {
       </div>
 
       {/* 콘텐츠 영역 */}
-      <div className="grid gap-4">
+      <div className="grid w-full max-w-full gap-4">
         {/* 통계카드 영역 */}
-        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
+        <div className="grid w-full max-w-full gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
           <div className="flex flex-col rounded-xl border bg-white shadow-sm">
             <div className="flex gap-x-4 p-4 md:p-5">
               <div className="flex size-[46px] flex-shrink-0 items-center justify-center rounded-lg bg-gray-100">
@@ -262,7 +262,7 @@ export default function Dashboard() {
         </div>
 
         {/* 유입량 통계 & 요 시그니처 워드 클라우드 */}
-        <div className="grid grid-rows-1 gap-4 sm:gap-6 xl:grid-cols-2">
+        <div className="grid max-w-full grid-rows-1 gap-4 sm:gap-6 xl:grid-cols-2">
           {/* 유입량 통계 */}
           <div className="h-full w-full">
             <div className="flex h-full w-full flex-col">
@@ -278,7 +278,7 @@ export default function Dashboard() {
                       </p>
                     </div>
                   </div>
-                  <div className="grid gap-3 px-6 py-4 md:flex md:items-center md:justify-center">
+                  <div className="grid h-full gap-3 px-6 py-4 md:flex md:items-center md:justify-center">
                     {/* 그래프 라이브러리 삽입 영역 */}
                     <TrafficGraph />
                   </div>
