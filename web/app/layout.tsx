@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={suit.className}>
+      <body className={`${suit.className} w-full`}>
         {children}
         <PrelineScript />
       </body>
