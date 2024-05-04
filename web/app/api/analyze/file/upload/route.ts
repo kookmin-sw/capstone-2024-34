@@ -33,18 +33,34 @@ export async function POST(request: Request) {
 
     console.log(JSON.stringify(savedData));
 
-    let response = await fetch(`http://localhost:3000/api/analyze/file/pe`, {
-      method: "POST",
-      body: JSON.stringify(savedData),
-      headers: {
-        "Content-Type": "application/json",
+    let response_header = await fetch(
+      `http://localhost:3000/api/analyze/file/pe`,
+      {
+        method: "POST",
+        body: JSON.stringify(savedData),
+        headers: {
+          "Content-Type": "application/json",
+        },
       },
-    });
-    const data = await response.json();
+    );
+    const data_header = await response_header.json();
+
+    let response_strings = await fetch(
+      `http://localhost:3000/api/analyze/file/pe-string`,
+      {
+        method: "POST",
+        body: JSON.stringify(savedData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    const data_strings = await response_strings.json();
+
     return NextResponse.json({
       success: true,
       message: "데이터 저장 성공",
-      data: data,
+      data: { data_header, data_strings },
     });
   } catch (error) {
     console.error("데이터 저장 중 오류 발생:", error);
