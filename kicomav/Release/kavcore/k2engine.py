@@ -15,6 +15,8 @@ import struct
 import zipfile
 import hashlib
 
+from numpy import unicode_
+
 try:
     from . import k2timelib
     from . import k2kmdfile
@@ -1194,9 +1196,9 @@ class EngineInstance:
                             name1 = name
 
                             if type(deep_name) != type(name):
-                                if isinstance(deep_name, unicode):
+                                if isinstance(deep_name, unicode_): #unicode -> unnicode_
                                     name1 = name.decode('utf-8', 'ignore')
-                                elif isinstance(name, unicode):
+                                elif isinstance(name, unicode_):
                                     deep_name1 = deep_name.decode('utf-8', 'ignore')
 
                             dname = '%s/%s' % (deep_name1, name1)
