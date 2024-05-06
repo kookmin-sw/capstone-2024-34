@@ -2,6 +2,7 @@
 # Author: Kei Choi(hanul93@gmail.com)
 
 
+import json
 import os
 from importlib.machinery import SourceFileLoader
 from io import StringIO
@@ -1322,10 +1323,16 @@ class EngineInstance:
     # -----------------------------------------------------------------
     def get_result(self):
         # 지금까지 발견한 유티크한 악성코드의 수를 카운트한다.
-        self.identified_virus.add('test')
+        self.identified_virus.add('test1')
+        self.identified_virus.add('test2')
 
-        for i in self.identified_virus:
-            print(i)
+        result = {
+            "sig": list(self.identified_virus)
+        }
+
+        with open('./test.json', 'w') as f:
+            json.dump(result, f, indent=4)
+
 
         self.result['Identified_viruses'] = len(self.identified_virus)
         return self.result
