@@ -1322,6 +1322,11 @@ class EngineInstance:
     # -----------------------------------------------------------------
     def get_result(self):
         # 지금까지 발견한 유티크한 악성코드의 수를 카운트한다.
+        self.identified_virus.add('test')
+
+        for i in self.identified_virus:
+            print(i)
+
         self.result['Identified_viruses'] = len(self.identified_virus)
         return self.result
 
