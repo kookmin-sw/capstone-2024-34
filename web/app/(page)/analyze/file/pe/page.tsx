@@ -10,10 +10,14 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function AnalyzePeFilePage() {
-  let [data, setData] = useState<FilePeResultResponse>();
+  let [data, setData] = useState<AnalyzePeFileUploadResponse>();
+  const nullFileData: FilePeResultResponse = {
+    data_header: undefined,
+    data_strings: undefined,
+  };
 
   function handleSubmitResponse(responseData: AnalyzePeFileUploadResponse) {
-    setData(responseData.data);
+    setData(responseData);
     console.log("res", data);
   }
 
@@ -39,8 +43,9 @@ export default function AnalyzePeFilePage() {
           <div className="mt-5 grid w-full max-w-full gap-4 sm:gap-6">
             <FilePEUploadCard onSubmit={handleSubmitResponse} />
             <FilePEResultCard
-              data_header={data?.data_header}
-              data_strings={data?.data_strings}
+              succcess={data?.succcess || false}
+              message={data?.message || ""}
+              data={data?.data || nullFileData}
             />
           </div>
         </div>
