@@ -2,17 +2,14 @@
 
 import InputStringsCard from "@components/yara/yara_input_card";
 import FilePEUploadCard from "@components/analyze/file_pe_upload_card";
-import {
-  AnalyzePeFileUploadResponse,
-  FilePeResultResponse,
-} from "@customTypes/analyze/api";
+import { YaraRuleCreateRespone } from "@customTypes/yara/api";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function AnalyzePeFilePage() {
-  let [data, setData] = useState<string[]>([]);
+  let [data, setData] = useState<YaraRuleCreateRespone>();
 
-  function handleSubmitResponse(responseData: string[]) {
+  function handleSubmitResponse(responseData: YaraRuleCreateRespone) {
     setData(responseData);
     console.log("res", data);
   }

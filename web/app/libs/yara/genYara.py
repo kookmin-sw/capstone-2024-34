@@ -1,26 +1,45 @@
+import sys
+import json
+
 def genYaraRule(input, output):
     input = list(input)
 
-    f = open(f'/public/uploads/', 'w')
-
-    f.write("import \"pe\"\n\n")
-    f.write(f"rule {output}\n")
-    f.write("{\n")
-    f.write("\tstrings:\n")
+    yara = "import \"pe\"\n\n"
+    yara += f"rule {output}\n"
+    yara += "{\n"
+    yara += "\tstrings:\n"
 
     cnt = 0
     for j in input:
         tmpStr = j.replace('\\', '\\\\')
         tmpStr = tmpStr.replace('\'', '\\\'').replace('\"', '\\\"')
         cnt += 1
-        f.write(f"\t\t$sig{cnt} = \"{tmpStr}\"\n")
+        yara += f"\t\t$sig{cnt} = \"{tmpStr}\"\n"
 
-    f.write("\tcondition:\n")
+    yara += "\tcondition:\n"
     tmpStr = "\t\t"
     for i in range(1, cnt):
         tmpStr += f"$sig{i} or "
     tmpStr += f"$sig{cnt}"
 
-    f.write(tmpStr)
-    f.write("\n}")
-    f.close()
+    yara += tmpStr
+    yara += "\n}"
+
+    return yara
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python extract_string.py <file_path>")
+        sys.exit(1)
+    respone = dict()
+
+    input_list = []
+    for i in range(1, len(sys.argv) - 1):
+        input_list.append(sys.argv[i])
+
+    yara = genYaraRule(input_list, sys.argv[len(sys.argv) - 2])
+
+    respone['yara'] = yara
+ 
+    json_data = json.dumps(respone)
+    print(json_data, end='')

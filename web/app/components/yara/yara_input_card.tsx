@@ -1,10 +1,10 @@
 "use client";
-import { AnalyzePeFileUploadResponse } from "@customTypes/analyze/api";
+import { YaraRuleCreateRespone } from "@customTypes/yara/api";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 interface YaraInputFormProps {
-  onSubmit: (data: string[]) => void;
+  onSubmit: (data: YaraRuleCreateRespone) => void;
 }
 
 const InputStringsCard = ({ onSubmit }: YaraInputFormProps) => {
@@ -49,44 +49,26 @@ const InputStringsCard = ({ onSubmit }: YaraInputFormProps) => {
         return;
       }
 
+      var inputStr = "";
       const formData = new FormData();
+      for (let i = 0; i < inputs.length; i++) {
+        inputStr += inputs[i];
+        inputStr += " ";
+      }
+
+      formData.append("inputs", inputStr);
       await fetch("/api/yara/file/create", {
         method: "POST",
-        body: inputs,
+        body: formData,
       })
         .then((res) => res.json())
-        .then((responseData: string[]) => {
+        .then((responseData: YaraRuleCreateRespone) => {
           onSubmit(responseData);
         })
         .catch((error) => {
           console.error("Error:", error);
         });
-
-      onSubmit(inputs);
     }
-
-    console.log(inputs);
-
-    // const formData = new FormData();
-    // files.forEach((file: File) => {
-    //   formData.append("upload_file", file);
-    // });
-
-    // await fetch("/api/analyze/file/upload", {
-    //   method: "POST",
-    //   body: formData,
-    // })
-    //   .then((res) => res.json())
-    //   .then((responseData: AnalyzePeFileUploadResponse) => {
-    //     onSubmit(responseData);
-    //     if (formRef.current) {
-    //       formRef.current.reset();
-    //     }
-    //     setData(responseData);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error:", error);
-    //   });
   }
 
   return (

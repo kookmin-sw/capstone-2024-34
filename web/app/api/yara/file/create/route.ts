@@ -3,8 +3,10 @@ import { NextResponse } from "next/server";
 import { join } from "path";
 import os from "os";
 
-export async function POST(req: string[]) {
-  console.log("POST body:", req);
+export async function POST(req: Request) {
+  const formData = await req.formData();
+  const inputData = formData.get("inputs");
+  // console.log("POST body:", req);
 
   // 파이썬 실행 커맨드
   const pythonCommand = os.platform() === "win32" ? "python" : "python3";
@@ -12,9 +14,20 @@ export async function POST(req: string[]) {
   // 파이썬 파일 경로
   const extractorLibPath = join(process.cwd(), "/app/libs/yara/genYara.py");
 
+  // 입력 데이터
+  const inputStr = "asd qwe zxc";
+  console.log(inputData?.toString());
+
+  inputData?.toString;
+  inputStr;
+
   // 파이썬 프로세스 실행 -> Promise 처리
   const processDataPromise = new Promise((resolve, reject) => {
-    const pythonProcess = spawn(pythonCommand, [extractorLibPath]);
+    const pythonProcess = spawn(pythonCommand, [
+      extractorLibPath,
+      inputStr,
+      "test",
+    ]);
     let output = "";
 
     // 파이썬 프로세스 정상 처리
