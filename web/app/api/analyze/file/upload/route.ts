@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     console.log(formData);
 
     const file: File | null = formData.get("upload_file") as unknown as File;
+    console.log(file);
 
     if (file.size > 0) {
       const bytes = await file.arrayBuffer();
@@ -29,6 +30,11 @@ export async function POST(request: Request) {
       };
 
       console.log("파일 저장 성공", savedData);
+    } else {
+      return NextResponse.json({
+        success: false,
+        message: "파일 업로드 실패",
+      });
     }
 
     console.log(JSON.stringify(savedData));

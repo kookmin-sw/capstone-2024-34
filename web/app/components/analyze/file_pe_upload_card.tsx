@@ -1,3 +1,4 @@
+"use client";
 import { AnalyzePeFileUploadResponse } from "@customTypes/analyze/api";
 import { FormEvent, useRef, useState } from "react";
 
@@ -20,7 +21,11 @@ const FilePEUploadCard = ({ onSubmit }: FileUploadFormProps) => {
   async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData();
+    files.forEach((file: File) => {
+      formData.append("upload_file", file);
+    });
+
     await fetch("/api/analyze/file/upload", {
       method: "POST",
       body: formData,
@@ -116,7 +121,6 @@ const FilePEUploadCard = ({ onSubmit }: FileUploadFormProps) => {
             name="upload_file"
             id="upload_file"
             accept=".acm, .ax, .cpl, .dll, .drv, .efi, .exe, .mui, .ocx, .scr, .sys, .tsp"
-            required={true}
             ref={inputRef}
             className="hidden"
             onChange={handleChange}

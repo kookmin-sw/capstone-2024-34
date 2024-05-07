@@ -1,8 +1,12 @@
 import { spawn } from "child_process";
 import { NextResponse } from "next/server";
 import { join } from "path";
+import os from "os";
 
 export async function GET(req: Request) {
+  // 파이썬 실행 커맨드
+  const pythonCommand = os.platform() === "win32" ? "python" : "python3";
+
   // 파이썬 파일 경로
   const extractorLibPath = join(
     process.cwd(),
@@ -17,7 +21,10 @@ export async function GET(req: Request) {
 
   // 파이썬 프로세스 실행 -> Promise 처리
   const processDataPromise = new Promise((resolve, reject) => {
-    const pythonProcess = spawn("python3", [extractorLibPath, tmpExeFilePath]);
+    const pythonProcess = spawn(pythonCommand, [
+      extractorLibPath,
+      tmpExeFilePath,
+    ]);
     let output = "";
 
     // 파이썬 프로세스 정상 처리
@@ -61,6 +68,9 @@ export async function POST(req: Request) {
   const body = await req.json();
   console.log("POST body:", body);
 
+  // 파이썬 실행 커맨드
+  const pythonCommand = os.platform() === "win32" ? "python" : "python3";
+
   // 파이썬 파일 경로
   const extractorLibPath = join(
     process.cwd(),
@@ -75,7 +85,10 @@ export async function POST(req: Request) {
 
   // 파이썬 프로세스 실행 -> Promise 처리
   const processDataPromise = new Promise((resolve, reject) => {
-    const pythonProcess = spawn("python3", [extractorLibPath, tmpExeFilePath]);
+    const pythonProcess = spawn(pythonCommand, [
+      extractorLibPath,
+      tmpExeFilePath,
+    ]);
     let output = "";
 
     // 파이썬 프로세스 정상 처리
