@@ -39,21 +39,23 @@ if __name__ == '__main__':
 
     respone = dict()
 
-    labels = []
+    attack = []
+    normal = []
 
     score = 0
     for string in strings:
         if string in SIGNATURES:
-            labels.append((string, 1))
+            attack.append(string)
             score += 1
         else:
-            labels.append((string, 0))
+            normal.append(string)
 
     score /= len(SIGNATURES)
     score = round(score * 100, 2)
 
     respone['score'] = score
-    respone['label'] = labels
-
+    respone['attack'] = attack
+    respone['normal'] = normal
+    
     json_data = json.dumps(respone)
     print(json_data, end='')
