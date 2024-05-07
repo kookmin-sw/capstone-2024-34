@@ -4,6 +4,8 @@ import localFont from "next/font/local";
 import "@styles/common/globals.css";
 import PrelineScript from "@components/common/prelinescript";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { ConfigProvider } from "antd";
+import koKR from "antd/lib/locale/ko_KR";
 
 export const metadata: Metadata = {
   title: "InfoSec Platform",
@@ -22,11 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className={`${suit.className} w-full`}>
+    <html lang="ko" className="h-full w-full">
+      <body className={`${suit.className} h-full w-full`}>
         <AntdRegistry>
-          {children}
-          <PrelineScript />
+          <ConfigProvider locale={koKR}>
+            {children}
+            <PrelineScript />
+          </ConfigProvider>
         </AntdRegistry>
       </body>
     </html>
