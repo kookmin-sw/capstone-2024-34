@@ -6,7 +6,7 @@ import WordCloud from "@components/dashboard/wordcloud";
 
 export default function Dashboard() {
   return (
-    <div className="w-full max-w-full space-y-4 p-4 sm:space-y-6 sm:p-6">
+    <div className="h-full w-full max-w-full space-y-4 p-4 sm:space-y-6 sm:p-6">
       <div className="grid w-full grid-cols-2">
         <header>
           <p className="mb-2 text-sm font-semibold text-blue-600">Dashboard</p>

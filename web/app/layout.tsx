@@ -24,8 +24,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className={`${suit.className} w-full`}>
+    <html lang="ko" className="h-full w-full">
+      <body className={`${suit.className} h-full w-full`}>
         <AntdRegistry>
           <ConfigProvider locale={koKR}>
             {children}

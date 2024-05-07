@@ -8,7 +8,7 @@ export default function DashBoardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="w-full">
+    <main className="h-full w-full">
       <header className="sticky inset-x-0 top-0 z-[48] flex w-full flex-wrap border-b bg-white py-2.5 text-sm sm:flex-nowrap sm:justify-start sm:py-4 lg:ps-64">
         <nav
           className="mx-auto flex w-full basis-full items-center px-4 sm:px-6"
@@ -110,7 +110,9 @@ export default function DashBoardLayout({
 
       <SideBar />
 
-      <div className="w-full lg:ps-64">{children}</div>
+      <div className="h-full min-h-full w-full bg-neutral-50 lg:ps-64">
+        {children}
+      </div>
     </main>
   );
 }
