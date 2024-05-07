@@ -2,8 +2,7 @@ import {
   AnalyzePeFileUploadResponse,
   FilePeStringResultResponse,
 } from "@customTypes/analyze/api";
-import { Table } from "antd";
-import { on } from "events";
+import { Table, TableColumnsType, TableProps, Tag } from "antd";
 
 interface ResultItem {
   key: string;
@@ -45,22 +44,25 @@ const FilePEResultCard = ({
   message,
 }: AnalyzePeFileUploadResponse) => {
   const dataSource = generateTableDataSource(data.data_strings);
-  const columns = [
+  const columns: TableColumnsType<ResultItem> = [
     {
       title: "번호",
       dataIndex: "key",
       key: "key",
+      width: "10%",
     },
     {
       title: "추출 텍스트",
       dataIndex: "extracted_string",
       key: "extracted_string",
+      width: "80%",
     },
     {
       title: "공격/정상",
       dataIndex: "status",
       key: "status",
-      filter: [
+      width: "10%",
+      filters: [
         {
           text: "공격",
           value: "attack",
@@ -70,13 +72,32 @@ const FilePEResultCard = ({
           value: "normal",
         },
       ],
-      onFilter: (value: any, record: { status: any }) =>
-        record.status === value,
+      onFilter: (value, record) => record.status === value,
+      filterSearch: true,
+      render: (_, { status }) => (
+        <>
+          <Tag
+            color={status === "attack" ? "red" : "blue"}
+            key={status + Math.random()}
+          >
+            {status === "attack" ? "공격" : "정상"}
+          </Tag>
+        </>
+      ),
     },
   ];
 
+  const onChange: TableProps<ResultItem>["onChange"] = (
+    pagination,
+    filters,
+    sorter,
+    extra,
+  ) => {
+    console.log("params", pagination, filters, sorter, extra);
+  };
+
   return (
-    <div className="focus:ring-brand-300 flex w-full max-w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-4 md:p-5">
+    <div className="focus:ring-brand-300 flex w-full max-w-full  flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm focus:outline-none focus:ring-4 md:p-5">
       {data.data_header ? (
         <div className="grid w-full gap-2 lg:grid-cols-2">
           {/* 점수 */}
@@ -369,6 +390,7 @@ const FilePEResultCard = ({
             </div>
           </div>
           <div className="lg:col-span-2">
+            <p className="mb-2 ml-1 text-xl">문자열 추출 결과</p>
             <Table dataSource={dataSource} columns={columns} />;
           </div>
           <div>
