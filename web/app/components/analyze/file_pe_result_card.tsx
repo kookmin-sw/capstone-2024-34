@@ -1,14 +1,90 @@
-import { AnalyzePeFileUploadResponse } from "@customTypes/analyze/api";
+import {
+  AnalyzePeFileUploadResponse,
+  FilePeStringResultResponse,
+} from "@customTypes/analyze/api";
+import { Table } from "antd";
+import { on } from "events";
+
+interface ResultItem {
+  key: string;
+  extracted_string: string;
+  status: string;
+}
+
+const generateTableDataSource = (
+  data: FilePeStringResultResponse,
+): ResultItem[] => {
+  if (!data) return [];
+  const result: ResultItem[] = [];
+  let keyCounter = 1;
+
+  data.output.attack.forEach((file) => {
+    result.push({
+      key: keyCounter.toString(),
+      extracted_string: file,
+      status: "attack",
+    });
+    keyCounter++;
+  });
+
+  data.output.normal.forEach((file) => {
+    result.push({
+      key: keyCounter.toString(),
+      extracted_string: file,
+      status: "normal",
+    });
+    keyCounter++;
+  });
+
+  return result;
+};
 
 const FilePEResultCard = ({
   succcess,
   data,
   message,
 }: AnalyzePeFileUploadResponse) => {
+  const dataSource = generateTableDataSource(data.data_strings);
+  const columns = [
+    {
+      title: "번호",
+      dataIndex: "key",
+      key: "key",
+    },
+    {
+      title: "추출 텍스트",
+      dataIndex: "extracted_string",
+      key: "extracted_string",
+    },
+    {
+      title: "공격/정상",
+      dataIndex: "status",
+      key: "status",
+      filter: [
+        {
+          text: "공격",
+          value: "attack",
+        },
+        {
+          text: "정상",
+          value: "normal",
+        },
+      ],
+      onFilter: (value: any, record: { status: any }) =>
+        record.status === value,
+    },
+  ];
+
   return (
     <div className="focus:ring-brand-300 flex w-full max-w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-4 md:p-5">
       {data.data_header ? (
         <div className="grid w-full gap-2 lg:grid-cols-2">
+          {/* 점수 */}
+          <div>
+            <p className="text-lg">분석점수</p>
+            <p className="text-xl">{data.data_strings.output.score}</p>
+          </div>
+          {/* 테이블 */}
           <div>
             <div className="grid grid-cols-4 divide-y divide-neutral-500 border-y border-neutral-700">
               <div className="col-span-4 bg-emerald-100">
@@ -292,7 +368,9 @@ const FilePEResultCard = ({
               </div>
             </div>
           </div>
-          <div></div>
+          <div className="lg:col-span-2">
+            <Table dataSource={dataSource} columns={columns} />;
+          </div>
           <div>
             <p>Header 추출</p>
             <p className="whitespace-pre-line text-wrap">

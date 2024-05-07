@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 
 import "@styles/common/globals.css";
 import PrelineScript from "@components/common/prelinescript";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 export const metadata: Metadata = {
   title: "InfoSec Platform",
@@ -23,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${suit.className} w-full`}>
-        {children}
-        <PrelineScript />
+        <AntdRegistry>
+          {children}
+          <PrelineScript />
+        </AntdRegistry>
       </body>
     </html>
   );

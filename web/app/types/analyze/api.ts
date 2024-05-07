@@ -5,6 +5,14 @@ export interface AnalyzePeFileUploadResponse {
 }
 
 export interface FilePeResultResponse {
-  data_header: JSON | undefined;
-  data_strings: JSON | undefined;
+  data_header: JSON;
+  data_strings: FilePeStringResultResponse;
+}
+
+export interface FilePeStringResultResponse {
+  output: {
+    score: number;
+    attack: string[];
+    normal: string[];
+  };
 }
