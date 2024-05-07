@@ -1,8 +1,7 @@
-interface FilePeResultCardProps {
-  data: JSON | undefined;
-}
-const FilePEResultCard = (props: FilePeResultCardProps) => {
-  console.log(JSON.stringify(props.data));
+import { FilePeResultResponse } from "@customTypes/analyze/api";
+
+const FilePEResultCard = (props: FilePeResultResponse) => {
+  console.log("props", props);
   return (
     <div className="focus:ring-brand-300 flex w-full max-w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-4 md:p-5">
       <div className="grid w-full gap-2 lg:grid-cols-2">
@@ -271,9 +270,19 @@ const FilePEResultCard = (props: FilePeResultCardProps) => {
             </div>
           </div>
         </div>
-        <p className="whitespace-pre-line text-wrap">
-          {JSON.stringify(props.data, null, 2)}
-        </p>
+        <div></div>
+        <div>
+          <p>Header 추출</p>
+          <p className="whitespace-pre-line text-wrap">
+            {JSON.stringify(props.data_header, null, 2)}
+          </p>
+        </div>
+        <div>
+          <p>String 추출</p>
+          <p className="whitespace-pre-line text-wrap">
+            {JSON.stringify(props.data_strings, null, 2)}
+          </p>
+        </div>
       </div>
 
       <p></p>

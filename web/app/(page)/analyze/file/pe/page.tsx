@@ -2,14 +2,19 @@
 
 import FilePEResultCard from "@components/analyze/file_pe_result_card";
 import FilePEUploadCard from "@components/analyze/file_pe_upload_card";
+import {
+  AnalyzePeFileUploadResponse,
+  FilePeResultResponse,
+} from "@customTypes/analyze/api";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function AnalyzePeFilePage() {
-  let [data, setData] = useState<JSON>();
+  let [data, setData] = useState<FilePeResultResponse>();
 
-  function handleSubmitResponse(responseData: JSON) {
-    setData(responseData);
+  function handleSubmitResponse(responseData: AnalyzePeFileUploadResponse) {
+    setData(responseData.data);
+    console.log("res", data);
   }
 
   return (
@@ -33,7 +38,10 @@ export default function AnalyzePeFilePage() {
           {/* 콘텐츠 영역 */}
           <div className="mt-5 grid w-full max-w-full gap-4 sm:gap-6">
             <FilePEUploadCard onSubmit={handleSubmitResponse} />
-            <FilePEResultCard data={data} />
+            <FilePEResultCard
+              data_header={data?.data_header}
+              data_strings={data?.data_strings}
+            />
           </div>
         </div>
       </div>

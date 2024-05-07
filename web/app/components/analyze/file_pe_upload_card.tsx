@@ -1,7 +1,8 @@
+import { AnalyzePeFileUploadResponse } from "@customTypes/analyze/api";
 import { FormEvent, useRef, useState } from "react";
 
 interface FileUploadFormProps {
-  onSubmit: (data: JSON) => void;
+  onSubmit: (data: AnalyzePeFileUploadResponse) => void;
 }
 
 const FilePEUploadCard = ({ onSubmit }: FileUploadFormProps) => {
@@ -12,7 +13,7 @@ const FilePEUploadCard = ({ onSubmit }: FileUploadFormProps) => {
   // input 파일 저장
   const [files, setFiles] = useState<any>([]);
   // 분석 api 호출결과 데이터 저장
-  const [data, setData] = useState<JSON>();
+  const [data, setData] = useState<AnalyzePeFileUploadResponse>();
   // 파일 업로드 개수 제한
   const maxFileCount = 1;
 
@@ -25,7 +26,7 @@ const FilePEUploadCard = ({ onSubmit }: FileUploadFormProps) => {
       body: formData,
     })
       .then((res) => res.json())
-      .then((responseData: JSON) => {
+      .then((responseData: AnalyzePeFileUploadResponse) => {
         onSubmit(responseData);
         if (formRef.current) {
           formRef.current.reset();
