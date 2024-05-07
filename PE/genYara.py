@@ -1,7 +1,3 @@
-import sys
-import re
-
-
 def genYaraRule(input, output):
     input = list(input)
 
@@ -27,12 +23,3 @@ def genYaraRule(input, output):
     f.write(tmpStr)
     f.write("\n}")
     f.close()
-
-
-def main(filePath):
-    genYaraRule(filePath)
-
-
-if __name__ == "__main__":
-    filePath = sys.argv[1]
-    main(filePath)
