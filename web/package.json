@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.0",
     "@cyberblast/react-wordcloud": "^1.2.9",
     "@heroicons/react": "^2.1.3",
     "apexcharts": "^3.49.0",
