@@ -11,6 +11,8 @@ import { useState } from "react";
 
 export default function AnalyzePeFilePage() {
   let [data, setData] = useState<AnalyzePeFileUploadResponse>();
+  // 업로드후 로딩 상태 저장
+  const [isProgress, setIsProgress] = useState(false);
 
   function handleSubmitResponse(responseData: AnalyzePeFileUploadResponse) {
     setData(responseData);
@@ -36,13 +38,18 @@ export default function AnalyzePeFilePage() {
         </div>
         {/* 콘텐츠 영역 */}
         <div className="mt-5 grid w-full max-w-full gap-4 sm:gap-6">
-          <FilePEUploadCard onSubmit={handleSubmitResponse} />
+          <FilePEUploadCard
+            onSubmit={handleSubmitResponse}
+            isProgress={isProgress}
+            setIsProgress={setIsProgress}
+          />
           <FilePEResultCard
             success={data?.success || false}
             message={data?.message || ""}
             data={
               data?.data || ({} as FilePeResultResponse as FilePeResultResponse)
             }
+            isProgress={isProgress}
           />
         </div>
       </div>
