@@ -1,5 +1,5 @@
 export interface AnalyzePeFileUploadResponse {
-  succcess: boolean;
+  success: boolean;
   message: string;
   data: FilePeResultResponse;
 }
