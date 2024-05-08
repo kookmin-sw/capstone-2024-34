@@ -494,7 +494,6 @@ const FilePEResultCard = ({
                     columns={columns}
                     onChange={onChange}
                   />
-                  ;
                 </div>
                 <div>
                   <p>Header 추출</p>
