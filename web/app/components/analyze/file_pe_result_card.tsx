@@ -1,9 +1,6 @@
-import {
-  AnalyzePeFileUploadResponse,
-  FilePeStringResultResponse,
-} from "@customTypes/analyze/api";
+import { AnalyzePeFileUploadResponse } from "@customTypes/analyze/api";
+import { FilePeStringResultResponse } from "@customTypes/analyze/file_pe_string";
 import { Table, TableColumnsType, TableProps, Tag } from "antd";
-import { useState } from "react";
 
 interface ResultItem {
   key: string;
@@ -18,19 +15,19 @@ const generateTableDataSource = (
   const result: ResultItem[] = [];
   let keyCounter = 1;
 
-  data.output.attack.forEach((file) => {
+  data.output.attack.forEach((exString: string) => {
     result.push({
       key: keyCounter.toString(),
-      extracted_string: file,
+      extracted_string: exString,
       status: "attack",
     });
     keyCounter++;
   });
 
-  data.output.normal.forEach((file) => {
+  data.output.normal.forEach((exString: string) => {
     result.push({
       key: keyCounter.toString(),
-      extracted_string: file,
+      extracted_string: exString,
       status: "normal",
     });
     keyCounter++;

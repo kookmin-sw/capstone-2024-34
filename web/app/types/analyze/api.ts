@@ -1,3 +1,6 @@
+import { FilePeStringResultResponse } from "@customTypes/analyze/file_pe_string";
+import { FilePeHeaderResultResponse } from "@customTypes/analyze/file_pe_header";
+
 export interface AnalyzePeFileUploadResponse {
   success: boolean;
   message: string;
@@ -5,14 +8,6 @@ export interface AnalyzePeFileUploadResponse {
 }
 
 export interface FilePeResultResponse {
-  data_header: JSON;
+  data_header: FilePeHeaderResultResponse;
   data_strings: FilePeStringResultResponse;
-}
-
-export interface FilePeStringResultResponse {
-  output: {
-    score: number;
-    attack: string[];
-    normal: string[];
-  };
 }
