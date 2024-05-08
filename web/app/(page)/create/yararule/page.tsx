@@ -1,7 +1,7 @@
 "use client";
 
 import InputStringsCard from "@components/yara/yara_input_card";
-import FilePEUploadCard from "@components/analyze/file_pe_upload_card";
+import YaraRuleResultCard from "@components/yara/yara_result_card";
 import { YaraRuleCreateRespone } from "@customTypes/yara/api";
 import Link from "next/link";
 import { useState } from "react";
@@ -35,11 +35,11 @@ export default function AnalyzePeFilePage() {
           {/* 콘텐츠 영역 */}
           <div className="mt-5 grid w-full max-w-full grid-cols-2 gap-4">
             <InputStringsCard onSubmit={handleSubmitResponse} />
-            {/* <FilePEUploadCard
-              succcess={data?.succcess || false}
+            <YaraRuleResultCard
+              success={data?.success || false}
               message={data?.message || ""}
-              data={data?.data || nullFileData}
-            /> */}
+              output={data?.output || ({} as JSON)}
+            />
           </div>
         </div>
       </div>

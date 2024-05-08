@@ -10,7 +10,9 @@ def genYaraRule(input, output):
     yara += "\tstrings:\n"
 
     cnt = 0
-    for j in input:
+    for j in input[0].split(' '):
+        if j == "":
+            continue
         tmpStr = j.replace('\\', '\\\\')
         tmpStr = tmpStr.replace('\'', '\\\'').replace('\"', '\\\"')
         cnt += 1
@@ -33,11 +35,7 @@ if __name__ == "__main__":
         sys.exit(1)
     respone = dict()
 
-    input_list = []
-    for i in range(1, len(sys.argv) - 1):
-        input_list.append(sys.argv[i])
-
-    yara = genYaraRule(input_list, sys.argv[len(sys.argv) - 2])
+    yara = genYaraRule(sys.argv[1: len(sys.argv) - 1], sys.argv[len(sys.argv) - 1])
 
     respone['yara'] = yara
  

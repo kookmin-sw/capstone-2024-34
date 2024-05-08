@@ -8,6 +8,7 @@ interface YaraInputFormProps {
 }
 
 const InputStringsCard = ({ onSubmit }: YaraInputFormProps) => {
+  const [name, setName] = useState<string>("");
   const [inputs, setInputs] = useState<string[]>([]);
   const [errMessage, setErrMessage] = useState<string>("");
 
@@ -57,6 +58,7 @@ const InputStringsCard = ({ onSubmit }: YaraInputFormProps) => {
       }
 
       formData.append("inputs", inputStr);
+      formData.append("name", name);
       await fetch("/api/yara/file/create", {
         method: "POST",
         body: formData,
@@ -75,6 +77,11 @@ const InputStringsCard = ({ onSubmit }: YaraInputFormProps) => {
     <>
       <div className="items-left flex justify-center">
         <form onSubmit={handleFormSubmit}>
+          <input
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            placeholder={"Yara 룰 이름"}
+          ></input>
           {inputs.map((input, index) => (
             <div key={index}>
               <input
