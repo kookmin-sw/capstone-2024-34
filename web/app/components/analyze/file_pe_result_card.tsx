@@ -39,7 +39,7 @@ const generateTableDataSource = (
 };
 
 const FilePEResultCard = ({
-  succcess,
+  success,
   data,
   message,
 }: AnalyzePeFileUploadResponse) => {

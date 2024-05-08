@@ -38,7 +38,7 @@ export default function AnalyzePeFilePage() {
         <div className="mt-5 grid w-full max-w-full gap-4 sm:gap-6">
           <FilePEUploadCard onSubmit={handleSubmitResponse} />
           <FilePEResultCard
-            succcess={data?.succcess || false}
+            success={data?.success || false}
             message={data?.message || ""}
             data={
               data?.data || ({} as FilePeResultResponse as FilePeResultResponse)
