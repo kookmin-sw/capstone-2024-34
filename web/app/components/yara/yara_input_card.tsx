@@ -73,6 +73,7 @@ const InputStringsCard = ({ onSubmit }: YaraInputFormProps) => {
     })
       .then((res) => res.json())
       .then((responseData: YaraRuleCreateRespone) => {
+        console.log(responseData);
         onSubmit(responseData);
       })
       .catch((error) => {

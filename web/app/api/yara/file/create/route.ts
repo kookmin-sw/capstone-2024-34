@@ -1,71 +1,57 @@
-import { spawn } from "child_process";
 import { NextResponse } from "next/server";
-import { join } from "path";
-import os from "os";
-import { message } from "antd";
 
 export async function POST(req: Request) {
   const formData = await req.formData();
 
+  let inputData = null;
   const inputs = formData.get("inputs");
-  if (inputs != null) var inputData = inputs.toString();
+  if (inputs != null) inputData = inputs.toString().split(" ");
 
-  const yara = formData.get("name");
-  if (yara != null) var yaraName = yara.toString();
+  let yaraName = null;
+  const name = formData.get("name");
+  if (name != null) yaraName = name.toString();
 
-  // 파이썬 실행 커맨드
-  const pythonCommand = os.platform() === "win32" ? "python" : "python3";
+  if (inputData != null && yaraName != null) {
+    let yara_rule = "";
+    yara_rule += 'import "pe"\n\n';
+    yara_rule += `rule ${yaraName}\n`;
+    yara_rule += "{\n";
+    yara_rule += "\tstrings:\n";
 
-  // 파이썬 파일 경로
-  const extractorLibPath = join(process.cwd(), "/app/libs/yara/genYara.py");
+    let cnt = 0;
+    for (let i = 0; i < inputData.length; i++) {
+      if (inputData[i] == "") continue;
+      cnt += 1;
+      yara_rule += `\t\t\$sig${cnt} = \"${inputData[i]}\"\n`;
+    }
 
-  // 파이썬 프로세스 실행 -> Promise 처리
-  const processDataPromise = new Promise((resolve, reject) => {
-    const pythonProcess = spawn(pythonCommand, [
-      extractorLibPath,
-      inputData,
-      yaraName,
-    ]);
-    let output = "";
+    yara_rule += "\tcondition:\n";
+    let tmpStr = "\t\t";
+    for (let i = 1; i < cnt; i++) {
+      tmpStr += `\$sig${i} or `;
+    }
+    tmpStr += `\$sig${cnt}`;
+    yara_rule += tmpStr;
+    yara_rule += "\n}";
 
-    // 파이썬 프로세스 정상 처리
-    pythonProcess.stdout.on("data", (data) => {
-      output += data.toString();
-      console.log("파이썬 프로세스 출력값:", output);
-    });
-
-    // 파이썬 프로세스 오류 처리
-    pythonProcess.stderr.on("data", (data) => {
-      console.error("파이썬 프로세스 실행 중 오류 발생:", data.toString());
-      reject(data.toString());
-    });
-
-    // 파이썬 프로세스 종료 핸들링
-    pythonProcess.on("close", (code) => {
-      if (code === 0) {
-        console.log("파이썬 정상 종료!");
-        let parsedData = JSON.parse(output);
-        resolve(parsedData);
-      } else {
-        console.error(`파이썬 프로세스 비정상 종료! 코드: ${code}`);
-        reject(`파이썬 프로세스 비정상 종료`);
-      }
-    });
-  });
-
-  try {
-    // Promise 처리 결과 대기후 반환
-    const promiseData = await processDataPromise;
-    console.log("파이썬 정상실행:", promiseData);
+    try {
+      return NextResponse.json(
+        {
+          output: { yara: yara_rule },
+          seccuess: true,
+          message: "Yara 룰 생성 성공",
+        },
+        { status: 200 },
+      );
+    } catch (error) {
+      return NextResponse.json(
+        { output: error, seccuess: false },
+        { status: 500 },
+      );
+    }
+  } else {
     return NextResponse.json(
-      { output: promiseData, seccuess: true, message: "Yara 룰 생성 성공" },
-      { status: 200 },
-    );
-  } catch (error) {
-    // 에러 핸들링
-    console.error("파이썬 프로세스 실행 중 오류 발생:", error);
-    return NextResponse.json(
-      { output: error, seccuess: false },
+      { output: "예상치 못한 에러", seccuess: false },
       { status: 500 },
     );
   }
