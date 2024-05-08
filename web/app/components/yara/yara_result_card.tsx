@@ -41,7 +41,7 @@ const YaraRuleResultCard = ({
         </div>
       ) : (
         <div className="mb-4 block text-lg font-bold text-gray-800 sm:text-lg">
-          yara Rule 생성 대기중
+          Yara Rule 생성 대기중
         </div>
       )}
     </div>
