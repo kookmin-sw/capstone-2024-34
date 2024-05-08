@@ -1,5 +1,9 @@
 export interface YaraRuleCreateRespone {
   success: boolean;
   message: string;
-  output: JSON;
+  output: YaraRule;
+}
+
+export interface YaraRule {
+  yara: string;
 }
