@@ -9,7 +9,7 @@ export default function DashBoardLayout({
 }) {
   return (
     <main className="h-full w-full">
-      <header className="sticky inset-x-0 top-0 z-[48] flex w-full flex-wrap border-b bg-white py-2.5 text-sm sm:flex-nowrap sm:justify-start sm:py-4 lg:ps-64">
+      <header className="sticky inset-x-0 top-0 z-[48] flex h-16 w-full flex-wrap border-b bg-white py-2.5 text-sm sm:flex-nowrap sm:justify-start sm:py-4 lg:ps-64">
         <nav
           className="mx-auto flex w-full basis-full items-center px-4 sm:px-6"
           aria-label="Global"
@@ -110,7 +110,7 @@ export default function DashBoardLayout({
 
       <SideBar />
 
-      <div className="h-full min-h-full w-full bg-neutral-50 lg:ps-64">
+      <div className="h-[calc(100%-4rem)] min-h-[calc(100%-4rem)] w-full bg-neutral-50 lg:ps-64">
         {children}
       </div>
     </main>

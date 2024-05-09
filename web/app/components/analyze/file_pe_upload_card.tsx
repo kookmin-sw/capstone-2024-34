@@ -4,9 +4,15 @@ import { FormEvent, useRef, useState } from "react";
 
 interface FileUploadFormProps {
   onSubmit: (data: AnalyzePeFileUploadResponse) => void;
+  isProgress: boolean;
+  setIsProgress: (isProgress: boolean) => void;
 }
 
-const FilePEUploadCard = ({ onSubmit }: FileUploadFormProps) => {
+const FilePEUploadCard = ({
+  onSubmit,
+  isProgress,
+  setIsProgress,
+}: FileUploadFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<any>(null);
   // 드래그 상태저장
@@ -20,6 +26,7 @@ const FilePEUploadCard = ({ onSubmit }: FileUploadFormProps) => {
 
   async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setIsProgress(true);
 
     const formData = new FormData();
     files.forEach((file: File) => {
@@ -40,6 +47,9 @@ const FilePEUploadCard = ({ onSubmit }: FileUploadFormProps) => {
       })
       .catch((error) => {
         console.error("Error:", error);
+      })
+      .finally(() => {
+        setIsProgress(false);
       });
   }
 
