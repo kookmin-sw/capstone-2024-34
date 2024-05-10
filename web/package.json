@@ -20,6 +20,7 @@
     "react": "^18",
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18",
+    "react-monaco-editor": "^0.55.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

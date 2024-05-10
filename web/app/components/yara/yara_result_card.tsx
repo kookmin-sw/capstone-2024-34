@@ -1,5 +1,6 @@
 import { YaraRuleCreateRespone } from "@customTypes/yara/api";
-import { KeyboardEvent, useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import MonacoEditor from "react-monaco-editor";
 
 const YaraRuleResultCard = ({
   success,
@@ -33,22 +34,6 @@ const YaraRuleResultCard = ({
     document.body.removeChild(link);
   };
 
-  // Tab 키가 입력되었을 때 실행되는 함수
-  const handleSetTab = (event: any) => {
-    if (event.keyCode === 9) {
-      event.preventDefault();
-      let val = event.target.value;
-      let start = event.target.selectionStart;
-      let end = event.target.selectionEnd;
-
-      event.target.value = val.substring(0, start) + "\t" + val.substring(end);
-      event.target.selectionStart = event.target.selectionEnd = start + 1;
-
-      setYaraRule(event.target.value);
-      return false;
-    }
-  };
-
   return (
     <div className="focus:ring-brand-300 flex w-full max-w-full flex-col items-start justify-start whitespace-pre-wrap rounded-xl border border-gray-200 bg-white p-4 shadow-sm focus:outline-none focus:ring-4 md:p-5">
       {output.yara != null ? (
@@ -65,23 +50,27 @@ const YaraRuleResultCard = ({
             </button>
           </div>
           {editMode ? (
-            <textarea
-              onChange={(event) => setYaraRule(event.target.value)}
-              onKeyDown={(event) => {
-                handleSetTab(event);
-              }}
-              className="resize-y rounded-md"
+            <MonacoEditor
+              onChange={(event) => setYaraRule(event)}
+              className="mt-4"
+              height="400"
               value={yaraRule}
             />
           ) : (
-            <p>{yaraRule}</p>
+            <p className="ml-5">{yaraRule}</p>
           )}
-          <button
-            className="hover:bg-brand-600 focus:ring-brand-300 bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
-            onClick={handleDownload}
-          >
-            Yara Rule 저장
-          </button>
+          {editMode ? (
+            <></>
+          ) : (
+            <div className="flex justify-end">
+              <button
+                className="hover:bg-brand-600 focus:ring-brand-300 mt-4 bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
+                onClick={handleDownload}
+              >
+                Yara Rule 저장
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div className="mb-4 block text-lg font-bold text-gray-800 sm:text-lg">
