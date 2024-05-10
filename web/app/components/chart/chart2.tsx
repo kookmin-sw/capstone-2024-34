@@ -60,7 +60,13 @@ const ApexChart2 = () => {
   return (
     <div>
       <div>
-        <ReactApexChart options={chartOptions} series={seriesData} type="pie" />
+        <ReactApexChart
+          options={chartOptions}
+          series={seriesData}
+          width={"100%"}
+          height={"100%"}
+          type="pie"
+        />
       </div>
     </div>
   );
