@@ -15,10 +15,7 @@ const options = {
   fontFamily: "SUIT",
 };
 
-const WordCloud = ({
-  words = mockWordCloudData,
-  wordCloudoptions = options,
-}) => {
+const WordCloud = () => {
   const [iteration, setIteration] = useState(0);
 
   useEffect(() => {
@@ -30,7 +27,7 @@ const WordCloud = ({
 
   return (
     <div className="w-full max-w-full">
-      <ReactWordcloud words={words} options={wordCloudoptions} />
+      <ReactWordcloud words={mockWordCloudData} options={options} />
     </div>
   );
 };

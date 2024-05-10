@@ -3,6 +3,7 @@ import TrafficGraph from "@components/dashboard/graphs";
 import { mockTableData } from "./mockData/table";
 import moment from "moment";
 import WordCloud from "@components/dashboard/wordcloud";
+import InfoParser from "@components/dashboard/infoParser";
 
 export default function Dashboard() {
   return (
@@ -953,6 +954,27 @@ export default function Dashboard() {
                         </button>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="grid max-w-full grid-rows-1 gap-4 sm:gap-6 xl:grid-cols-2">
+          {/* 보안 정보 파싱 */}
+          <div className="h-full w-full">
+            <div className="flex h-full w-full flex-col">
+              <div className="inline-block h-full min-w-full align-middle">
+                <div className="h-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                  <div className="grid gap-3 border-b border-gray-200 px-6 py-4 md:flex md:items-center md:justify-between">
+                    <h2 className="text-xl font-semibold text-gray-800">
+                      국내 취약점 정보
+                    </h2>
+                  </div>
+                  <div className="grid h-full gap-3 px-6 py-4 md:flex md:items-center md:justify-center">
+                    <InfoParser
+                      path={"https://knvd.krcert.or.kr/rss/securityInfo.do"}
+                    />
                   </div>
                 </div>
               </div>
