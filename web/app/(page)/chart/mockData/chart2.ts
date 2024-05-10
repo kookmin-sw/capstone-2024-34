@@ -2,27 +2,39 @@ import { Chart2 } from "@customTypes/mock/chart";
 
 export const mockChart2Data: Chart2[] = [
   {
-    name: "mon",
-    data: 33,
+    name: "Exception",
+    data: 13364,
   },
   {
-    name: "tue",
-    data: 15,
+    name: "user32",
+    data: 11784,
   },
   {
-    name: "wed",
-    data: 44,
+    name: "kernel32",
+    data: 8343,
   },
   {
-    name: "thr",
-    data: 55,
+    name: "CloseHandle",
+    data: 9885,
   },
   {
-    name: "fri",
-    data: 41,
+    name: "GetFilesSize",
+    data: 6314,
   },
   {
-    name: "sat",
-    data: 17,
+    name: "FindClose",
+    data: 6247,
+  },
+  {
+    name: "System",
+    data: 12775,
+  },
+  {
+    name: "Delete",
+    data: 17858,
+  },
+  {
+    name: "etc",
+    data: 10000,
   },
 ];
