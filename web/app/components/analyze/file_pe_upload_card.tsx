@@ -118,7 +118,7 @@ const FilePEUploadCard = ({
         <form
           className={`${
             dragActive ? "bg-blue-400" : "bg-neutral-100"
-          }  focus:ring-brand-300 flex  w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 p-4 text-center shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-4 md:p-5`}
+          }  focus:ring-brand-300 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gray-200 bg-white p-4 text-center shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-4 md:p-5`}
           ref={formRef}
           onSubmit={handleFormSubmit}
           onDragEnter={handleDragEnter}

@@ -1,5 +1,5 @@
 import { FilePeHeaderResultResponse } from "@customTypes/analyze/file_pe_header";
-import { Button, Modal } from "antd";
+import { Button, Modal, Table, TableColumnsType } from "antd";
 import { useState } from "react";
 
 const FilePEHeaderResultCard = (props: {
@@ -7,22 +7,160 @@ const FilePEHeaderResultCard = (props: {
 }) => {
   const { output } = props.data;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [headerIdx, setHeaderIdx] = useState(0);
 
-  const showModal = () => {
+  const showModal = (headerDataIdx: number) => {
+    setHeaderIdx(headerDataIdx);
     setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
+  interface TableItem {
+    idx: string;
+    key: string;
+    value: string;
+    desc: string;
+  }
+
+  const columns: TableColumnsType<TableItem> = [
+    {
+      title: "번호",
+      dataIndex: "idx",
+      key: "idx",
+      width: "10%",
+    },
+    {
+      title: "이름",
+      dataIndex: "key",
+      key: "key",
+      width: "50%",
+    },
+    {
+      title: "값",
+      dataIndex: "value",
+      key: "value",
+      width: "20%",
+    },
+    {
+      title: "Readable Value",
+      dataIndex: "value",
+      key: "value",
+      width: "20%",
+    },
+  ];
+
+  const genModalContent = (headerTypeNum: number) => {
+    let dataSource: TableItem[] = [];
+    switch (headerTypeNum) {
+      case 2: {
+        dataSource = [
+          {
+            idx: "0",
+            key: "Machine",
+            value: output.Machine.toString(),
+            desc: "",
+          },
+          {
+            idx: "1",
+            key: "NumberOfSections",
+            value: output.NumberOfSections.toString(),
+            desc: "",
+          },
+          {
+            idx: "2",
+            key: "TimeDateStamp",
+            value: output.TimeDateStamp.toString(),
+            desc: "",
+          },
+          {
+            idx: "3",
+            key: "PointerToSymbolTable",
+            value: output.PointerToSymbolTable.toString(),
+            desc: "",
+          },
+          {
+            idx: "4",
+            key: "NumberOfSymbols",
+            value: output.NumberOfSymbols.toString(),
+            desc: "",
+          },
+          {
+            idx: "5",
+            key: "SizeOfOptionalHeader",
+            value: output.SizeOfOptionalHeader.toString(),
+            desc: "",
+          },
+          {
+            idx: "6",
+            key: "Characteristics",
+            value: output.Characteristics.toString(),
+            desc: "",
+          },
+        ];
+        break;
+      }
+      case 3: {
+        dataSource = [
+          {
+            idx: "0",
+            key: "Magic",
+            value: output.Magic.toString(),
+            desc: "",
+          },
+          {
+            idx: "1",
+            key: "Major/MinorLinker Version",
+            value: `${output.MajorLinkerVersion}/${output.MinorLinkerVersion}`,
+            desc: "",
+          },
+          {
+            idx: "2",
+            key: "SizeOfCode",
+            value: output.SizeOfCode.toString(),
+            desc: "",
+          },
+          {
+            idx: "3",
+            key: "SizeOfInitializedData",
+            value: output.SizeOfInitializedData.toString(),
+            desc: "",
+          },
+          {
+            idx: "4",
+            key: "SizeOfUninitializedData",
+            value: output.SizeOfUninitializedData.toString(),
+            desc: "",
+          },
+          {
+            idx: "5",
+            key: "AddressOfEntryPoint",
+            value: output.AddressOfEntryPoint.toString(),
+            desc: "",
+          },
+          {
+            idx: "6",
+            key: "BaseOfCode",
+            value: output.BaseOfCode.toString(),
+            desc: "",
+          },
+          {
+            idx: "7",
+            key: "BaseOfData",
+            value: output.BaseOfData.toString(),
+            desc: "",
+          },
+        ];
+      }
+    }
+    return <Table dataSource={dataSource} columns={columns} />;
+  };
+
   return (
     <>
-      <div className="grid grid-cols-4 divide-y divide-neutral-500 border-y border-neutral-700">
+      <div className="grid w-full divide-y divide-neutral-500 overflow-x-scroll border-y border-neutral-700 lg:grid-cols-4">
         <div className="col-span-4 bg-emerald-100">
           <p className="text-center text-sm text-neutral-600">DOS HEADER</p>
         </div>
@@ -33,59 +171,62 @@ const FilePEHeaderResultCard = (props: {
 
         <div
           className="col-span-4 grid cursor-pointer grid-cols-4 divide-y divide-neutral-500 bg-orange-100 hover:bg-orange-200"
-          onClick={showModal}
+          onClick={() => showModal(2)}
         >
-          <div className="group col-span-2">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">Signature 0x50450000</p>
           </div>
-          <div className="group col-span-1">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">Machine</p>
           </div>
-          <div className="group col-span-1">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">#NumberOfSections</p>
           </div>
-          <div className="group col-span-2">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">TimeDateStamp</p>
           </div>
-          <div className="group col-span-2">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">PointerToSymbolTable</p>
           </div>
-          <div className="group col-span-2">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600"># NumberOfSymbolTable</p>
           </div>
-          <div className="group col-span-1">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">SizeOfOptionalHeader</p>
           </div>
-          <div className="group col-span-1">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">Characteristics</p>
           </div>
         </div>
 
-        <div className="col-span-4 grid grid-cols-4 divide-y divide-neutral-500">
-          <div className="col-span-1 bg-cyan-100">
+        <div
+          className="col-span-4 grid cursor-pointer grid-cols-4 divide-y divide-neutral-500 bg-cyan-100 hover:bg-cyan-200"
+          onClick={() => showModal(3)}
+        >
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">Magic</p>
           </div>
-          <div className="col-span-1 bg-cyan-100">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">
               Major/MinorLinker Version
             </p>
           </div>
-          <div className="col-span-2 bg-cyan-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">SizeOfCode</p>
           </div>
-          <div className="col-span-2 bg-cyan-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">SizeOfInitializedData</p>
           </div>
-          <div className="col-span-2 bg-cyan-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">SizeOfUninitializedData</p>
           </div>
-          <div className="col-span-2 bg-cyan-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">AddressOfEntryPoint</p>
           </div>
-          <div className="col-span-2 bg-cyan-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">BaseOfCode</p>
           </div>
-          <div className="col-span-2 bg-cyan-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">BaseOfData</p>
           </div>
         </div>
@@ -294,20 +435,16 @@ const FilePEHeaderResultCard = (props: {
           <p className="text-sm text-neutral-600">Characteristics</p>
         </div>
       </div>
+
       <Modal
         title="COFF Header"
         open={isModalOpen}
-        onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
+        width={800}
       >
         <div className="text-lg">
-          <p>Machine | {output.Machine}</p>
-          <p>NumberOfSections | {output.NumberOfSections}</p>
-          <p>TimeDateStamp | {output.TimeDateStamp}</p>
-          <p>PointerToSymbolTable | {output.PointerToSymbolTable}</p>
-          <p>NumberOfSymbols | {output.NumberOfSymbols}</p>
-          <p>SizeOfOptionalHeader | {output.SizeOfOptionalHeader}</p>
-          <p>Characteristics | {output.Characteristics}</p>
+          <>{genModalContent(headerIdx)}</>
         </div>
       </Modal>
     </>
