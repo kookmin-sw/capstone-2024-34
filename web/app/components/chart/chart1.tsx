@@ -13,7 +13,7 @@ const ApexChart1 = () => {
   const options = {
     chart: {
       stacked: true,
-      stackType: "100%", // 100% 타입 주면 구현되는데 option에서 에러띄움
+      stackType: "100%" as "100%", // 100% 타입 주면 구현되는데 option에서 에러띄움
     },
     plotOptions: {
       bar: {
