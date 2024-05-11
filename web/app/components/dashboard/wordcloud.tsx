@@ -29,9 +29,9 @@ const WordCloud = ({
   }, [iteration]);
 
   return (
-    <div className="w-full max-w-full">
+    <>
       <ReactWordcloud words={words} options={wordCloudoptions} />
-    </div>
+    </>
   );
 };
 

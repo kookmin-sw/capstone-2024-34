@@ -37,7 +37,7 @@ export default function AnalyzePeFilePage() {
           <div className="place-items-end items-end place-self-end"></div>
         </div>
         {/* 콘텐츠 영역 */}
-        <div className="mt-5 grid w-full max-w-full gap-4 overflow-x-scroll sm:gap-6">
+        <div className="mt-5 grid w-full max-w-full gap-4  sm:gap-6">
           <FilePEUploadCard
             onSubmit={handleSubmitResponse}
             isProgress={isProgress}

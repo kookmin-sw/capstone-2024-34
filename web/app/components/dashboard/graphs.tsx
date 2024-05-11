@@ -72,7 +72,7 @@ const TrafficGraph = () => {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center">
+    <>
       <ReactApexChart
         options={chartOptions}
         series={values}
@@ -80,7 +80,7 @@ const TrafficGraph = () => {
         height={"100%"}
         type="pie"
       />
-    </div>
+    </>
   );
 };
 
