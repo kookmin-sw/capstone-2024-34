@@ -2,19 +2,16 @@
 
 import FilePEResultCard from "@components/analyze/file_pe_result_card";
 import FilesPEUploadCard from "@components/analyze/files_pe_upload_card";
-import {
-  AnalyzePeFileUploadResponse,
-  FilePeResultResponse,
-} from "@customTypes/analyze/api";
+import { AnalyzePeFilesUploadResponse } from "@customTypes/analyze/api";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function AnalyzePeFilesPage() {
-  let [data, setData] = useState<AnalyzePeFileUploadResponse>();
+  let [data, setData] = useState<AnalyzePeFilesUploadResponse>();
   // 업로드후 로딩 상태 저장
   const [isProgress, setIsProgress] = useState(false);
 
-  function handleSubmitResponse(responseData: AnalyzePeFileUploadResponse) {
+  function handleSubmitResponse(responseData: AnalyzePeFilesUploadResponse) {
     setData(responseData);
     console.log("res", data);
   }
@@ -43,14 +40,24 @@ export default function AnalyzePeFilesPage() {
             isProgress={isProgress}
             setIsProgress={setIsProgress}
           />
-          <FilePEResultCard
+          {data?.data !== undefined ? (
+            <div className="bg-neutral-200 p-4">
+              <p>정상 업로드 성공</p>
+              <p>{data?.data.folderPath}</p>
+              <p>{JSON.stringify(data?.data.files)}</p>
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {/* <FilePEResultCard
             success={data?.success || false}
             message={data?.message || ""}
             data={
               data?.data || ({} as FilePeResultResponse as FilePeResultResponse)
             }
             isProgress={isProgress}
-          />
+          /> */}
         </div>
       </div>
     </div>

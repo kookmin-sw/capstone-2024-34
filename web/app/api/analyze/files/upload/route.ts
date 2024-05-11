@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { mkdir, writeFile } from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
+import { FilesPeResultResponse } from "@customTypes/analyze/api";
 
 export const config = {
   api: {
@@ -9,13 +10,8 @@ export const config = {
   },
 };
 
-export interface FileName {
-  origin_filename: string;
-  conv_filename: string;
-}
-
 export async function POST(request: Request) {
-  let savedData = { files: [] as FileName[], folderPath: "" };
+  let savedData: FilesPeResultResponse = { files: [], folderPath: "" };
 
   try {
     const formData = await request.formData();
@@ -88,7 +84,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: "데이터 저장 성공",
-      data: { savedData },
+      data: savedData,
     });
   } catch (error) {
     console.error("데이터 저장 중 오류 발생:", error);
