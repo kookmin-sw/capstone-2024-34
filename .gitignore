@@ -223,8 +223,8 @@ tempCodeRunnerFile.py
 /PE/datasets/ben/*
 !/PE/datasets/ben/README.md
 
-/PE/res/PE_big_group.pkl
-/PE/res/PE_virtual_vector.pkl
+/PE/res/*big_group.pkl
+/PE/res/*_vector.pkl
 /PE/datasets/pkl/*
 !/PE/datasets/pkl/README.md
 
