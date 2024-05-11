@@ -66,6 +66,7 @@ const handler = NextAuth({
     strategy: "jwt",
     maxAge: 3500,
   },
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };
