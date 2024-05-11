@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import ApexChart2 from "@components/chart/chart2";
 import ApexChart3 from "@components/chart/chart3";
+import ApexChart1 from "@components/chart/chart1";
 
 export default function ChartPage() {
   return (
@@ -21,6 +22,9 @@ export default function ChartPage() {
           <div className="place-items-end items-end place-self-end"></div>
         </div>
         {/* 콘텐츠 영역 */}
+        <div>
+          <ApexChart1></ApexChart1>
+        </div>
         <div>
           <ApexChart2></ApexChart2>
         </div>
