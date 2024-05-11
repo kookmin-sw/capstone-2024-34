@@ -14,7 +14,7 @@ const handler = NextAuth({
         username: {
           label: "아이디",
           type: "text",
-          placeholder: "이메일 주소 입력",
+          placeholder: "아이디 입력",
         },
         password: {
           label: "비밀번호",
