@@ -22,7 +22,7 @@ const FilesPEUploadCard = ({
   // 분석 api 호출결과 데이터 저장
   const [data, setData] = useState<AnalyzePeFileUploadResponse>();
   // 파일 업로드 개수 제한
-  const maxFileCount = 1;
+  const maxFileCount = 1000;
 
   async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -30,10 +30,10 @@ const FilesPEUploadCard = ({
 
     const formData = new FormData();
     files.forEach((file: File) => {
-      formData.append("upload_file", file);
+      formData.append("upload_file[]", file);
     });
 
-    await fetch("/api/analyze/file/upload", {
+    await fetch("/api/analyze/files/upload", {
       method: "POST",
       body: formData,
     })
@@ -114,8 +114,9 @@ const FilesPEUploadCard = ({
 
   return (
     <>
-      <div className="flex items-center justify-center">
+      <div className="flex w-full flex-col items-center justify-center">
         <form
+          id={"multiple_file_upload_form"}
           className={`${
             dragActive ? "bg-blue-400" : "bg-neutral-100"
           }  focus:ring-brand-300 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gray-200 bg-white p-4 text-center shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-4 md:p-5`}
@@ -133,6 +134,7 @@ const FilesPEUploadCard = ({
             accept=".acm, .ax, .cpl, .dll, .drv, .efi, .exe, .mui, .ocx, .scr, .sys, .tsp"
             ref={inputRef}
             className="hidden"
+            multiple={true}
             onChange={handleChange}
           />
 
@@ -160,33 +162,43 @@ const FilesPEUploadCard = ({
             </span>
             해 업로드해주세요.
           </p>
-
-          {files.length != 0 ? (
-            <>
-              <div className="flex flex-col items-center p-3">
-                {files.map((file: any, idx: any) => (
-                  <div key={idx} className="flex flex-row space-x-5">
-                    <span>{file.name}</span>
-                    <span
-                      className="cursor-pointer text-red-500"
-                      onClick={() => removeFile(file.name, idx)}
-                    >
-                      삭제
-                    </span>
-                  </div>
-                ))}
-              </div>
-              <button
-                type="submit"
-                className="hover:bg-brand-600 focus:ring-brand-300  bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
-              >
-                분석하기
-              </button>
-            </>
-          ) : (
-            <></>
-          )}
         </form>
+        {files.length != 0 ? (
+          <div className="mt-2 w-full">
+            <p className="ml-1">
+              <span className="text-blue-600">{files.length}개</span> /{" "}
+              {maxFileCount}개
+            </p>
+            <div className="mt-1 flex max-h-72 w-full flex-col items-center space-y-2 overflow-y-scroll">
+              {files.map((file: File, idx: any) => (
+                <div
+                  key={idx}
+                  className="flex w-full flex-row space-x-5 rounded-lg border border-gray-200 bg-white px-4 py-3 shadow-sm"
+                >
+                  <span className="flex-1 text-base">
+                    {file.name} [
+                    {Math.round((file.size / (1024 * 1024)) * 100) / 100}MB]
+                  </span>
+                  <span
+                    className="cursor-pointer hover:text-red-500"
+                    onClick={() => removeFile(file.name, idx)}
+                  >
+                    × 삭제
+                  </span>
+                </div>
+              ))}
+            </div>
+            <button
+              type="submit"
+              form="multiple_file_upload_form"
+              className="hover:bg-brand-600 focus:ring-brand-300 mt-3 w-full rounded-lg bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
+            >
+              분석하기
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </>
   );
