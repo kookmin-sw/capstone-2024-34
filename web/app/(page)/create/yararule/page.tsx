@@ -6,7 +6,7 @@ import { YaraRuleCreateRespone, YaraRule } from "@customTypes/yara/api";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function AnalyzePeFilePage() {
+export default function CreateYaraRulePage() {
   let [data, setData] = useState<YaraRuleCreateRespone>();
 
   function handleSubmitResponse(responseData: YaraRuleCreateRespone) {
