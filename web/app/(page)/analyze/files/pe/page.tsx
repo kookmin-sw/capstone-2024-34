@@ -17,7 +17,7 @@ export default function AnalyzePeFilesPage() {
   }
 
   return (
-    <div className="h-full w-full max-w-full space-y-4 overflow-x-hidden px-4 py-4 sm:space-y-6 sm:px-2 sm:py-6">
+    <div className="h-full w-full max-w-full space-y-4 overflow-x-hidden px-4 py-4 sm:space-y-6 sm:px-6 sm:py-6">
       <div className="h-full min-h-full w-full">
         {/* 페이지 헤더 */}
         <div className="grid grid-cols-2">
