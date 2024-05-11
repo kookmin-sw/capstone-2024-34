@@ -255,16 +255,16 @@ export default function SideBar() {
                     className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
                     href="/analyze/file/pe"
                   >
-                    PE 파일 분석
+                    단일 PE 파일 분석
                   </Link>
                 </li>
                 <li>
-                  <a
+                  <Link
                     className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
-                    href="#"
+                    href="/analyze/files/pe"
                   >
-                    문서 파일 분석
-                  </a>
+                    복수 PE 파일 분석
+                  </Link>
                 </li>
               </ul>
             </div>
