@@ -16,10 +16,10 @@ export default function AnalyzePeFilePage() {
 
   return (
     <>
-      <div className="w-full max-w-full space-y-4 p-4 sm:space-y-6 sm:p-6">
+      <div className="h-full w-full max-w-full space-y-4 overflow-x-hidden px-4 py-4 sm:space-y-6 sm:px-2 sm:py-6">
         <div className="h-full min-h-full w-full">
           {/* 페이지 헤더 */}
-          <div className="grid grid-cols-2">
+          <div className="grid lg:grid-cols-2">
             <header>
               <p className="mb-2 text-sm font-semibold text-blue-600">
                 Create Yara Rule
@@ -33,7 +33,7 @@ export default function AnalyzePeFilePage() {
             <div className="place-items-end items-end place-self-end"></div>
           </div>
           {/* 콘텐츠 영역 */}
-          <div className="mt-5 grid w-full max-w-full grid-cols-2 gap-4">
+          <div className="mt-5 grid w-full max-w-full gap-4 lg:grid-cols-2">
             <InputStringsCard onSubmit={handleSubmitResponse} />
             <YaraRuleResultCard
               success={data?.success || false}

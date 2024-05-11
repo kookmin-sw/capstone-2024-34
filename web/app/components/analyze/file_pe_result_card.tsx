@@ -128,17 +128,17 @@ const FilePEResultCard = ({
         <>
           {data.data_header ? (
             <div className="focus:ring-brand-300 flex w-full max-w-full  flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm focus:outline-none focus:ring-4 md:p-5">
-              <div className="grid w-full max-w-full gap-2 overflow-x-scroll lg:grid-cols-2">
+              <div className="grid w-full max-w-full gap-2 overflow-x-hidden lg:grid-cols-2">
                 {/* 점수 */}
                 <div>
                   <p className="text-lg">분석점수</p>
                   <p className="text-xl">{data.data_strings.output.score}</p>
                 </div>
                 {/* 테이블 */}
-                <div>
+                <div className="w-full max-w-full overflow-x-hidden">
                   <FilePEHeaderResultCard data={data.data_header} />
                 </div>
-                <div className="lg:col-span-2">
+                <div className="overflow-x-scroll lg:col-span-2">
                   <p className="mb-2 ml-1 text-xl">문자열 추출 결과</p>
                   <Table
                     dataSource={dataSource}
@@ -146,13 +146,13 @@ const FilePEResultCard = ({
                     onChange={onChange}
                   />
                 </div>
-                <div>
+                <div className="w-full max-w-full overflow-x-scroll">
                   <p>Header 추출</p>
                   <p className="whitespace-pre-line text-wrap">
                     {JSON.stringify(data.data_header, null, 2)}
                   </p>
                 </div>
-                <div>
+                <div className="w-full max-w-full overflow-x-scroll">
                   <p>String 추출</p>
                   <p className="whitespace-pre-line text-wrap">
                     {JSON.stringify(data.data_strings, null, 2)}
