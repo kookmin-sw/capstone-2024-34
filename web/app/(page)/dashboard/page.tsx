@@ -81,7 +81,7 @@ export default function Dashboard() {
                 </div>
                 <div className="mt-1 flex items-center gap-x-2">
                   <h3 className="text-2xl font-semibold text-gray-800">
-                    72,540
+                    2,540
                   </h3>
                   <span className="inline-flex items-center gap-x-1 rounded-full bg-green-100 px-2 py-0.5 text-green-900">
                     <svg
@@ -136,7 +136,7 @@ export default function Dashboard() {
                 </div>
                 <div className="mt-1 flex items-center gap-x-2">
                   <h3 className="text-2xl font-semibold text-gray-800">
-                    24,376
+                    1,376
                   </h3>
                   <span className="inline-flex items-center gap-x-1 rounded-full bg-red-100 px-2 py-0.5 text-red-900">
                     <svg
