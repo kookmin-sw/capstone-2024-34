@@ -168,28 +168,12 @@ export default function SideBar() {
             >
               <ul className="ps-2 pt-2">
                 <li>
-                  <a
+                  <Link
                     className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
-                    href="#"
+                    href="/stats/chart"
                   >
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
-                    href="#"
-                  >
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
-                    href="#"
-                  >
-                    Link 3
-                  </a>
+                    통계 시각화
+                  </Link>
                 </li>
               </ul>
             </div>

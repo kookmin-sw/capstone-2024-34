@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { mockChart1Data } from "../../(page)/chart/mockData/chart1";
+import { mockChart1Data } from "../../(page)/stats/chart/mockData/chart1";
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
