@@ -30,7 +30,7 @@ export async function GET(req: Request) {
     // 파이썬 프로세스 정상 처리
     pythonProcess.stdout.on("data", (data) => {
       output += data.toString();
-      console.log("파이썬 프로세스 출력값:", output);
+      console.log("파이썬 프로세스 정상수행");
     });
 
     // 파이썬 프로세스 오류 처리
@@ -55,7 +55,7 @@ export async function GET(req: Request) {
   try {
     // Promise 처리 결과 대기후 반환
     const promiseData = await processDataPromise;
-    console.log("파이썬 정상실행:", promiseData);
+    console.log("파이썬 프로세스 결과 정상 수신");
     return NextResponse.json({ output: promiseData }, { status: 200 });
   } catch (error) {
     // 에러 핸들링
@@ -94,7 +94,7 @@ export async function POST(req: Request) {
     // 파이썬 프로세스 정상 처리
     pythonProcess.stdout.on("data", (data) => {
       output += data.toString();
-      console.log("파이썬 프로세스 출력값:", output);
+      console.log("파이썬 프로세스 정상수행");
     });
 
     // 파이썬 프로세스 오류 처리
@@ -119,7 +119,7 @@ export async function POST(req: Request) {
   try {
     // Promise 처리 결과 대기후 반환
     const promiseData = await processDataPromise;
-    console.log("파이썬 정상실행:", promiseData);
+    console.log("파이썬 프로세스 결과 정상 수신");
     return NextResponse.json({ output: promiseData }, { status: 200 });
   } catch (error) {
     // 에러 핸들링
