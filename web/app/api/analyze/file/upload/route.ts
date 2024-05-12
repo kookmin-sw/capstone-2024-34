@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
+import { FileInfo } from "@customTypes/analyze/api";
 
 export const config = {
   api: {
@@ -15,6 +16,12 @@ export async function POST(request: Request) {
     console.log(formData);
 
     const file: File | null = formData.get("upload_file") as unknown as File;
+    const fileInfo: FileInfo = {
+      fileName: file.name,
+      fileType: file.type,
+      fileSize: file.size,
+      fileLastModified: file.lastModified,
+    };
     console.log(file);
 
     if (file.size > 0) {
@@ -66,7 +73,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: "데이터 저장 성공",
-      data: { data_header, data_strings },
+      data: { data_header, data_strings, fileInfo },
     });
   } catch (error) {
     console.error("데이터 저장 중 오류 발생:", error);
