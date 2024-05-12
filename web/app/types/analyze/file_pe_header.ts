@@ -186,3 +186,226 @@ export interface FilePeHeaderResultResponse {
     "Resource:TimeDateStamp": number;
   };
 }
+export interface FilePeHeaderTableItem {
+  idx: string;
+  key: string;
+  value: string;
+  desc: string;
+}
+
+export const FilePeHeaderTableItems2 = (data: FilePeHeaderResultResponse) => {
+  const output = data.output;
+
+  return [
+    {
+      idx: "0",
+      key: "Machine",
+      value: output.Machine.toString(),
+      desc: "",
+    },
+    {
+      idx: "1",
+      key: "NumberOfSections",
+      value: output.NumberOfSections.toString(),
+      desc: "",
+    },
+    {
+      idx: "2",
+      key: "TimeDateStamp",
+      value: output.TimeDateStamp.toString(),
+      desc: "",
+    },
+    {
+      idx: "3",
+      key: "PointerToSymbolTable",
+      value: output.PointerToSymbolTable.toString(),
+      desc: "",
+    },
+    {
+      idx: "4",
+      key: "NumberOfSymbols",
+      value: output.NumberOfSymbols.toString(),
+      desc: "",
+    },
+    {
+      idx: "5",
+      key: "SizeOfOptionalHeader",
+      value: output.SizeOfOptionalHeader.toString(),
+      desc: "",
+    },
+    {
+      idx: "6",
+      key: "Characteristics",
+      value: output.Characteristics.toString(),
+      desc: "",
+    },
+  ] as FilePeHeaderTableItem[];
+};
+
+export const FilePeHeaderTableItems3 = (data: FilePeHeaderResultResponse) => {
+  const output = data.output;
+  return [
+    {
+      idx: "0",
+      key: "Magic",
+      value: output.Magic.toString(),
+      desc: "",
+    },
+    {
+      idx: "1",
+      key: "Major/MinorLinker Version",
+      value: `${output.MajorLinkerVersion}/${output.MinorLinkerVersion}`,
+      desc: "",
+    },
+    {
+      idx: "2",
+      key: "SizeOfCode",
+      value: output.SizeOfCode.toString(),
+      desc: "",
+    },
+    {
+      idx: "3",
+      key: "SizeOfInitializedData",
+      value: output.SizeOfInitializedData.toString(),
+      desc: "",
+    },
+    {
+      idx: "4",
+      key: "SizeOfUninitializedData",
+      value: output.SizeOfUninitializedData.toString(),
+      desc: "",
+    },
+    {
+      idx: "5",
+      key: "AddressOfEntryPoint",
+      value: output.AddressOfEntryPoint.toString(),
+      desc: "",
+    },
+    {
+      idx: "6",
+      key: "BaseOfCode",
+      value: output.BaseOfCode.toString(),
+      desc: "",
+    },
+    {
+      idx: "7",
+      key: "BaseOfData",
+      value: output.BaseOfData.toString(),
+      desc: "",
+    },
+  ] as FilePeHeaderTableItem[];
+};
+
+export const FilePeHeaderTableItems4 = (data: FilePeHeaderResultResponse) => {
+  const output = data.output;
+  return [
+    {
+      idx: "0",
+      key: "ImageBase",
+      value: output.ImageBase.toString(),
+      desc: "",
+    },
+    {
+      idx: "1",
+      key: "SectionAlignment",
+      value: output.SectionAlignment.toString(),
+      desc: "",
+    },
+    {
+      idx: "2",
+      key: "FileAlignment",
+      value: output.FileAlignment.toString(),
+      desc: "",
+    },
+    {
+      idx: "3",
+      key: "Major/MinorOperatingSystem Version",
+      value: `${output.MajorOperatingSystemVersion}/${output.MinorOperatingSystemVersion}`,
+      desc: "",
+    },
+    {
+      idx: "4",
+      key: "Major/MinorImage Version",
+      value: `${output.MajorImageVersion}/${output.MinorImageVersion}`,
+      desc: "",
+    },
+    {
+      idx: "5",
+      key: "Major/MinorSubsystem Version",
+      value: `${output.MajorSubsystemVersion}/${output.MinorSubsystemVersion}`,
+      desc: "",
+    },
+    {
+      idx: "6",
+      key: "Reserved1",
+      value: output.Reserved1.toString(),
+      desc: "",
+    },
+    {
+      idx: "7",
+      key: "SizeOfImage",
+      value: output.SizeOfImage.toString(),
+      desc: "",
+    },
+    {
+      idx: "8",
+      key: "SizeOfHeaders",
+      value: output.SizeOfHeaders.toString(),
+      desc: "",
+    },
+    {
+      idx: "9",
+      key: "CheckSum",
+      value: output.CheckSum.toString(),
+      desc: "",
+    },
+    {
+      idx: "10",
+      key: "Subsystem",
+      value: output.Subsystem.toString(),
+      desc: "",
+    },
+    {
+      idx: "11",
+      key: "DllCharacteristics",
+      value: output.DllCharacteristics.toString(),
+      desc: "",
+    },
+    {
+      idx: "12",
+      key: "SizeOfStackReserve",
+      value: output.SizeOfStackReserve.toString(),
+      desc: "",
+    },
+    {
+      idx: "13",
+      key: "SizeOfStackCommit",
+      value: output.SizeOfStackCommit.toString(),
+      desc: "",
+    },
+    {
+      idx: "14",
+      key: "SizeOfHeapReserve",
+      value: output.SizeOfHeapReserve.toString(),
+      desc: "",
+    },
+    {
+      idx: "15",
+      key: "SizeOfHeapCommit",
+      value: output.SizeOfHeapCommit.toString(),
+      desc: "",
+    },
+    {
+      idx: "16",
+      key: "LoaderFlags",
+      value: output.LoaderFlags.toString(),
+      desc: "",
+    },
+    {
+      idx: "17",
+      key: "NumberOfRvaAndSizes",
+      value: output.NumberOfRvaAndSizes.toString(),
+      desc: "",
+    },
+  ];
+};
