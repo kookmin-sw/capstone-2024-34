@@ -18,4 +18,17 @@ model User {
   userID String @unique
   userPW String
   name   String
+  analyses Analysis[]
+}
+
+model Analysis {
+  id       String   @id @unique @default(uuid())
+  time     DateTime
+  filename String
+  analysis String
+  score    Float
+  result   Int
+  reason   String
+  userid   String
+  user     User    @relation(fields: [userid], references: [id])
 }
