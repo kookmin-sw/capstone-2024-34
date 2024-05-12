@@ -70,38 +70,31 @@ def HH(
 	ratio: float = 0.8,
 	deduplication: bool = False,
 ):
-
 	hh1 = HeavyHitter(hh1_size)
 	hh2 = HeavyHitter(hh2_size)
 
-	tmp_counter = 0
+	threshold = 0
 	for packet in packets:
-
+		min_val = []
 		signset = set()
 
-		for idx, chunk in enumerate(packet):
-			counter1 = hh1.update(chunk)
-
-			if counter1 > 0:
-				if (counter1 > ratio * tmp_counter) and (chunk not in signset):
-					tmp_counter = min(counter1, tmp_counter)
-					hh2.update(chunk)
-					if deduplication:
-						signset.add(chunk)
-			else:
-				if chunk not in signset:
+		for chunk in packet:
+			if chunk not in signset:
+				counter1 = hh1.update(chunk)
+				if counter1 >= ratio * threshold:
+					min_val.append(counter1)
 					hh2.update(chunk)
 					if deduplication:
 						signset.add(chunk)
 
-		
+		if len(min_val) != 0:
+			threshold = min(min_val)
+
 	hh2.fixSubstringFrequency()
-	return sorted(list(hh2.items.items()), key=lambda x: -x[1])
-
+	return ([i for i in sorted(list(hh2.items.items()), key=lambda x: -x[1]) if i[1] >= threshold])
 
 
 if __name__ == '__main__':
-	packets = [['http', 'asd'] * 30 for _ in range(30)]
-	print(packets[0][0])
-
-	print(HH(packets=packets, deduplication=True))
+	packets = [['http'], ['http', 'asdfq'], ['asd', 'asdfq']]
+	packets += [['asdfq'] for _ in range(10)]
+	print(HH(packets=packets, deduplication=True, ratio=0.5, hh2_size=1))

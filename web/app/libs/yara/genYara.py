@@ -128,7 +128,7 @@ if __name__ == "__main__":
 	hh1_size = 3000
 	hh2_size = 3000
 	hh3_size = 3000
-	ratio = 0.1
+	ratio = 1
 	signatures = main(str_feature, window_size=window_size, K=K, M=M, thetaJ=thetaJ, vector_size=vector_size, 
 				  eps=eps, minpts=minpts, ngram=ngram, hh1_size=hh1_size, hh2_size=hh2_size, hh3_size=hh3_size, ratio=ratio)
 	
@@ -138,5 +138,6 @@ if __name__ == "__main__":
 
 	f = open('my_yara_rule.yar', 'w')
 	f.write(yara_rule)
+	f.close()
 	
-	print(yara_rule)
+	# print(yara_rule)
