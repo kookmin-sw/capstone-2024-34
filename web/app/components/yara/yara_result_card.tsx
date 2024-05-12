@@ -1,6 +1,11 @@
+"use client";
 import { YaraRuleCreateRespone } from "@customTypes/yara/api";
+import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
-import MonacoEditor from "react-monaco-editor";
+
+const MonacoEditor = dynamic(() => import("react-monaco-editor"), {
+  ssr: false,
+});
 
 const YaraRuleResultCard = ({
   success,
@@ -19,7 +24,8 @@ const YaraRuleResultCard = ({
     // 입력된 텍스트를 Blob 객체로 변환
     const blob = new Blob([yaraRule], { type: "text/plain" });
     // Blob 객체를 URL.createObjectURL을 사용하여 다운로드할 수 있는 URL로 변환
-    const url = window.URL.createObjectURL(blob);
+    const url =
+      typeof window != undefined ? window.URL.createObjectURL(blob) : "";
 
     // a 태그를 동적으로 생성하여 다운로드 링크 생성
     const link = document.createElement("a");

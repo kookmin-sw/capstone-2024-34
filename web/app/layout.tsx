@@ -6,6 +6,7 @@ import PrelineScript from "@components/common/prelinescript";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
 import koKR from "antd/lib/locale/ko_KR";
+import NextAuthProviders from "@components/common/nextauthprovider";
 
 export const metadata: Metadata = {
   title: "InfoSec Platform",
@@ -24,14 +25,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="h-full w-full">
-      <body className={`${suit.className} h-full w-full`}>
-        <AntdRegistry>
-          <ConfigProvider locale={koKR}>
-            {children}
-            <PrelineScript />
-          </ConfigProvider>
-        </AntdRegistry>
+    <html lang="ko">
+      <body className={`${suit.className}`}>
+        <NextAuthProviders>
+          <AntdRegistry>
+            <ConfigProvider locale={koKR}>
+              {children}
+              <PrelineScript />
+            </ConfigProvider>
+          </AntdRegistry>
+        </NextAuthProviders>
       </body>
     </html>
   );

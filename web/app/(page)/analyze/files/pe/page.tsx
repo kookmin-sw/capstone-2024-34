@@ -1,20 +1,17 @@
 "use client";
 
 import FilePEResultCard from "@components/analyze/file_pe_result_card";
-import FilePEUploadCard from "@components/analyze/file_pe_upload_card";
-import {
-  AnalyzePeFileUploadResponse,
-  FilePeResultResponse,
-} from "@customTypes/analyze/api";
+import FilesPEUploadCard from "@components/analyze/files_pe_upload_card";
+import { AnalyzePeFilesUploadResponse } from "@customTypes/analyze/api";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function AnalyzePeFilePage() {
-  let [data, setData] = useState<AnalyzePeFileUploadResponse>();
+export default function AnalyzePeFilesPage() {
+  let [data, setData] = useState<AnalyzePeFilesUploadResponse>();
   // 업로드후 로딩 상태 저장
   const [isProgress, setIsProgress] = useState(false);
 
-  function handleSubmitResponse(responseData: AnalyzePeFileUploadResponse) {
+  function handleSubmitResponse(responseData: AnalyzePeFilesUploadResponse) {
     setData(responseData);
     console.log("res", data);
   }
@@ -29,7 +26,7 @@ export default function AnalyzePeFilePage() {
               Analyze PE File
             </p>
             <h1 className="block text-2xl font-bold text-gray-800 sm:text-3xl">
-              단일 PE 파일 분석
+              복수 PE 파일 분석
             </h1>
             <p className="mt-2 text-lg text-gray-800"></p>
           </header>
@@ -38,19 +35,29 @@ export default function AnalyzePeFilePage() {
         </div>
         {/* 콘텐츠 영역 */}
         <div className="mt-5 grid w-full max-w-full gap-4 sm:gap-6">
-          <FilePEUploadCard
+          <FilesPEUploadCard
             onSubmit={handleSubmitResponse}
             isProgress={isProgress}
             setIsProgress={setIsProgress}
           />
-          <FilePEResultCard
+          {data?.data !== undefined ? (
+            <div className="bg-neutral-200 p-4">
+              <p>정상 업로드 성공</p>
+              <p>{data?.data.folderPath}</p>
+              <p>{JSON.stringify(data?.data.files)}</p>
+            </div>
+          ) : (
+            <></>
+          )}
+
+          {/* <FilePEResultCard
             success={data?.success || false}
             message={data?.message || ""}
             data={
               data?.data || ({} as FilePeResultResponse as FilePeResultResponse)
             }
             isProgress={isProgress}
-          />
+          /> */}
         </div>
       </div>
     </div>
