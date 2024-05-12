@@ -216,8 +216,10 @@ def THH(
 
 
 if __name__ == '__main__':
-    packets = [['http' for _ in range(30)] for _ in range(30)]
-    print(packets[0][0])
+    packets = [['http', 'admin'] * 30 + ['admin'] for _ in range(30)]
+    packets += [['qwdqwe', '1gg33'] for _ in range(20)]
+    packets += [['1gg33'] for _ in range(20)]
+    print(packets)
 
     print(THH(packets=packets, ratio=0.1, deduplication=True))
     print(DHH(packets=packets, ratio=0.1, deduplication=True))
