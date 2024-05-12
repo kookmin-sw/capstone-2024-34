@@ -70,8 +70,6 @@ def HH(
 	ratio: float = 0.8,
 	deduplication: bool = False,
 ):
-	print("heavy heater")
-
 	hh1 = HeavyHitter(hh1_size)
 	hh2 = HeavyHitter(hh2_size)
 
