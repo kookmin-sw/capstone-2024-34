@@ -6,7 +6,6 @@ import {
   AnalyzePeFileUploadResponse,
   FilePeResultResponse,
 } from "@customTypes/analyze/api";
-import Link from "next/link";
 import { useState } from "react";
 
 export default function AnalyzePeFilePage() {
@@ -44,11 +43,9 @@ export default function AnalyzePeFilePage() {
             setIsProgress={setIsProgress}
           />
           <FilePEResultCard
-            success={data?.success || false}
-            message={data?.message || ""}
-            data={
-              data?.data || ({} as FilePeResultResponse as FilePeResultResponse)
-            }
+            success={data?.success}
+            message={data?.message}
+            data={data?.data || ({} as FilePeResultResponse)}
             isProgress={isProgress}
           />
         </div>

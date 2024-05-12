@@ -15,6 +15,8 @@ const FilePEHeaderResultCard = (props: {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [headerIdx, setHeaderIdx] = useState(0);
 
+  if (!output) return <></>;
+
   const showModal = (headerDataIdx: number) => {
     setHeaderIdx(headerDataIdx);
     setIsModalOpen(true);
@@ -63,7 +65,7 @@ const FilePEHeaderResultCard = (props: {
         return "Windows Specific Fields";
       }
       default:
-        return "";
+        return " ";
     }
   };
 
@@ -87,7 +89,7 @@ const FilePEHeaderResultCard = (props: {
   };
 
   return (
-    <>
+    <div>
       <div className="grid w-full divide-y divide-neutral-500 overflow-x-scroll border-y border-neutral-700 lg:grid-cols-4">
         <div className="col-span-4 bg-emerald-100">
           <p className="text-center text-sm text-neutral-600">DOS HEADER</p>
@@ -375,10 +377,10 @@ const FilePEHeaderResultCard = (props: {
         width={800}
       >
         <div className="text-lg">
-          <>{genModalContent(headerIdx)}</>
+          <div>{genModalContent(headerIdx)}</div>
         </div>
       </Modal>
-    </>
+    </div>
   );
 };
 

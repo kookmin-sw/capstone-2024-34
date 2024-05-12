@@ -3,8 +3,8 @@ import { FilePeHeaderResultResponse } from "@customTypes/analyze/file_pe_header"
 import exp from "constants";
 
 export interface AnalyzePeFileUploadResponse {
-  success: boolean;
-  message: string;
+  success: boolean | undefined;
+  message: string | undefined;
   data: FilePeResultResponse;
 }
 

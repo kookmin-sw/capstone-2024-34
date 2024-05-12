@@ -1,8 +1,9 @@
 import { AnalyzePeFileUploadResponse } from "@customTypes/analyze/api";
 import { FilePeStringResultResponse } from "@customTypes/analyze/file_pe_string";
-import { Table, TableColumnsType, TableProps, Tag } from "antd";
+import { Table, TableColumnsType, TableProps, Tag, Tooltip } from "antd";
 
 import FilePEHeaderResultCard from "./file_pe_result_header";
+import { FilePeHeaderLibItems } from "@customTypes/analyze/file_pe_header";
 
 interface ResultItem {
   key: string;
@@ -11,7 +12,7 @@ interface ResultItem {
 }
 
 const generateTableDataSource = (
-  data: FilePeStringResultResponse,
+  data: FilePeStringResultResponse | undefined,
 ): ResultItem[] => {
   if (!data) return [];
   const result: ResultItem[] = [];
@@ -44,7 +45,7 @@ const FilePEResultCard = ({
   message,
   isProgress,
 }: AnalyzePeFileUploadResponse & { isProgress: boolean }) => {
-  const dataSource = generateTableDataSource(data.data_strings);
+  const dataSource = generateTableDataSource(data?.data_strings);
   const columns: TableColumnsType<ResultItem> = [
     {
       title: "번호",
@@ -76,14 +77,14 @@ const FilePEResultCard = ({
       onFilter: (value, record) => record.status === value,
       filterSearch: true,
       render: (_, { status }) => (
-        <>
+        <div>
           <Tag
             color={status === "attack" ? "red" : "blue"}
             key={status + Math.random()}
           >
             {status === "attack" ? "공격" : "정상"}
           </Tag>
-        </>
+        </div>
       ),
     },
   ];
@@ -126,7 +127,7 @@ const FilePEResultCard = ({
         </div>
       ) : (
         <div className="grid w-full max-w-full gap-4 sm:gap-6 lg:grid-cols-3">
-          {data.data_header ? (
+          {data?.data_header ? (
             <>
               <div className="grid gap-4 sm:gap-6">
                 <div className="max-w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
@@ -139,25 +140,27 @@ const FilePEResultCard = ({
                   <div className="flex w-full items-center justify-center">
                     <ul className="flex w-full flex-col">
                       <li className="items-center gap-x-2 border-b border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 last:border-0">
-                        <p className="text-neutral-400">파일명</p>
-                        <p>{data.fileInfo.fileName}</p>
+                        <div className="text-neutral-400">파일명</div>
+                        <div>{data.fileInfo.fileName}</div>
                       </li>
                       <li className="items-center gap-x-2 border-b border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 last:border-0">
-                        <p className="text-neutral-400">파일크기</p>
-                        <p>
+                        <div className="text-neutral-400">파일크기</div>
+                        <div>
                           {Math.round(
                             (data.fileInfo.fileSize / (1024 * 1024)) * 100,
                           ) / 100}
                           MB
-                        </p>
+                        </div>
                       </li>
                       <li className="items-center gap-x-2 border-b border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 last:border-0">
-                        <p className="text-neutral-400">파일 마지막 수정일</p>
-                        <p>
+                        <div className="text-neutral-400">
+                          파일 마지막 수정일
+                        </div>
+                        <div>
                           {new Date(
                             data.fileInfo.fileLastModified,
                           ).toLocaleString()}
-                        </p>
+                        </div>
                       </li>
                     </ul>
                   </div>
@@ -183,8 +186,19 @@ const FilePEResultCard = ({
                     </h2>
                     {/* <p className="text-sm text-gray-600 ">String 영역 분석</p> */}
                   </div>
-                  <div className="flex w-full items-center justify-center px-4 py-4 ">
-                    <p className="w-full text-xl"></p>
+                  <div className="flex w-full items-center justify-center gap-4 px-4 py-4 ">
+                    <div className="inline-flex flex-wrap gap-2">
+                      {FilePeHeaderLibItems(data.data_header).map(
+                        (item, idx) =>
+                          item.value === 1 ? (
+                            <Tooltip title={item.desc} key={idx}>
+                              <div className="inline-flex items-center gap-x-1.5 rounded-lg bg-neutral-100 px-3 py-1.5 text-xs font-medium text-blue-800">
+                                {item.name}
+                              </div>
+                            </Tooltip>
+                          ) : null,
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -197,9 +211,9 @@ const FilePEResultCard = ({
                   {/* <p className="text-sm text-gray-600 ">String 영역 분석</p> */}
                 </div>
                 <div className="flex w-full items-center justify-center px-4 py-4 ">
-                  <p className="w-full text-xl">
+                  <div className="w-full text-xl">
                     <FilePEHeaderResultCard data={data.data_header} />
-                  </p>
+                  </div>
                 </div>
               </div>
 
@@ -211,18 +225,18 @@ const FilePEResultCard = ({
                   {/* <p className="text-sm text-gray-600 ">String 영역 분석</p> */}
                 </div>
                 <div className="flex w-full items-center justify-center px-4 py-4 ">
-                  <p className="w-full text-xl">
+                  <div className="w-full text-xl">
                     <Table
                       dataSource={dataSource}
                       columns={columns}
                       onChange={onChange}
                     />
-                  </p>
+                  </div>
                 </div>
               </div>
             </>
           ) : (
-            <></>
+            <div></div>
           )}
         </div>
       )}
