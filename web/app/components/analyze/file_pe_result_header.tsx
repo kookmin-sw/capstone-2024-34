@@ -1,5 +1,11 @@
-import { FilePeHeaderResultResponse } from "@customTypes/analyze/file_pe_header";
-import { Button, Modal, Table, TableColumnsType } from "antd";
+import {
+  FilePeHeaderResultResponse,
+  FilePeHeaderTableItem,
+  FilePeHeaderTableItems2,
+  FilePeHeaderTableItems3,
+  FilePeHeaderTableItems4,
+} from "@customTypes/analyze/file_pe_header";
+import { Modal, Table, TableColumnsType } from "antd";
 import { useState } from "react";
 
 const FilePEHeaderResultCard = (props: {
@@ -8,6 +14,8 @@ const FilePEHeaderResultCard = (props: {
   const { output } = props.data;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [headerIdx, setHeaderIdx] = useState(0);
+
+  if (!output) return <></>;
 
   const showModal = (headerDataIdx: number) => {
     setHeaderIdx(headerDataIdx);
@@ -18,14 +26,7 @@ const FilePEHeaderResultCard = (props: {
     setIsModalOpen(false);
   };
 
-  interface TableItem {
-    idx: string;
-    key: string;
-    value: string;
-    desc: string;
-  }
-
-  const columns: TableColumnsType<TableItem> = [
+  const columns: TableColumnsType<FilePeHeaderTableItem> = [
     {
       title: "번호",
       dataIndex: "idx",
@@ -52,114 +53,43 @@ const FilePEHeaderResultCard = (props: {
     },
   ];
 
-  const genModalContent = (headerTypeNum: number) => {
-    let dataSource: TableItem[] = [];
+  const genModalTitle = (headerTypeNum: number) => {
     switch (headerTypeNum) {
       case 2: {
-        dataSource = [
-          {
-            idx: "0",
-            key: "Machine",
-            value: output.Machine.toString(),
-            desc: "",
-          },
-          {
-            idx: "1",
-            key: "NumberOfSections",
-            value: output.NumberOfSections.toString(),
-            desc: "",
-          },
-          {
-            idx: "2",
-            key: "TimeDateStamp",
-            value: output.TimeDateStamp.toString(),
-            desc: "",
-          },
-          {
-            idx: "3",
-            key: "PointerToSymbolTable",
-            value: output.PointerToSymbolTable.toString(),
-            desc: "",
-          },
-          {
-            idx: "4",
-            key: "NumberOfSymbols",
-            value: output.NumberOfSymbols.toString(),
-            desc: "",
-          },
-          {
-            idx: "5",
-            key: "SizeOfOptionalHeader",
-            value: output.SizeOfOptionalHeader.toString(),
-            desc: "",
-          },
-          {
-            idx: "6",
-            key: "Characteristics",
-            value: output.Characteristics.toString(),
-            desc: "",
-          },
-        ];
+        return "COFF Header";
+      }
+      case 3: {
+        return "Standad COFF Fields";
+      }
+      case 4: {
+        return "Windows Specific Fields";
+      }
+      default:
+        return " ";
+    }
+  };
+
+  const genModalContent = (headerTypeNum: number) => {
+    let dataSource: FilePeHeaderTableItem[] = [];
+    switch (headerTypeNum) {
+      case 2: {
+        dataSource = FilePeHeaderTableItems2(props.data);
         break;
       }
       case 3: {
-        dataSource = [
-          {
-            idx: "0",
-            key: "Magic",
-            value: output.Magic.toString(),
-            desc: "",
-          },
-          {
-            idx: "1",
-            key: "Major/MinorLinker Version",
-            value: `${output.MajorLinkerVersion}/${output.MinorLinkerVersion}`,
-            desc: "",
-          },
-          {
-            idx: "2",
-            key: "SizeOfCode",
-            value: output.SizeOfCode.toString(),
-            desc: "",
-          },
-          {
-            idx: "3",
-            key: "SizeOfInitializedData",
-            value: output.SizeOfInitializedData.toString(),
-            desc: "",
-          },
-          {
-            idx: "4",
-            key: "SizeOfUninitializedData",
-            value: output.SizeOfUninitializedData.toString(),
-            desc: "",
-          },
-          {
-            idx: "5",
-            key: "AddressOfEntryPoint",
-            value: output.AddressOfEntryPoint.toString(),
-            desc: "",
-          },
-          {
-            idx: "6",
-            key: "BaseOfCode",
-            value: output.BaseOfCode.toString(),
-            desc: "",
-          },
-          {
-            idx: "7",
-            key: "BaseOfData",
-            value: output.BaseOfData.toString(),
-            desc: "",
-          },
-        ];
+        dataSource = FilePeHeaderTableItems3(props.data);
+        break;
+      }
+      case 4: {
+        dataSource = FilePeHeaderTableItems4(props.data);
+        break;
       }
     }
     return <Table dataSource={dataSource} columns={columns} />;
   };
 
   return (
-    <>
+    <div>
       <div className="grid w-full divide-y divide-neutral-500 overflow-x-scroll border-y border-neutral-700 lg:grid-cols-4">
         <div className="col-span-4 bg-emerald-100">
           <p className="text-center text-sm text-neutral-600">DOS HEADER</p>
@@ -231,68 +161,71 @@ const FilePEHeaderResultCard = (props: {
           </div>
         </div>
 
-        <div className="col-span-4 grid grid-cols-4 divide-y divide-neutral-500">
-          <div className="col-span-2 col-start-3 bg-amber-100">
+        <div
+          className="col-span-4 grid cursor-pointer grid-cols-4 divide-y divide-neutral-500 bg-amber-100 hover:bg-amber-200"
+          onClick={() => showModal(4)}
+        >
+          <div className="col-span-2 col-start-3">
             <p className="text-sm text-neutral-600">ImageBase</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">SectionAlignment</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">FileAlignment</p>
           </div>
-          <div className="col-span-1 bg-amber-100">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">MajorOSVersion</p>
           </div>
-          <div className="col-span-1 bg-amber-100">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">MinorOSVersion</p>
           </div>
-          <div className="col-span-1 bg-amber-100">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">MajorImageVersion</p>
           </div>
-          <div className="col-span-1 bg-amber-100">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">MinorImageVersion</p>
           </div>
-          <div className="col-span-1 bg-amber-100">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">MajorSubsystemVersion</p>
           </div>
-          <div className="col-span-1 bg-amber-100">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">MinorSubsystemVersion</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">Win32VersionValue</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">SizeOfImage</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">SizeOfHeaders</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">CheckSum</p>
           </div>
-          <div className="col-span-1 bg-amber-100">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">Subsystem</p>
           </div>
-          <div className="col-span-1 bg-amber-100">
+          <div className="col-span-1">
             <p className="text-sm text-neutral-600">DllCharacteristics</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">SizeOfStackReserve</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">SizeOfStackCommit</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">SizeOfHeapReserve</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">SizeOfHeapCommit</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">LoaderFlags</p>
           </div>
-          <div className="col-span-2 bg-amber-100">
+          <div className="col-span-2">
             <p className="text-sm text-neutral-600">#NumberOfRvaAndSizes</p>
           </div>
         </div>
@@ -437,17 +370,17 @@ const FilePEHeaderResultCard = (props: {
       </div>
 
       <Modal
-        title="COFF Header"
+        title={genModalTitle(headerIdx)}
         open={isModalOpen}
         onCancel={handleCancel}
         footer={null}
         width={800}
       >
         <div className="text-lg">
-          <>{genModalContent(headerIdx)}</>
+          <div>{genModalContent(headerIdx)}</div>
         </div>
       </Modal>
-    </>
+    </div>
   );
 };
 

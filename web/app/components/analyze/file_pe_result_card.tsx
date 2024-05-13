@@ -1,8 +1,9 @@
 import { AnalyzePeFileUploadResponse } from "@customTypes/analyze/api";
 import { FilePeStringResultResponse } from "@customTypes/analyze/file_pe_string";
-import { Table, TableColumnsType, TableProps, Tag } from "antd";
+import { Table, TableColumnsType, TableProps, Tag, Tooltip } from "antd";
 
 import FilePEHeaderResultCard from "./file_pe_result_header";
+import { FilePeHeaderLibItems } from "@customTypes/analyze/file_pe_header";
 
 interface ResultItem {
   key: string;
@@ -11,7 +12,7 @@ interface ResultItem {
 }
 
 const generateTableDataSource = (
-  data: FilePeStringResultResponse,
+  data: FilePeStringResultResponse | undefined,
 ): ResultItem[] => {
   if (!data) return [];
   const result: ResultItem[] = [];
@@ -44,7 +45,7 @@ const FilePEResultCard = ({
   message,
   isProgress,
 }: AnalyzePeFileUploadResponse & { isProgress: boolean }) => {
-  const dataSource = generateTableDataSource(data.data_strings);
+  const dataSource = generateTableDataSource(data?.data_strings);
   const columns: TableColumnsType<ResultItem> = [
     {
       title: "번호",
@@ -76,14 +77,14 @@ const FilePEResultCard = ({
       onFilter: (value, record) => record.status === value,
       filterSearch: true,
       render: (_, { status }) => (
-        <>
+        <div>
           <Tag
             color={status === "attack" ? "red" : "blue"}
             key={status + Math.random()}
           >
             {status === "attack" ? "공격" : "정상"}
           </Tag>
-        </>
+        </div>
       ),
     },
   ];
@@ -125,45 +126,119 @@ const FilePEResultCard = ({
           </div>
         </div>
       ) : (
-        <>
-          {data.data_header ? (
-            <div className="focus:ring-brand-300 flex w-full max-w-full  flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm focus:outline-none focus:ring-4 md:p-5">
-              <div className="grid w-full max-w-full gap-2 overflow-x-hidden lg:grid-cols-2">
-                {/* 점수 */}
-                <div>
-                  <p className="text-lg">분석점수</p>
-                  <p className="text-xl">{data.data_strings.output.score}</p>
+        <div className="grid w-full max-w-full gap-4 sm:gap-6 lg:grid-cols-3">
+          {data?.data_header ? (
+            <>
+              <div className="grid gap-4 sm:gap-6">
+                <div className="max-w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                  <div className="border-b border-gray-200 px-4 py-4">
+                    <h2 className="text-lg font-semibold text-gray-800">
+                      분석 파일 기본 정보
+                    </h2>
+                    {/* <p className="text-sm text-gray-600 ">String 영역 분석</p> */}
+                  </div>
+                  <div className="flex w-full items-center justify-center">
+                    <ul className="flex w-full flex-col">
+                      <li className="items-center gap-x-2 border-b border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 last:border-0">
+                        <div className="text-neutral-400">파일명</div>
+                        <div>{data.fileInfo.fileName}</div>
+                      </li>
+                      <li className="items-center gap-x-2 border-b border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 last:border-0">
+                        <div className="text-neutral-400">파일크기</div>
+                        <div>
+                          {Math.round(
+                            (data.fileInfo.fileSize / (1024 * 1024)) * 100,
+                          ) / 100}
+                          MB
+                        </div>
+                      </li>
+                      <li className="items-center gap-x-2 border-b border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 last:border-0">
+                        <div className="text-neutral-400">
+                          파일 마지막 수정일
+                        </div>
+                        <div>
+                          {new Date(
+                            data.fileInfo.fileLastModified,
+                          ).toLocaleString()}
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-                {/* 테이블 */}
-                <div className="w-full max-w-full overflow-x-hidden">
-                  <FilePEHeaderResultCard data={data.data_header} />
+                <div className="max-w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                  <div className="border-b border-gray-200 px-4 py-4">
+                    <h2 className="text-lg font-semibold text-gray-800">
+                      공격 분석 점수
+                    </h2>
+                    {/* <p className="text-sm text-gray-600 ">String 영역 분석</p> */}
+                  </div>
+                  <div className="flex w-full items-center justify-center px-4 py-4 ">
+                    <p className="w-full text-xl">
+                      {data.data_strings.output.score}점
+                    </p>
+                  </div>
                 </div>
-                <div className="overflow-x-scroll lg:col-span-2">
-                  <p className="mb-2 ml-1 text-xl">문자열 추출 결과</p>
-                  <Table
-                    dataSource={dataSource}
-                    columns={columns}
-                    onChange={onChange}
-                  />
-                </div>
-                <div className="w-full max-w-full overflow-x-scroll">
-                  <p>Header 추출</p>
-                  <p className="whitespace-pre-line text-wrap">
-                    {JSON.stringify(data.data_header, null, 2)}
-                  </p>
-                </div>
-                <div className="w-full max-w-full overflow-x-scroll">
-                  <p>String 추출</p>
-                  <p className="whitespace-pre-line text-wrap">
-                    {JSON.stringify(data.data_strings, null, 2)}
-                  </p>
+
+                <div className="max-w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+                  <div className="border-b border-gray-200 px-4 py-4">
+                    <h2 className="text-lg font-semibold text-gray-800">
+                      주요 사용 라이브러리
+                    </h2>
+                    {/* <p className="text-sm text-gray-600 ">String 영역 분석</p> */}
+                  </div>
+                  <div className="flex w-full items-center justify-center gap-4 px-4 py-4 ">
+                    <div className="inline-flex flex-wrap gap-2">
+                      {FilePeHeaderLibItems(data.data_header).map(
+                        (item, idx) =>
+                          item.value === 1 ? (
+                            <Tooltip title={item.desc} key={idx}>
+                              <div className="inline-flex items-center gap-x-1.5 rounded-lg bg-neutral-100 px-3 py-1.5 text-xs font-medium text-blue-800">
+                                {item.name}
+                              </div>
+                            </Tooltip>
+                          ) : null,
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+
+              <div className="max-w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm lg:col-span-2">
+                <div className="border-b border-gray-200 px-4 py-4">
+                  <h2 className="text-lg font-semibold text-gray-800">
+                    헤더 영역 분석 시각화
+                  </h2>
+                  {/* <p className="text-sm text-gray-600 ">String 영역 분석</p> */}
+                </div>
+                <div className="flex w-full items-center justify-center px-4 py-4 ">
+                  <div className="w-full text-xl">
+                    <FilePEHeaderResultCard data={data.data_header} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="max-w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm lg:col-span-3">
+                <div className="border-b border-gray-200 px-4 py-4">
+                  <h2 className="text-lg font-semibold text-gray-800">
+                    스트링 영역 분석
+                  </h2>
+                  {/* <p className="text-sm text-gray-600 ">String 영역 분석</p> */}
+                </div>
+                <div className="flex w-full items-center justify-center px-4 py-4 ">
+                  <div className="w-full text-xl">
+                    <Table
+                      dataSource={dataSource}
+                      columns={columns}
+                      onChange={onChange}
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
           ) : (
-            <></>
+            <div></div>
           )}
-        </>
+        </div>
       )}
     </>
   );
