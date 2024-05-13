@@ -1,6 +1,7 @@
 import prisma from "@libs/common/prisma";
 
 interface RequestBody {
+  id: string;
   time: string;
   rulename: string;
   rule: string;

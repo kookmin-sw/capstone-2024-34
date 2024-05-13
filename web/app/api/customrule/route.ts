@@ -15,7 +15,6 @@ export async function POST(request: Request) {
 
   const customRule = await prisma.customRule.create({
     data: {
-      id: body.id,
       userid: body.userid,
       ruleid: body.ruleid,
     },
