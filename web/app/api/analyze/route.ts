@@ -1,18 +1,15 @@
 import prisma from "@libs/common/prisma";
+import { DateTime } from "next-auth/providers/kakao";
 
 interface RequestBody {
   id: string;
-  time: Date;
+  time: DateTime;
   filename: string;
   analysis: string;
   score: number;
   result: number;
   reason: string;
   userid: string;
-}
-
-interface RequestDeleteBody {
-  id: string;
 }
 
 export async function POST(request: Request) {
@@ -40,7 +37,7 @@ export async function GET(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const body: RequestDeleteBody = await request.json();
+  const body: RequestBody = await request.json();
 
   try {
     const deletedAnalysis = await prisma.analysis.delete({

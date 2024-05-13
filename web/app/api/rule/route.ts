@@ -1,14 +1,12 @@
 import prisma from "@libs/common/prisma";
+import { DateTime } from "next-auth/providers/kakao";
 
 interface RequestBody {
-  time: string;
+  id: string;
+  time: DateTime;
   rulename: string;
   rule: string;
   isuser: boolean;
-}
-
-interface RequestDeleteBody {
-  id: string;
 }
 
 export async function POST(request: Request) {
@@ -33,19 +31,19 @@ export async function GET(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const body: RequestDeleteBody = await request.json();
+  const body: RequestBody = await request.json();
 
   try {
-    const deletedAnalysis = await prisma.analysis.delete({
+    const deletedRule = await prisma.rule.delete({
       where: {
         id: body.id,
       },
     });
 
-    return new Response(JSON.stringify(deletedAnalysis));
+    return new Response(JSON.stringify(deletedRule));
   } catch (error) {
     return new Response(
-      JSON.stringify({ error: "Failed to delete analysis item" }),
+      JSON.stringify({ error: "Failed to delete rule item" }),
       { status: 500 },
     );
   }
