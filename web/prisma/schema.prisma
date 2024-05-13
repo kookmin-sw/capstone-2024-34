@@ -18,4 +18,35 @@ model User {
   userID String @unique
   userPW String
   name   String
+  analyses Analysis[]
+  custom CustomRule[]
+}
+
+model Analysis {
+  id       String   @id @unique @default(uuid())
+  time     DateTime
+  filename String
+  analysis String
+  score    Float
+  result   Int
+  reason   String
+  userid   String
+  user     User    @relation(fields: [userid], references: [id])
+}
+
+model CustomRule {
+  id     String @id @unique @default(uuid())
+  userid String
+  ruleid String @unique
+  user   User   @relation(fields: [userid], references: [id])
+  rule   Rule   @relation(fields: [ruleid], references: [id])
+}
+
+model Rule {
+  id       String    @id @unique @default(uuid())
+  time     DateTime
+  rulename String
+  rule     String
+  isuser   Boolean
+  custom   CustomRule?
 }
