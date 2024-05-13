@@ -12,10 +12,6 @@ interface RequestBody {
   userid: string;
 }
 
-interface RequestDeleteBody {
-  id: string;
-}
-
 export async function POST(request: Request) {
   const body: RequestBody = await request.json();
 
@@ -41,7 +37,7 @@ export async function GET(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const body: RequestDeleteBody = await request.json();
+  const body: RequestBody = await request.json();
 
   try {
     const deletedAnalysis = await prisma.analysis.delete({

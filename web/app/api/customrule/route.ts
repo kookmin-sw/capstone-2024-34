@@ -6,10 +6,6 @@ interface RequestBody {
   ruleid: string;
 }
 
-interface RequestDeleteBody {
-  id: string;
-}
-
 export async function POST(request: Request) {
   const body: RequestBody = await request.json();
 
@@ -30,19 +26,19 @@ export async function GET(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  const body: RequestDeleteBody = await request.json();
+  const body: RequestBody = await request.json();
 
   try {
-    const deletedAnalysis = await prisma.analysis.delete({
+    const deletedCustomRule = await prisma.customRule.delete({
       where: {
         id: body.id,
       },
     });
 
-    return new Response(JSON.stringify(deletedAnalysis));
+    return new Response(JSON.stringify(deletedCustomRule));
   } catch (error) {
     return new Response(
-      JSON.stringify({ error: "Failed to delete analysis item" }),
+      JSON.stringify({ error: "Failed to delete customrule item" }),
       { status: 500 },
     );
   }
