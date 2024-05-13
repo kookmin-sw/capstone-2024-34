@@ -1,8 +1,9 @@
 import prisma from "@libs/common/prisma";
+import { DateTime } from "next-auth/providers/kakao";
 
 interface RequestBody {
   id: string;
-  time: string;
+  time: DateTime;
   rulename: string;
   rule: string;
   isuser: boolean;
