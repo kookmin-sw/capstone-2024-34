@@ -20,7 +20,6 @@ export async function POST(request: Request) {
 
   const analysis = await prisma.analysis.create({
     data: {
-      id: body.id,
       time: new Date(body.time),
       filename: body.filename,
       analysis: body.analysis,
