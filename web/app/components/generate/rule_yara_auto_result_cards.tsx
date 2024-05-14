@@ -1,5 +1,7 @@
 import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
+import { YaraTokenizerConf } from "@customTypes/yara/monaco_editor";
 import dynamic from "next/dynamic";
+import { monaco } from "react-monaco-editor";
 
 const MonacoEditor = dynamic(() => import("react-monaco-editor"), {
   ssr: false,
@@ -12,6 +14,11 @@ const AutoGenYaraRuleResultCard = ({
   data_yara,
   isProgress,
 }: GenYaraRulePeFilesUploadResponse & { isProgress: boolean }) => {
+  const monacoEditorWillMount = (monaco: any) => {
+    console.log("editorDidMount", monaco);
+    monaco.focus();
+  };
+
   return (
     <>
       {isProgress ? (
@@ -67,9 +74,23 @@ const AutoGenYaraRuleResultCard = ({
                   </h2>
                 </div>
                 <MonacoEditor
-                  className="mt-4 w-full"
+                  className="w-full py-4"
                   height="600"
                   value={data_yara?.rule}
+                  language="yara"
+                  theme="vs"
+                  editorWillMount={(monaco) => {
+                    monaco.languages.register({ id: "yara" });
+                    monaco.languages.setMonarchTokensProvider(
+                      "yara",
+                      YaraTokenizerConf as any,
+                    );
+                  }}
+                  options={{
+                    fontSize: 14,
+                    wordWrap: "on",
+                    minimap: { enabled: false },
+                  }}
                 />
               </div>
             </div>
