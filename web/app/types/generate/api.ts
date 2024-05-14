@@ -9,10 +9,10 @@ export interface YaraRule {
 }
 
 export interface GenYaraRulePeFilesUploadResponse {
-  success: boolean;
-  message: string;
-  data_uploader: FilesPeUploaderResultResponse;
-  data_yara: GenAutoYaraAPIResponse;
+  success: boolean | undefined;
+  message: string | undefined;
+  data_uploader: FilesPeUploaderResultResponse | undefined;
+  data_yara: GenAutoYaraAPIResponse | undefined;
 }
 
 export interface FilesPeUploaderResultResponse {

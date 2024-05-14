@@ -1,6 +1,7 @@
 "use client";
 
-import FilesPEUploadCard from "@components/generate/files_pe_upload_card";
+import AutoGenYaraRuleResultCard from "@components/generate/rule_yara_auto_result_cards";
+import FilesPEUploadCard from "@components/generate/rule_yara_auto_upload_pe_card";
 import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
 import Link from "next/link";
 import { useState } from "react";
@@ -41,25 +42,25 @@ export default function AnalyzePeFilesPage() {
             isProgress={isProgress}
             setIsProgress={setIsProgress}
           />
-          {data?.success === true ? (
+
+          {/* {data?.success === true ? (
             <div className="bg-neutral-200 p-4">
               <p>정상 업로드 성공</p>
               <p>{JSON.stringify(data?.data_yara)}</p>
-              <p>{data?.data_uploader.folderPath}</p>
-              <p>{JSON.stringify(data?.data_uploader.files)}</p>
+              <p>{data?.data_uploader?.folderPath}</p>
+              <p>{JSON.stringify(data?.data_uploader?.files)}</p>
             </div>
           ) : (
             <></>
-          )}
+          )} */}
 
-          {/* <FilePEResultCard
-            success={data?.success || false}
-            message={data?.message || ""}
-            data={
-              data?.data || ({} as FilePeResultResponse as FilePeResultResponse)
-            }
+          <AutoGenYaraRuleResultCard
+            success={data?.success}
+            message={data?.message}
+            data_uploader={data?.data_uploader}
+            data_yara={data?.data_yara}
             isProgress={isProgress}
-          /> */}
+          />
         </div>
       </div>
     </div>

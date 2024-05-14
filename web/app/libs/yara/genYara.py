@@ -152,5 +152,5 @@ if __name__ == "__main__":
     f.write(yara_rule)
 
     json_data = json.dumps(
-        {"rulePath": yara_rule, "extractSignature": signatures})
+        {"rule": yara_rule, "extractSignature": signatures})
     print(json_data, end='')

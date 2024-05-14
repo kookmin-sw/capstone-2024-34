@@ -1,7 +1,7 @@
 "use client";
 
-import InputStringsCard from "@components/yara/yara_input_card";
-import YaraRuleResultCard from "@components/yara/yara_result_card";
+import InputStringsCard from "@components/generate/rule_yara_manual_input_card";
+import YaraRuleResultCard from "@components/generate/rule_yara_manual_result_card";
 import { YaraRuleCreateRespone, YaraRule } from "@customTypes/generate/api";
 import Link from "next/link";
 import { useState } from "react";

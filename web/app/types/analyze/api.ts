@@ -5,7 +5,7 @@ import exp from "constants";
 export interface AnalyzePeFileUploadResponse {
   success: boolean | undefined;
   message: string | undefined;
-  data: FilePeResultResponse;
+  data: FilePeResultResponse | undefined;
 }
 
 export interface FileInfo {
