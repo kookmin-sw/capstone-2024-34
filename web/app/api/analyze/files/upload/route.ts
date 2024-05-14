@@ -28,10 +28,10 @@ export async function POST(request: Request) {
         message: "업로드된 파일이 없습니다.",
       });
     }
-
-    const uploadDir = path.join(process.cwd(), "public", "uploads", uuidv4());
+    const folderName = uuidv4();
+    const uploadDir = path.join(process.cwd(), "public", "uploads", folderName);
     await mkdir(uploadDir, { recursive: true });
-    savedData.folderPath = uploadDir;
+    savedData.folderPath = folderName;
 
     for (const file of files) {
       if (file.size > 0) {
@@ -54,20 +54,20 @@ export async function POST(request: Request) {
         });
       }
     }
-
+    //
     // console.log(JSON.stringify(savedData));
 
-    // let response_header = await fetch(
-    //   `http://localhost:3000/api/analyze/file/pe`,
-    //   {
-    //     method: "POST",
-    //     body: JSON.stringify(savedData),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   },
-    // );
-    // const data_header = await response_header.json();
+    let response_header = await fetch(
+      `http://localhost:3000/api/analyze/files/yara`,
+      {
+        method: "POST",
+        body: JSON.stringify(savedData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+    const data_header = await response_header.json();
 
     // let response_strings = await fetch(
     //   `http://localhost:3000/api/analyze/file/pe-string`,
