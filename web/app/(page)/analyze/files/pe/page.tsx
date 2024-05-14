@@ -40,11 +40,12 @@ export default function AnalyzePeFilesPage() {
             isProgress={isProgress}
             setIsProgress={setIsProgress}
           />
-          {data?.data !== undefined ? (
+          {data?.success === true ? (
             <div className="bg-neutral-200 p-4">
               <p>정상 업로드 성공</p>
-              <p>{data?.data.folderPath}</p>
-              <p>{JSON.stringify(data?.data.files)}</p>
+              <p>{JSON.stringify(data?.data_yara)}</p>
+              <p>{data?.data_uploader.folderPath}</p>
+              <p>{JSON.stringify(data?.data_uploader.files)}</p>
             </div>
           ) : (
             <></>

@@ -12,7 +12,7 @@ def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_si
     fine_vectors = []
 
     # print('vectorization')
-    for payload in tqdm(payloads):
+    for payload in payloads:
         chunks = payload  # AEchunking(payload, window_size)
         vector = np.zeros(vector_size, dtype=np.int8)
         for chunk in chunks:
@@ -40,7 +40,7 @@ def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_si
 
     # print('make signature')
     cluster_signature = dict()
-    for cluster_label in tqdm(cluster_dict.keys()):
+    for cluster_label in cluster_dict.keys():
         payloads = cluster_dict[cluster_label]
 
         signatures = THH(

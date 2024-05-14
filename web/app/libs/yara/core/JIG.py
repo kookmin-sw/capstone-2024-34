@@ -27,7 +27,7 @@ def JIG(vectors, thetaJ):
     big_group_indices = []
 
     # print('checking big group')
-    for doc in tqdm(range(len(vectors))):
+    for doc in range(len(vectors)):
         vector = vectors[doc]
         MV += vector
 

@@ -24,7 +24,8 @@ export interface FilePeResultResponse {
 export interface AnalyzePeFilesUploadResponse {
   success: boolean;
   message: string;
-  data: FilesPeResultResponse;
+  data_uploader: FilesPeResultResponse;
+  data_yara: GenAutoYaraAPIResponse;
 }
 
 export interface FilesPeResultResponse {
@@ -35,4 +36,9 @@ export interface FilesPeResultResponse {
 export interface FileName {
   origin_filename: string;
   conv_filename: string;
+}
+
+export interface GenAutoYaraAPIResponse {
+  rule: string;
+  extractSignature: string[];
 }

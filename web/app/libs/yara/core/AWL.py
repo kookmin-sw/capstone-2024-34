@@ -8,7 +8,7 @@ ngram, hh1_size, hh2_size, ratio: DHH 하이퍼 파라미터
 
 def AWL(payloads, ngram, hh1_size, hh2_size, hh3_size, ratio):
 
-    print('start whtie list')
+    # print('start whtie list')
     stopwords = THH(
         packets=payloads,
         k=ngram,
@@ -18,6 +18,6 @@ def AWL(payloads, ngram, hh1_size, hh2_size, hh3_size, ratio):
         ratio=ratio,
         deduplication=True,
     )
-    print('end white list')
+    # print('end white list')
 
     return stopwords

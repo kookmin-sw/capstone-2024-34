@@ -28,7 +28,7 @@ def genStrFeature(file_path):
 
     # print('start: extract string feature')
 
-    for f in tqdm(file_direc):
+    for f in file_direc:
         mal_path = os.path.join(file_path, f)
         ret = extract_string(mal_path)
         vec = list(ret)
@@ -151,5 +151,6 @@ if __name__ == "__main__":
     f = open(f'{file_path}/my_yara_rule.yar', 'w')
     f.write(yara_rule)
 
-    json_data = json.dumps({"rule": yara_rule})
+    json_data = json.dumps(
+        {"rulePath": yara_rule, "extractSignature": signatures})
     print(json_data, end='')
