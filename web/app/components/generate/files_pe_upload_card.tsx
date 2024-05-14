@@ -1,13 +1,10 @@
 "use client";
-import {
-  AnalyzePeFileUploadResponse,
-  AnalyzePeFilesUploadResponse,
-  FilesPeResultResponse,
-} from "@customTypes/analyze/api";
+
+import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
 import { FormEvent, useRef, useState } from "react";
 
 interface FilesUploadFormProps {
-  onSubmit: (data: AnalyzePeFilesUploadResponse) => void;
+  onSubmit: (data: GenYaraRulePeFilesUploadResponse) => void;
   isProgress: boolean;
   setIsProgress: (isProgress: boolean) => void;
 }
@@ -24,7 +21,7 @@ const FilesPEUploadCard = ({
   // input 파일 저장
   const [files, setFiles] = useState<any>([]);
   // 분석 api 호출결과 데이터 저장
-  const [data, setData] = useState<AnalyzePeFilesUploadResponse>();
+  const [data, setData] = useState<GenYaraRulePeFilesUploadResponse>();
   // 파일 업로드 개수 제한
   const maxFileCount = 1000;
 
@@ -37,12 +34,12 @@ const FilesPEUploadCard = ({
       formData.append("upload_file[]", file);
     });
 
-    await fetch("/api/analyze/files/upload", {
+    await fetch("/api/generate/rule/yara/upload", {
       method: "POST",
       body: formData,
     })
       .then((res) => res.json())
-      .then((responseData: AnalyzePeFilesUploadResponse) => {
+      .then((responseData: GenYaraRulePeFilesUploadResponse) => {
         // Update the type of responseData
         onSubmit(responseData);
         if (formRef.current) {

@@ -20,25 +20,3 @@ export interface FilePeResultResponse {
   data_strings: FilePeStringResultResponse;
   fileInfo: FileInfo;
 }
-
-export interface AnalyzePeFilesUploadResponse {
-  success: boolean;
-  message: string;
-  data_uploader: FilesPeResultResponse;
-  data_yara: GenAutoYaraAPIResponse;
-}
-
-export interface FilesPeResultResponse {
-  files: FileName[];
-  folderPath: String;
-}
-
-export interface FileName {
-  origin_filename: string;
-  conv_filename: string;
-}
-
-export interface GenAutoYaraAPIResponse {
-  rule: string;
-  extractSignature: string[];
-}

@@ -103,9 +103,17 @@ export default function SideBar() {
                 <li>
                   <Link
                     className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
-                    href="/create/yararule"
+                    href="/generate/rule/yara/manual"
                   >
-                    Yara rule 생성
+                    Yara Rule 수동생성
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    href="/generate/rule/yara/auto"
+                  >
+                    Yara Rule 자동생성
                   </Link>
                 </li>
               </ul>
@@ -240,14 +248,6 @@ export default function SideBar() {
                     href="/analyze/file/pe"
                   >
                     단일 PE 파일 분석
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
-                    href="/analyze/files/pe"
-                  >
-                    복수 PE 파일 분석
                   </Link>
                 </li>
               </ul>

@@ -2,10 +2,8 @@ import { NextResponse } from "next/server";
 import { mkdir, writeFile } from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import path from "path";
-import {
-  FilesPeResultResponse,
-  GenAutoYaraAPIResponse,
-} from "@customTypes/analyze/api";
+
+import { FilesPeUploaderResultResponse } from "@customTypes/generate/api";
 
 export const config = {
   api: {
@@ -14,7 +12,7 @@ export const config = {
 };
 
 export async function POST(request: Request) {
-  let savedData: FilesPeResultResponse = { files: [], folderPath: "" };
+  let savedData: FilesPeUploaderResultResponse = { files: [], folderPath: "" };
 
   try {
     const formData = await request.formData();
@@ -60,7 +58,7 @@ export async function POST(request: Request) {
     // console.log(JSON.stringify(savedData));
 
     let response_create_yara = await fetch(
-      `http://localhost:3000/api/analyze/files/yara`,
+      `http://localhost:3000/api/generate/rule/yara/auto`,
       {
         method: "POST",
         body: JSON.stringify(savedData),
