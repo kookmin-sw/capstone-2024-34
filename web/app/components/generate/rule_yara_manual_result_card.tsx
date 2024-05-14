@@ -1,5 +1,5 @@
 "use client";
-import { YaraRuleCreateRespone } from "@customTypes/yara/api";
+import { YaraRuleCreateRespone } from "@customTypes/generate/api";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 

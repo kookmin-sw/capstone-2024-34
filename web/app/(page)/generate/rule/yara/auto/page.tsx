@@ -1,17 +1,19 @@
 "use client";
 
-import FilePEResultCard from "@components/analyze/file_pe_result_card";
-import FilesPEUploadCard from "@components/analyze/files_pe_upload_card";
-import { AnalyzePeFilesUploadResponse } from "@customTypes/analyze/api";
+import AutoGenYaraRuleResultCard from "@components/generate/rule_yara_auto_result_cards";
+import FilesPEUploadCard from "@components/generate/rule_yara_auto_upload_pe_card";
+import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function AnalyzePeFilesPage() {
-  let [data, setData] = useState<AnalyzePeFilesUploadResponse>();
+  let [data, setData] = useState<GenYaraRulePeFilesUploadResponse>();
   // 업로드후 로딩 상태 저장
   const [isProgress, setIsProgress] = useState(false);
 
-  function handleSubmitResponse(responseData: AnalyzePeFilesUploadResponse) {
+  function handleSubmitResponse(
+    responseData: GenYaraRulePeFilesUploadResponse,
+  ) {
     setData(responseData);
     console.log("res", data);
   }
@@ -23,10 +25,10 @@ export default function AnalyzePeFilesPage() {
         <div className="grid grid-cols-2">
           <header>
             <p className="mb-2 text-sm font-semibold text-blue-600">
-              Analyze PE File
+              Auto Generate Yara Rule
             </p>
             <h1 className="block text-2xl font-bold text-gray-800 sm:text-3xl">
-              복수 PE 파일 분석
+              Yara Rule 자동 생성
             </h1>
             <p className="mt-2 text-lg text-gray-800"></p>
           </header>
@@ -40,24 +42,25 @@ export default function AnalyzePeFilesPage() {
             isProgress={isProgress}
             setIsProgress={setIsProgress}
           />
-          {data?.data !== undefined ? (
+
+          {/* {data?.success === true ? (
             <div className="bg-neutral-200 p-4">
               <p>정상 업로드 성공</p>
-              <p>{data?.data.folderPath}</p>
-              <p>{JSON.stringify(data?.data.files)}</p>
+              <p>{JSON.stringify(data?.data_yara)}</p>
+              <p>{data?.data_uploader?.folderPath}</p>
+              <p>{JSON.stringify(data?.data_uploader?.files)}</p>
             </div>
           ) : (
             <></>
-          )}
+          )} */}
 
-          {/* <FilePEResultCard
-            success={data?.success || false}
-            message={data?.message || ""}
-            data={
-              data?.data || ({} as FilePeResultResponse as FilePeResultResponse)
-            }
+          <AutoGenYaraRuleResultCard
+            success={data?.success}
+            message={data?.message}
+            data_uploader={data?.data_uploader}
+            data_yara={data?.data_yara}
             isProgress={isProgress}
-          /> */}
+          />
         </div>
       </div>
     </div>
