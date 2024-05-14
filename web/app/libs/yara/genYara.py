@@ -97,8 +97,8 @@ def genYaraRule(input_list, output, signatures_len):
     yara += "\tcondition:\n"
     tmpStr = f"\t\t{signatures_len} of ("
     for i in range(1, cnt):
-        tmpStr += f"#sig{i}, "
-    tmpStr += f"#sig{cnt})"
+        tmpStr += f"$sig{i}, "
+    tmpStr += f"$sig{cnt})"
 
     yara += tmpStr
     yara += "\n}"
