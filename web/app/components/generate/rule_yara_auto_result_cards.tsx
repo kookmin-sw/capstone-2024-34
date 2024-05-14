@@ -78,7 +78,7 @@ const AutoGenYaraRuleResultCard = ({
                   height="600"
                   value={data_yara?.rule}
                   language="yara"
-                  theme="vs-dark"
+                  theme="vs"
                   editorWillMount={(monaco) => {
                     monaco.languages.register({ id: "yara" });
                     monaco.languages.setMonarchTokensProvider(
@@ -86,7 +86,11 @@ const AutoGenYaraRuleResultCard = ({
                       YaraTokenizerConf as any,
                     );
                   }}
-                  options={{ fontSize: 14 }}
+                  options={{
+                    fontSize: 14,
+                    wordWrap: "on",
+                    minimap: { enabled: false },
+                  }}
                 />
               </div>
             </div>
