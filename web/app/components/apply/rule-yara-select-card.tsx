@@ -4,7 +4,7 @@ import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
 
 const SelectYaraRuleCard = () => {
   return (
-    <div className="max-w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+    <div className="h-full max-w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
       <div className="border-b border-gray-200 px-4 py-4">
         <h2 className="text-lg font-semibold text-gray-800">Yara Rule 선택</h2>
       </div>
@@ -30,14 +30,15 @@ const SelectYaraRuleCard = () => {
                 aria-controls="basic-tabs-2"
                 role="tab"
               >
-                새로운 Yara Rule
+                새로운 Yara Rule 업로드
               </button>
             </nav>
           </div>
 
-          <div className="px-4">
+          <div>
             <div
               id="basic-tabs-1"
+              className="px-4"
               role="tabpanel"
               aria-labelledby="basic-tabs-item-1"
             >
@@ -109,13 +110,10 @@ const SelectYaraRuleCard = () => {
             </div>
             <div
               id="basic-tabs-2"
-              className="hidden"
+              className="hidden p-4"
               role="tabpanel"
               aria-labelledby="basic-tabs-item-2"
             >
-              <p className="text-gray-500">
-                새로운 Yara Rule을 생성하고 적용할 수 있습니다.
-              </p>
               <ApplyRuleFilesYarUploadCard
                 onSubmit={function (
                   data: GenYaraRulePeFilesUploadResponse,

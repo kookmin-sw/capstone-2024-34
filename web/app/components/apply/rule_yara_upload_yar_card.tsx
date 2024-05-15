@@ -142,9 +142,9 @@ const ApplyRuleFilesYarUploadCard = ({
           </button>
         </div>
       ) : (
-        <div className="flex w-full flex-col items-center justify-center">
+        <div className="flex h-full min-h-72 w-full flex-col items-center justify-center">
           <form
-            id={"multiple_file_upload_form"}
+            id={"file_upload_form"}
             className={`${
               dragActive ? "bg-blue-400" : "bg-neutral-100"
             }  focus:ring-brand-300 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gray-200 bg-white p-4 text-center shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-4 md:p-5`}
@@ -159,7 +159,7 @@ const ApplyRuleFilesYarUploadCard = ({
               type="file"
               name="upload_file"
               id="upload_file"
-              accept=".acm, .ax, .cpl, .dll, .drv, .efi, .exe, .mui, .ocx, .scr, .sys, .tsp"
+              accept=".yar"
               ref={inputRef}
               className="hidden"
               multiple={true}
@@ -221,7 +221,7 @@ const ApplyRuleFilesYarUploadCard = ({
                 form="multiple_file_upload_form"
                 className="hover:bg-brand-600 focus:ring-brand-300 mt-3 w-full rounded-lg bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
               >
-                분석하기
+                적용하기
               </button>
             </div>
           ) : (
