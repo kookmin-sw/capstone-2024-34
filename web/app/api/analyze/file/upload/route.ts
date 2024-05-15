@@ -89,7 +89,6 @@ export async function POST(request: Request) {
     }
 
     const analysisbody = {
-      time: fileInfo.fileLastModified,
       filename: fileInfo.fileName,
       analysis: JSON.stringify(tmp).toString(),
       score: data_strings.output.score,
@@ -97,6 +96,7 @@ export async function POST(request: Request) {
       reason: reason,
       userid: "415e9062-dc25-4bc4-9eb9-0f4bc3c8409e",
     };
+
     await fetch(`http://localhost:3000/api/analyze`, {
       method: "POST",
       body: JSON.stringify(analysisbody),
