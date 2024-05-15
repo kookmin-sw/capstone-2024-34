@@ -16,7 +16,7 @@ function SignIn() {
       username: userID,
       password: userPW,
       redirect: true,
-      callbackUrl: "/dashboard/",
+      callbackUrl: "/dashboard",
     });
 
     console.log(result);
@@ -26,69 +26,67 @@ function SignIn() {
   };
 
   return (
-    <div className="relative flex flex-wrap bg-neutral-50 lg:h-screen lg:items-center">
-      <div className="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/3 lg:px-8 lg:py-24">
-        <div className="mx-auto max-w-lg">
-          <Image
-            className="mb-2 inline-block rounded-full ring-2 ring-white"
-            src="/images/kmu.png"
-            alt="kmu"
-            width={64}
-            height={64}
-          />
-          <p className="text-3xl font-semibold">Platform GIPS</p>
-          <p>생성형 침입방지 보안 플랫폼</p>
-          <hr className="mt-2 h-1 bg-neutral-500" />
-          <p className="mt-2 break-keep text-sm font-thin text-neutral-400">
-            본 시스템은 허가된 사용자만 이용하실 수 있습니다. 부당한 방법으로
-            전산망에 접속하거나 정보를 삭제/변경/유출하는 사용자는 관련법령에
-            따라 처벌 받게 됩니다.
-          </p>
-
-          <hr className="bg-brand-400 mb-5 mt-5 h-1 w-20 border-t-0 md:mb-0" />
-
-          <form
-            onSubmit={handleSubmit}
-            className="mb-0 mt-6 space-y-4 text-neutral-800"
-          >
-            <h1 className="text-brand-400 text-xl font-bold">로그인</h1>
-
-            <div>
-              <label htmlFor="email" className="sr-only">
-                아이디
-              </label>
-
-              <div className="relative">
-                <input
-                  onChange={(e) => setUserId(e.target.value)}
-                  className="block w-full rounded-lg border border-neutral-300 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 "
-                  placeholder="아이디 입력"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="password" className="sr-only">
-                Password
-              </label>
-
-              <div className="relative">
-                <input
-                  type="password"
-                  onChange={(e) => setUserPW(e.target.value)}
-                  className="block w-full rounded-lg border border-neutral-300 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 "
-                  placeholder="비밀번호 입력"
-                />
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50"
+    <div className="relative flex flex-wrap bg-neutral-50 lg:h-screen">
+      <div className=" w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/3 lg:px-8 lg:py-16">
+        <div className="mx-auto flex h-full max-w-lg flex-col">
+          <div>
+            <Image
+              className="mb-2 inline-block rounded-full ring-2 ring-white"
+              src="/images/kmu.png"
+              alt="kmu"
+              width={64}
+              height={64}
+            />
+            <p className="text-3xl font-semibold">Platform GIPS</p>
+            <p>생성형 침입방지 보안 플랫폼</p>
+            <hr className="mt-2 h-1 bg-neutral-500" />
+            <hr className="bg-brand-400 mb-5 mt-5 h-1 w-20 border-t-0 md:mb-0" />
+            <form
+              onSubmit={handleSubmit}
+              className="mb-0 mt-2 space-y-4 text-neutral-800"
             >
-              로그인
-            </button>
-          </form>
+              <h1 className="text-brand-400 text-xl font-bold">로그인</h1>
+              <div>
+                <label htmlFor="email" className="sr-only">
+                  아이디
+                </label>
+                <div className="relative">
+                  <input
+                    onChange={(e) => setUserId(e.target.value)}
+                    className="block w-full rounded-lg border border-neutral-300 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 "
+                    placeholder="아이디 입력"
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="password" className="sr-only">
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    type="password"
+                    onChange={(e) => setUserPW(e.target.value)}
+                    className="block w-full rounded-lg border border-neutral-300 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 "
+                    placeholder="비밀번호 입력"
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="w-full items-center gap-x-2 rounded-lg border border-transparent bg-blue-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50"
+              >
+                로그인
+              </button>
+            </form>
+          </div>
+
+          <div className="flex flex-1 items-end">
+            <p className="mt-4 break-keep text-center text-sm font-thin text-neutral-400">
+              본 시스템은 허가된 사용자만 이용하실 수 있습니다. <br />
+              부당한 방법으로 전산망에 접속하거나 정보를 삭제/변경/유출하는
+              사용자는 관련법령에 따라 처벌 받게 됩니다.
+            </p>
+          </div>
         </div>
       </div>
 
