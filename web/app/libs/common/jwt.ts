@@ -27,3 +27,8 @@ export function verifyJwt(token: string) {
     return null;
   }
 }
+
+export function decodeJwt(token: string) {
+  const decoded = jwt.decode(token);
+  return decoded as JwtPayload;
+}

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import { FileInfo } from "@customTypes/analyze/api";
+import { decodeJwt, verifyJwt } from "@libs/common/jwt";
 
 export const config = {
   api: {
@@ -11,6 +12,14 @@ export const config = {
 
 export async function POST(request: Request) {
   let savedData;
+  const accessToken = request.headers.get("authorization");
+
+  if (!accessToken || !verifyJwt(accessToken)) {
+    return new Response(JSON.stringify({ error: "No Authorization" }), {
+      status: 401,
+    });
+  }
+
   try {
     const formData = await request.formData();
     console.log(formData);
@@ -94,7 +103,7 @@ export async function POST(request: Request) {
       score: data_strings.output.score,
       result: result,
       reason: reason,
-      userid: "415e9062-dc25-4bc4-9eb9-0f4bc3c8409e",
+      userid: decodeJwt(accessToken!).id,
     };
 
     await fetch(`http://localhost:3000/api/analyze`, {
