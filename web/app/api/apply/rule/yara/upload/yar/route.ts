@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
-import { FileInfo } from "@customTypes/analyze/api";
-import { decodeJwt, verifyJwt } from "@libs/common/jwt";
 
 export const config = {
   api: {
@@ -12,32 +10,18 @@ export const config = {
 
 export async function POST(request: Request) {
   let savedData;
-  const accessToken = request.headers.get("authorization");
-
-  if (!accessToken || !verifyJwt(accessToken)) {
-    return new Response(JSON.stringify({ error: "No Authorization" }), {
-      status: 401,
-    });
-  }
-
   try {
     const formData = await request.formData();
     console.log(formData);
 
     const file: File | null = formData.get("upload_file") as unknown as File;
-    const fileInfo: FileInfo = {
-      fileName: file.name,
-      fileType: file.type,
-      fileSize: file.size,
-      fileLastModified: file.lastModified,
-    };
     console.log(file);
 
     if (file.size > 0) {
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
       const convFileName = `${uuidv4()}.${getFileExtension(file.name)}`;
-      const path = `${process.cwd()}/public/uploads/${convFileName}`;
+      const path = `${process.cwd()}/public/uploads/tmp/${convFileName}`;
       await writeFile(path, buffer);
 
       savedData = {
@@ -79,42 +63,10 @@ export async function POST(request: Request) {
     );
     const data_strings = await response_strings.json();
 
-    let reason = "";
-    let result = 0;
-    let tmp = {
-      attack: data_strings.output.attack,
-      normal: data_strings.output.normal,
-    };
-
-    if (data_strings.output.attack.length > 0) {
-      reason = "attack";
-      result = 1;
-    } else if (data_strings.output.normal.length > 0) {
-      reason = "normal";
-      result = 0;
-    } else {
-      reason = "hold";
-      result = 2;
-    }
-
-    const analysisbody = {
-      time: fileInfo.fileLastModified,
-      filename: fileInfo.fileName,
-      analysis: JSON.stringify(tmp).toString(),
-      score: data_strings.output.score,
-      result: result,
-      reason: reason,
-      userid: "415e9062-dc25-4bc4-9eb9-0f4bc3c8409e",
-    };
-    await fetch(`http://localhost:3000/api/analyze`, {
-      method: "POST",
-      body: JSON.stringify(analysisbody),
-    });
-
     return NextResponse.json({
       success: true,
       message: "데이터 저장 성공",
-      data: { data_header, data_strings, fileInfo },
+      data: { data_header, data_strings },
     });
   } catch (error) {
     console.error("데이터 저장 중 오류 발생:", error);

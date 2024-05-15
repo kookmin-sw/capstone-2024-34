@@ -1,5 +1,6 @@
 "use client";
 import { AnalyzePeFileUploadResponse } from "@customTypes/analyze/api";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useRef, useState } from "react";
 
@@ -26,6 +27,8 @@ const FilePEUploadCard = ({
   const maxFileCount = 1;
   // 화면 초기화용 라우터
   const router = useRouter();
+  // 세션 정보
+  const { data: session } = useSession();
 
   async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,6 +42,7 @@ const FilePEUploadCard = ({
     await fetch("/api/analyze/file/upload", {
       method: "POST",
       body: formData,
+      headers: { Authorization: `${session?.user.accessToken}` },
     })
       .then((res) => res.json())
       .then((responseData: AnalyzePeFileUploadResponse) => {
