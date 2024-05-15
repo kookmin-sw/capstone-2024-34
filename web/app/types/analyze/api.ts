@@ -20,13 +20,3 @@ export interface FilePeResultResponse {
   data_strings: FilePeStringResultResponse;
   fileInfo: FileInfo;
 }
-
-export interface PEinfo {
-  time: String;
-  filename: String;
-  analysis: String;
-  score: number;
-  result: number;
-  reason: String;
-  userid: String;
-}
