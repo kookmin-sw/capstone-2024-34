@@ -13,10 +13,6 @@ export async function POST(request: Request) {
     }
     const signature = await prisma.signature.create({
       data: {
-<<<<<<< HEAD
-=======
-        time: new Date(),
->>>>>>> b94aae3 (feat: get signature api)
         signature: body.signature,
       },
     });
