@@ -23,6 +23,7 @@ model User {
 }
 
 model Analysis {
+<<<<<<< HEAD
   id        String   @id @unique @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -33,6 +34,18 @@ model Analysis {
   reason    String
   userid    String
   user      User     @relation(fields: [userid], references: [id])
+=======
+  id       String   @id @unique @default(uuid())
+  time     DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  filename String
+  analysis String
+  score    Float
+  result   Int
+  reason   String
+  userid   String
+  user     User    @relation(fields: [userid], references: [id])
+>>>>>>> b94aae3 (feat: get signature api)
 }
 
 model YaraRule {
@@ -45,9 +58,27 @@ model YaraRule {
   user      User     @relation(fields: [userid], references: [id])
 }
 
+<<<<<<< HEAD
 model Signature {
   id        String   @id @unique @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   signature String
 }
+=======
+model Rule {
+  id       String    @id @unique @default(uuid())
+  time     DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  rulename String
+  rule     String
+  isuser   Boolean
+  custom   CustomRule?
+}
+model Signature {
+  id       String    @id @unique @default(uuid())
+  time     DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  signature String
+}
+>>>>>>> b94aae3 (feat: get signature api)
