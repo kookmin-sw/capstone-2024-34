@@ -231,3 +231,6 @@ tempCodeRunnerFile.py
 # yara rule make test dataset
 /web/app/libs/yara/test/*
 !/web/app/libs/yara/test/README.md
+
+# signature.txt
+*/signatures.txt
