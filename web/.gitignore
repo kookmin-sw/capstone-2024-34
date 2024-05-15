@@ -38,4 +38,5 @@ next-env.d.ts
 # user uploads folder
 /public/uploads/*
 !/public/uploads/.gitkeep
-
+!/public/uploads/yara/.gitkeep
+/public/upload/**/

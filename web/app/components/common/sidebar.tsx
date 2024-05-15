@@ -120,6 +120,140 @@ export default function SideBar() {
             </div>
           </li>
 
+          <li className="hs-accordion" id="apply-rule-accordion">
+            <button
+              type="button"
+              className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-5 flex-shrink-0"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 0 1 9 9v.375M10.125 2.25A3.375 3.375 0 0 1 13.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 0 1 3.375 3.375M9 15l2.25 2.25L15 12"
+                />
+              </svg>
+              탐지규칙 적용
+              <svg
+                className="ms-auto hidden size-4 hs-accordion-active:block"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m18 15-6-6-6 6" />
+              </svg>
+              <svg
+                className="ms-auto block size-4 hs-accordion-active:hidden"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+
+            <div
+              id="apply-rule-accordion-child"
+              className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
+            >
+              <ul className="ps-2 pt-2">
+                <li>
+                  <Link
+                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    href="/apply/rule/yara"
+                  >
+                    Yara Rule 적용
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li className="hs-accordion" id="analyze-accordion">
+            <button
+              type="button"
+              className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-5 flex-shrink-0"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
+                />
+              </svg>
+              정적파일 분석
+              <svg
+                className="ms-auto hidden size-4 hs-accordion-active:block"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m18 15-6-6-6 6" />
+              </svg>
+              <svg
+                className="ms-auto block size-4 hs-accordion-active:hidden"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </button>
+
+            <div
+              id="analyze-accordion-child"
+              className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
+            >
+              <ul className="ps-2 pt-2">
+                <li>
+                  <Link
+                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    href="/analyze/file/pe"
+                  >
+                    단일 PE 파일 분석
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+
           <li className="hs-accordion" id="account-accordion">
             <button
               type="button"
@@ -181,73 +315,6 @@ export default function SideBar() {
                     href="/stats/chart"
                   >
                     통계 시각화
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </li>
-
-          <li className="hs-accordion" id="analyze-accordion">
-            <button
-              type="button"
-              className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="size-5 flex-shrink-0"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Zm3.75 11.625a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
-                />
-              </svg>
-              파일 분석
-              <svg
-                className="ms-auto hidden size-4 hs-accordion-active:block"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m18 15-6-6-6 6" />
-              </svg>
-              <svg
-                className="ms-auto block size-4 hs-accordion-active:hidden"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </button>
-
-            <div
-              id="analyze-accordion-child"
-              className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
-            >
-              <ul className="ps-2 pt-2">
-                <li>
-                  <Link
-                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
-                    href="/analyze/file/pe"
-                  >
-                    단일 PE 파일 분석
                   </Link>
                 </li>
               </ul>
