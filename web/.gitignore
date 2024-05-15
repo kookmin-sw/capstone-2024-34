@@ -36,7 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 # user uploads folder
-/public/uploads/*
+/public/uploads/**
 !/public/uploads/.gitkeep
-!/public/uploads/yara/.gitkeep
-/public/upload/**/
+!/public/uploads/tmp
+!/public/uploads/tmp/.gitkeep
