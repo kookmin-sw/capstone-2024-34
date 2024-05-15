@@ -70,6 +70,38 @@ export async function POST(request: Request) {
     );
     const data_strings = await response_strings.json();
 
+    let reason = "";
+    let result = 0;
+    let tmp = {
+      attack: data_strings.output.attack,
+      normal: data_strings.output.normal,
+    };
+
+    if (data_strings.output.attack.length > 0) {
+      reason = "attack";
+      result = 1;
+    } else if (data_strings.output.normal.length > 0) {
+      reason = "normal";
+      result = 0;
+    } else {
+      reason = "hold";
+      result = 2;
+    }
+
+    const analysisbody = {
+      time: fileInfo.fileLastModified,
+      filename: fileInfo.fileName,
+      analysis: JSON.stringify(tmp).toString(),
+      score: data_strings.output.score,
+      result: result,
+      reason: reason,
+      userid: "415e9062-dc25-4bc4-9eb9-0f4bc3c8409e",
+    };
+    await fetch(`http://localhost:3000/api/analyze`, {
+      method: "POST",
+      body: JSON.stringify(analysisbody),
+    });
+
     return NextResponse.json({
       success: true,
       message: "데이터 저장 성공",
