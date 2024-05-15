@@ -2,8 +2,7 @@ import prisma from "@libs/common/prisma";
 import { DateTime } from "next-auth/providers/kakao";
 
 interface RequestBody {
-  id: string;
-  time: DateTime;
+  id?: string;
   filename: string;
   analysis: string;
   score: number;
@@ -17,7 +16,6 @@ export async function POST(request: Request) {
 
   const analysis = await prisma.analysis.create({
     data: {
-      time: new Date(body.time),
       filename: body.filename,
       analysis: body.analysis,
       score: body.score,

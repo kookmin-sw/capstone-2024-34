@@ -2,22 +2,20 @@ import prisma from "@libs/common/prisma";
 import { DateTime } from "next-auth/providers/kakao";
 
 interface RequestBody {
-  id: string;
-  time: DateTime;
+  id?: string;
   rulename: string;
   rule: string;
-  isuser: boolean;
+  userid: string;
 }
 
 export async function POST(request: Request) {
   const body: RequestBody = await request.json();
 
-  const rule = await prisma.rule.create({
+  const rule = await prisma.yaraRule.create({
     data: {
-      time: body.time,
       rulename: body.rulename,
       rule: body.rule,
-      isuser: body.isuser,
+      userid: body.userid,
     },
   });
 
@@ -25,7 +23,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  const rules = await prisma.rule.findMany();
+  const rules = await prisma.yaraRule.findMany();
 
   return new Response(JSON.stringify(rules));
 }
@@ -34,7 +32,7 @@ export async function DELETE(request: Request) {
   const body: RequestBody = await request.json();
 
   try {
-    const deletedRule = await prisma.rule.delete({
+    const deletedRule = await prisma.yaraRule.delete({
       where: {
         id: body.id,
       },
