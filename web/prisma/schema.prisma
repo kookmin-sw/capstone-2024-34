@@ -24,7 +24,8 @@ model User {
 
 model Analysis {
   id       String   @id @unique @default(uuid())
-  time     DateTime
+  time     DateTime @default(now())
+  updatedAt DateTime @updatedAt
   filename String
   analysis String
   score    Float
@@ -44,9 +45,16 @@ model CustomRule {
 
 model Rule {
   id       String    @id @unique @default(uuid())
-  time     DateTime
+  time     DateTime @default(now())
+  updatedAt DateTime @updatedAt
   rulename String
   rule     String
   isuser   Boolean
   custom   CustomRule?
+}
+model Signature {
+  id       String    @id @unique @default(uuid())
+  time     DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  signature String
 }
