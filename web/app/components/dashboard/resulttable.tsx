@@ -3,14 +3,36 @@
 import { Table, TableColumnsType, TableProps, Tag, Tooltip } from "antd";
 import { mockTableData } from "../../(page)/dashboard/mockData/table";
 import { FileResultTableData } from "@customTypes/mock/dashboard";
+import { useEffect } from "react";
 
 const ResultTable = () => {
+  const tmp: FileResultTableData[] = [];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/analyze", {
+          method: "GET",
+        });
+        const data = await res.json();
+        console.log("--------", data);
+      } catch (err) {
+        console.log("Failed to send request");
+      }
+    };
+    fetchData();
+  }, []);
+
   const dataSource = mockTableData;
   const columns: TableColumnsType<FileResultTableData> = [
     {
       title: "번호",
       dataIndex: "id",
       key: "id",
+      render: (text) => (
+        <div className="px-6 py-2">
+          <span className="text-sm text-gray-600">{text}</span>
+        </div>
+      ),
     },
     {
       title: "일시",
@@ -21,6 +43,11 @@ const ResultTable = () => {
       title: "파일명",
       dataIndex: "fileName",
       key: "fileName",
+      render: (text) => (
+        <div className="px-6 py-2">
+          <span className="text-sm text-gray-600">{text}</span>
+        </div>
+      ),
     },
     {
       title: "탐지결과",
@@ -41,7 +68,7 @@ const ResultTable = () => {
         },
       ],
       onFilter: (value, record) => record.result === value,
-      render: (text: string, record: FileResultTableData) => (
+      render: (text: string) => (
         <div className="px-6 py-2">
           {text === "정상" ? (
             <span className="inline-flex items-center gap-x-1 rounded-full bg-teal-100 px-1.5 py-1 text-xs font-medium text-teal-800">
@@ -93,10 +120,20 @@ const ResultTable = () => {
       title: "탐지사유",
       dataIndex: "reason",
       key: "reason",
+      render: (text) => (
+        <div className="px-6 py-2">
+          <span className="text-sm text-gray-600">{text}</span>
+        </div>
+      ),
     },
   ];
 
-  const onChange = (pagination: any, filters: any, sorter: any, extra: any) => {
+  const onChange: TableProps<FileResultTableData>["onChange"] = (
+    pagination,
+    filters,
+    sorter,
+    extra,
+  ) => {
     console.log("params", pagination, filters, sorter, extra);
   };
 

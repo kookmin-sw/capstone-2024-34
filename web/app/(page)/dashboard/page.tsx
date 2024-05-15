@@ -5,7 +5,15 @@ import moment from "moment";
 import WordCloud from "@components/dashboard/wordcloud";
 import ResultTable from "@components/dashboard/resulttable";
 
+// export async function GetAnalysis() {
+//   await fetch(`http://localhost:3000/api/analyze/`, {
+//     method: "GET",
+//   });
+// }
+
 export default function Dashboard() {
+  // const tmp = GetAnalysis();
+  // console.log(tmp);
   return (
     <div className="h-full w-full max-w-full space-y-4 overflow-x-hidden px-4 py-4 sm:space-y-6 sm:px-6 sm:py-6">
       <div className="grid w-full grid-cols-2">
