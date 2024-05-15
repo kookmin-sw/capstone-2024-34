@@ -104,7 +104,7 @@ export async function POST(request: Request) {
       score: data_strings.output.score,
       result: result,
       reason: reason,
-      userid: "415e9062-dc25-4bc4-9eb9-0f4bc3c8409e",
+      userid: decodeJwt(accessToken!).id,
     };
     await fetch(`http://localhost:3000/api/analyze`, {
       method: "POST",
