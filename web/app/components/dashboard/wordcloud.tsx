@@ -11,7 +11,6 @@ import { MinMaxPair } from "@cyberblast/react-wordcloud";
 
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
-import { fetchData } from "next-auth/client/_utils";
 
 const options = {
   rotations: 1,
