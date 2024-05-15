@@ -1,14 +1,14 @@
 import numpy as np
-from core.utils import minHash
+from core.utils import AEchunking, minHash
 from tqdm import tqdm
 
 
-def MV2(payloads, window_size, K, M):
+def MV2(payloads, K, M):
 
     minhashed_virtual_vectors = []
 
-    # print('make minhashed vector')
-    for payload in payloads:
+    print('make minhashed vector')
+    for payload in tqdm(payloads):
         chunks = list(payload)  # AEchunking(payload, W=window_size)
         encode_pos = minHash(chunks, K) % M
 

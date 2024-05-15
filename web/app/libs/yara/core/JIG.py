@@ -6,19 +6,18 @@ from tqdm import tqdm
 def IORA(sum_vector_):
     sum_vector = sorted(sum_vector_, reverse=True)
     total = sum(sum_vector)
-
+    
     for idx in range(0, len(sum_vector)):
         length = len(sum_vector) - idx
         mean = total / length
         sigma = math.sqrt(mean * (length - 1) / length)
-
+        
         thetaC = mean + 6 * sigma
         if sum_vector[idx] <= thetaC:
             break
 
         total -= sum_vector[idx]
     return thetaC
-
 
 def JIG(vectors, thetaJ):
 
@@ -27,7 +26,7 @@ def JIG(vectors, thetaJ):
     big_group_indices = []
 
     # print('checking big group')
-    for doc in range(len(vectors)):
+    for doc in tqdm(range(len(vectors))):
         vector = vectors[doc]
         MV += vector
 

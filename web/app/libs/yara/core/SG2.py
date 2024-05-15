@@ -7,11 +7,11 @@ from core.HH import HH
 from tqdm import tqdm
 
 
-def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_size, hh3_size, ratio):
+def SG2(payloads, vector_size, eps, minpts, hh1_size, hh2_size, ratio):
     fine_vectors = []
 
-    # print('vectorization')
-    for payload in payloads:
+    print('chunking')
+    for payload in tqdm(payloads):
         chunks = payload  # AEchunking(payload, window_size)
         vector = np.zeros(vector_size, dtype=np.int8)
         for chunk in chunks:
@@ -21,10 +21,10 @@ def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_si
 
         fine_vectors.append(vector)
 
-    # print('start DBSCAN')
+    print('start DBSCAN')
     model = DBSCAN(eps=1-eps, min_samples=minpts, metric='cosine', n_jobs=8)
     model.fit(fine_vectors)
-    # print('end DBSCAN')
+    print('end DBSCAN')
 
     cluster_labels = model.labels_
 
@@ -39,7 +39,7 @@ def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_si
 
     # print('make signature')
     cluster_signature = dict()
-    for cluster_label in cluster_dict.keys():
+    for cluster_label in tqdm(cluster_dict.keys()):
         payloads = cluster_dict[cluster_label]
 
         signatures = HH(
