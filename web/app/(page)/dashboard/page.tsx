@@ -3,6 +3,7 @@ import TrafficGraph from "@components/dashboard/graphs";
 import { mockTableData } from "./mockData/table";
 import moment from "moment";
 import WordCloud from "@components/dashboard/wordcloud";
+import ResultTable from "@components/dashboard/resulttable";
 
 export default function Dashboard() {
   return (
@@ -922,6 +923,9 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <ResultTable></ResultTable>
         </div>
       </div>
     </div>
