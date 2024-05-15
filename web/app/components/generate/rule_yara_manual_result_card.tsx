@@ -1,5 +1,6 @@
 "use client";
-import { YaraRuleCreateRespone } from "@customTypes/yara/api";
+import { YaraRuleCreateRespone } from "@customTypes/generate/api";
+import { YaraTokenizerConf } from "@customTypes/yara/monaco_editor";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 
@@ -58,9 +59,23 @@ const YaraRuleResultCard = ({
           {editMode ? (
             <MonacoEditor
               onChange={(event) => setYaraRule(event)}
-              className="mt-4"
+              className="w-full py-4"
               height="400"
               value={yaraRule}
+              language="yara"
+              theme="vs"
+              editorWillMount={(monaco) => {
+                monaco.languages.register({ id: "yara" });
+                monaco.languages.setMonarchTokensProvider(
+                  "yara",
+                  YaraTokenizerConf as any,
+                );
+              }}
+              options={{
+                fontSize: 14,
+                wordWrap: "on",
+                minimap: { enabled: false },
+              }}
             />
           ) : (
             <p className="ml-5">{yaraRule}</p>

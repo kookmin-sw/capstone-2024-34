@@ -14,8 +14,40 @@ datasource db {
 }
 
 model User {
-  id     String @id @default(uuid())
-  userID String @unique
-  userPW String
-  name   String
+  id        String     @id @default(uuid())
+  userID    String     @unique
+  userPW    String
+  name      String
+  analyses  Analysis[]
+  yaraRules YaraRule[]
+}
+
+model Analysis {
+  id        String   @id @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  filename  String
+  analysis  String
+  score     Float
+  result    Int
+  reason    String
+  userid    String
+  user      User     @relation(fields: [userid], references: [id])
+}
+
+model YaraRule {
+  id        String   @id @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  rulename  String
+  rule      String
+  userid    String
+  user      User     @relation(fields: [userid], references: [id])
+}
+
+model Signature {
+  id        String   @id @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  signature String
 }

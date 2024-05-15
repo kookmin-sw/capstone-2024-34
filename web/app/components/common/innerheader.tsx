@@ -59,7 +59,7 @@ export default function InnerHeader() {
                   className="inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full border border-transparent text-sm font-semibold text-gray-800 hover:bg-gray-100 disabled:opacity-50"
                 >
                   <Image
-                    className="inline-block size-[38px] rounded-full ring-2 ring-white"
+                    className="inline-block rounded-full ring-2 ring-white"
                     src="/images/kmu.png"
                     alt="kmu"
                     width={38}
@@ -158,7 +158,7 @@ export default function InnerHeader() {
                   className="inline-flex h-[2.375rem] w-[2.375rem] items-center justify-center gap-x-2 rounded-full border border-transparent text-sm font-semibold text-gray-800 hover:bg-gray-100 disabled:pointer-events-none disabled:opacity-50"
                 >
                   <Image
-                    className="inline-block size-[38px] rounded-full ring-2 ring-white"
+                    className="inline-block rounded-full ring-2 ring-white"
                     src="/images/kmu.png"
                     alt="kmu"
                     width={38}

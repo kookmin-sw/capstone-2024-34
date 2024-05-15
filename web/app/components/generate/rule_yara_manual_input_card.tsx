@@ -1,5 +1,5 @@
 "use client";
-import { YaraRuleCreateRespone } from "@customTypes/yara/api";
+import { YaraRuleCreateRespone } from "@customTypes/generate/api";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
@@ -67,7 +67,7 @@ const InputStringsCard = ({ onSubmit }: YaraInputFormProps) => {
 
     formData.append("inputs", inputStr);
     formData.append("name", name);
-    await fetch("/api/yara/file/create", {
+    await fetch("/api/generate/rule/yara/manual", {
       method: "POST",
       body: formData,
     })

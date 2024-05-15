@@ -1,8 +1,10 @@
+import json
 import sys
 from tqdm import tqdm
 import re
 
-import sys, os
+import sys
+import os
 from core.MV2 import MV2
 from core.JIG import JIG
 from core.SG2 import SG2
@@ -24,34 +26,38 @@ def genStrFeature(file_path):
 
 	file_direc = os.listdir(file_path)
 
-	print('start: extract string feature')
+	# print('start: extract string feature')
 
-	for f in tqdm(file_direc):
+	for f in file_direc:
 		mal_path = os.path.join(file_path, f)
 		ret = extract_string(mal_path)
 		vec = list(ret)
 		res.append(vec)
 
-	print('end: extract string feature')
+	# print('end: extract string feature')
 
 	return res
 
 
 # GIPS
 def main(str_feature,
-		 window_size, K, M, # MV2 파라미터
+		 window_size, K, M,  # MV2 파라미터
 		 thetaJ,  # JIG 파라미터
-		 vector_size, eps, minpts, ngram, hh1_size, hh2_size, hh3_size, ratio # SG2, AWL 파라미터
-		):
+		 vector_size, eps, minpts, ngram, hh1_size, hh2_size, hh3_size, ratio  # SG2, AWL 파라미터
+		 ):
 
-	print(f'data no: {len(str_feature)}')
+	# print(f'data no: {len(str_feature)}')
+
+	str_feature = list(str_feature)
+	for feature in str_feature:
+		feature = list(feature)
 
 	# 빅 그룹 식별
-	minhashed_virtual_vectors = MV2(payloads=str_feature, window_size=window_size, K=K, M=M)
+	minhashed_virtual_vectors = MV2(
+		payloads=str_feature, window_size=window_size, K=K, M=M)
 
 	big_group_indices = JIG(vectors=minhashed_virtual_vectors, thetaJ=thetaJ)
-  
-	
+
 	big_group_payloads = []
 	non_big_group_paylaods = []
 
@@ -60,11 +66,11 @@ def main(str_feature,
 			big_group_payloads.append(payload)
 		else:
 			non_big_group_paylaods.append(payload)
-	
+
 	# 시그니처 생성
-	cluster_signatures = SG2(payloads=big_group_payloads, window_size=window_size, vector_size=vector_size, 
+	cluster_signatures = SG2(payloads=big_group_payloads, window_size=window_size, vector_size=vector_size,
 							 eps=eps, minpts=minpts, ngram=ngram, hh1_size=hh1_size, hh2_size=hh2_size, hh3_size=hh3_size, ratio=ratio)
-	
+
 	signatures = set()
 	for value_list in cluster_signatures.values():
 		for i in value_list:
@@ -95,8 +101,8 @@ def genYaraRule(input_list, output, signatures_len):
 	yara += "\tcondition:\n"
 	tmpStr = f"\t\t{signatures_len} of ("
 	for i in range(1, cnt):
-		tmpStr += f"#sig{i}, "
-	tmpStr += f"#sig{cnt})"
+		tmpStr += f"$sig{i}, "
+	tmpStr += f"$sig{cnt})"
 
 	yara += tmpStr
 	yara += "\n}"
@@ -104,11 +110,21 @@ def genYaraRule(input_list, output, signatures_len):
 	return yara
 
 
+def blockPrint():
+	global backupstdout
+	backupstdout = sys.stdout
+	sys.stdout = open(os.devnull, 'w')
+
+
+def enablePrint():
+	global backupstdout
+	sys.stdout = backupstdout
+
+
 if __name__ == "__main__":
 	if len(sys.argv) < 2:
 		print("Usage: python extract_string.py <file_path>")
 		sys.exit(1)
-
 	# file path
 	file_path = sys.argv[1]
 
@@ -128,7 +144,7 @@ if __name__ == "__main__":
 	hh1_size = 3000
 	hh2_size = 3000
 	hh3_size = 3000
-	ratio = 1
+	ratio = 0.4
 	signatures = main(str_feature, window_size=window_size, K=K, M=M, thetaJ=thetaJ, vector_size=vector_size, 
 				  eps=eps, minpts=minpts, ngram=ngram, hh1_size=hh1_size, hh2_size=hh2_size, hh3_size=hh3_size, ratio=ratio)
 	

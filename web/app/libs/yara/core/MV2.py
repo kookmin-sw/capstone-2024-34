@@ -7,8 +7,8 @@ def MV2(payloads, window_size, K, M):
 
     minhashed_virtual_vectors = []
 
-    print('make minhashed vector')
-    for payload in tqdm(payloads):
+    # print('make minhashed vector')
+    for payload in payloads:
         chunks = list(payload)  # AEchunking(payload, W=window_size)
         encode_pos = minHash(chunks, K) % M
 
