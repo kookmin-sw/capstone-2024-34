@@ -91,7 +91,7 @@ def HH(
 			threshold = min(min_val)
 
 	hh2.fixSubstringFrequency()
-	return ([i for i in sorted(list(hh2.items.items()), key=lambda x: -x[1]) if i[1] >= threshold]) # i[0] not in hh1.items and hh1.items[i[0]] >= threshold
+	return ([i for i in sorted(list(hh2.items.items()), key=lambda x: -x[1]) if (i[0] in hh1.items) and (hh1.items[i[0]] >= threshold * ratio)]) # if i[1] >= threshold i[0] in hh1.items and hh1.items[i[0]] >= threshold * ratio
 
 
 if __name__ == '__main__':
