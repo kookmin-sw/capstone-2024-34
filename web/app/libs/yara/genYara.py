@@ -2,6 +2,7 @@ import sys
 import re
 import os
 import pickle
+import json
 
 from core.MV2 import MV2
 from core.JIG import JIG
@@ -10,12 +11,12 @@ from core.SG2 import SG2
 
 # string feature extract
 def extract_string(path, min_bytes=6):
-    with open(os.path.join(path), 'rb') as f:
-        file_data = f.read()
-        string = set(s.decode().strip().lower() for s in re.findall(
-            b"[\x20-\x7e]{" + bytes(str(min_bytes), 'utf-8') + b",}", file_data))
-        
-    return set([i for i in string if i != ''])
+	with open(os.path.join(path), 'rb') as f:
+		file_data = f.read()
+		string = set(s.decode().strip().lower() for s in re.findall(
+			b"[\x20-\x7e]{" + bytes(str(min_bytes), 'utf-8') + b",}", file_data))
+		
+	return set([i for i in string if i != ''])
 
 
 # return string feature extract list
@@ -161,6 +162,9 @@ if __name__ == "__main__":
 	signatures_len = 1
 	yara_rule = genYaraRule(signatures, "test1", signatures_len)
 
-	f = open('my_yara_rule.yar', 'w')
+	f = open(f'{file_path}/my_yara_rule.yar', 'w')
 	f.write(yara_rule)
-	f.close()
+
+	json_data = json.dumps(
+		{"rule": yara_rule, "extractSignature": signatures})
+	print(json_data, end='')
