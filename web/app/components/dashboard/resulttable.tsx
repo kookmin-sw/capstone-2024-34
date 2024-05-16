@@ -3,10 +3,11 @@
 import { Table, TableColumnsType, TableProps, Tag, Tooltip } from "antd";
 import { mockTableData } from "../../(page)/dashboard/mockData/table";
 import { FileResultTableData } from "@customTypes/mock/dashboard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const ResultTable = () => {
-  const tmp: FileResultTableData[] = [];
+  const [tableData, setTableData] = useState<FileResultTableData[]>([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -14,13 +15,42 @@ const ResultTable = () => {
           method: "GET",
         });
         const data = await res.json();
-        console.log("--------", data);
+
+        let tmpData: FileResultTableData[] = [];
+        for (const index in data) {
+          const element = data[index];
+          let tempResult, tempReason;
+          console.log(element);
+          if (element.result === 1) {
+            tempResult = "공격";
+            tempReason = "뭐 넣음?";
+            const tmp = JSON.stringify(element.analysis);
+            // console.log("---------", tmp);
+          } else if (element.result === 0) {
+            tempResult = "정상";
+            tempReason = "뭐 넣음?";
+          } else {
+            tempResult = "보류";
+            tempReason = "-";
+          }
+          const item: FileResultTableData = {
+            id: element.id,
+            date: element.updatedAt,
+            fileName: element.filename,
+            result: tempResult,
+            reason: tempReason,
+          };
+          tmpData.push(item);
+        }
+        setTableData(tmpData);
       } catch (err) {
         console.log("Failed to send request");
       }
     };
     fetchData();
   }, []);
+
+  console.log("+++++++", tableData);
 
   const dataSource = mockTableData;
   const columns: TableColumnsType<FileResultTableData> = [
@@ -84,7 +114,7 @@ const ResultTable = () => {
               </svg>
               정상
             </span>
-          ) : text === "악성" ? (
+          ) : text === "공격" ? (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-800">
               <svg
                 className="size-2.5"
@@ -96,7 +126,7 @@ const ResultTable = () => {
               >
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
               </svg>
-              악성
+              공격
             </span>
           ) : (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-100 px-2 py-0.5 text-xs font-medium text-orange-800">
@@ -140,7 +170,7 @@ const ResultTable = () => {
   return (
     <div>
       <Table
-        dataSource={dataSource}
+        dataSource={tableData}
         columns={columns}
         onChange={onChange}
       ></Table>
