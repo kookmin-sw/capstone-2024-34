@@ -1,7 +1,6 @@
 "use client";
 
 import { Table, TableColumnsType, TableProps, Tag, Tooltip } from "antd";
-import { mockTableData } from "../../(page)/dashboard/mockData/table";
 import { FileResultTableData } from "@customTypes/mock/dashboard";
 import { useEffect, useState } from "react";
 
@@ -19,8 +18,8 @@ const ResultTable = () => {
         let tmpData: FileResultTableData[] = [];
         for (const index in data) {
           const element = data[index];
-          let tempResult, tempReason;
-          console.log(element);
+          let tempResult;
+
           if (element.result === 1) {
             tempResult = "공격";
           } else if (element.result === 0) {
@@ -45,9 +44,6 @@ const ResultTable = () => {
     fetchData();
   }, []);
 
-  console.log("+++++++", tableData);
-
-  const dataSource = mockTableData;
   const columns: TableColumnsType<FileResultTableData> = [
     {
       title: "번호",
