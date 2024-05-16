@@ -141,7 +141,7 @@ export default function AnalyzePeFilesPage() {
 
               <div className="mt-5 sm:mt-8">
                 <div data-hs-stepper-content-item='{"index": 1}'>
-                  <div className="grid min-h-96 w-full max-w-full gap-4 rounded-xl sm:gap-6 xl:grid-cols-3">
+                  <div className="grid min-h-72 w-full max-w-full gap-4 rounded-xl sm:gap-6 xl:grid-cols-3">
                     <div className="h-full">
                       <SelectYaraRuleCard
                         selectedYaraRule={selectedYaraRule}
