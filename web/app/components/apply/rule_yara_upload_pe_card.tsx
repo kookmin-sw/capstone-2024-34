@@ -1,10 +1,11 @@
 "use client";
 
-import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
+import { ApplyYaraRulePeFilesUploadResponse } from "@customTypes/apply/api";
+import { useSession } from "next-auth/react";
 import { FormEvent, useRef, useState } from "react";
 
 interface FilesUploadFormProps {
-  onSubmit: (data: GenYaraRulePeFilesUploadResponse) => void;
+  onSubmit: (data: ApplyYaraRulePeFilesUploadResponse) => void;
   isProgress: boolean;
   setIsProgress: (isProgress: boolean) => void;
 }
@@ -21,9 +22,11 @@ const ApplyRuleFilesPEUploadCard = ({
   // input 파일 저장
   const [files, setFiles] = useState<any>([]);
   // 분석 api 호출결과 데이터 저장
-  const [data, setData] = useState<GenYaraRulePeFilesUploadResponse>();
+  const [data, setData] = useState<ApplyYaraRulePeFilesUploadResponse>();
   // 파일 업로드 개수 제한
   const maxFileCount = 1000;
+  // 세션 정보
+  const { data: session } = useSession();
 
   async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -34,13 +37,13 @@ const ApplyRuleFilesPEUploadCard = ({
       formData.append("upload_file[]", file);
     });
 
-    await fetch("/api/generate/rule/yara/upload", {
+    await fetch("/api/apply/rule/yara/upload/pe", {
       method: "POST",
       body: formData,
+      headers: { Authorization: `${session?.user.accessToken}` },
     })
       .then((res) => res.json())
-      .then((responseData: GenYaraRulePeFilesUploadResponse) => {
-        // Update the type of responseData
+      .then((responseData: ApplyYaraRulePeFilesUploadResponse) => {
         onSubmit(responseData);
         if (formRef.current) {
           formRef.current.reset();
@@ -118,28 +121,7 @@ const ApplyRuleFilesPEUploadCard = ({
     <>
       {data?.success ? (
         <div className="flex">
-          <p className="flex-1"></p>
-          <button
-            type="button"
-            className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50"
-            onClick={() => window.location.reload()}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="size-4 flex-shrink-0"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-              />
-            </svg>
-            다른 파일로 생성하기
-          </button>
+          <p className="flex-1">업로드 완료</p>
         </div>
       ) : (
         <div className="flex w-full flex-col items-center justify-center">
@@ -197,7 +179,7 @@ const ApplyRuleFilesPEUploadCard = ({
                 <span className="text-blue-600">{files.length}개</span> /{" "}
                 {maxFileCount}개
               </p>
-              <div className="mt-1 flex max-h-72 w-full flex-col items-center space-y-2 overflow-y-scroll">
+              <div className="mt-1 flex max-h-36 w-full flex-col items-center space-y-2 overflow-y-scroll">
                 {files.map((file: File, idx: any) => (
                   <div
                     key={idx}
@@ -221,7 +203,7 @@ const ApplyRuleFilesPEUploadCard = ({
                 form="multiple_file_upload_form"
                 className="hover:bg-brand-600 focus:ring-brand-300 mt-3 w-full rounded-lg bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
               >
-                분석하기
+                업로드 하기
               </button>
             </div>
           ) : (

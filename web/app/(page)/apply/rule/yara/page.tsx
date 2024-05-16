@@ -1,29 +1,31 @@
 "use client";
 
+import { useState } from "react";
+import { Steps } from "antd";
+
 import YaraRulePreviewCard from "@components/apply/rule-yara-preview-card";
 import SelectYaraRuleCard from "@components/apply/rule-yara-select-card";
 import ApplyRuleFilesPEUploadCard from "@components/apply/rule_yara_upload_pe_card";
 
-import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
+import { ApplyYaraRulePeFilesUploadResponse } from "@customTypes/apply/api";
 import { YaraRuleDB } from "@customTypes/yara/db";
-import { Steps } from "antd";
-import Link from "next/link";
-import { useState } from "react";
 
 export default function AnalyzePeFilesPage() {
-  let [data, setData] = useState<GenYaraRulePeFilesUploadResponse>();
-  // 업로드후 로딩 상태 저장
-  const [isProgress, setIsProgress] = useState(false);
+  // Step UI Index 저장
+  const [currStepIdx, setCurrStepIdx] = useState(0);
   // STEP1 선택한 Yara Rule 스트링 데이터 저장
   const [selectedYaraRule, setSelectedYaraRule] = useState<YaraRuleDB>();
+  // STEP2 업로드한 PE 파일 데이터 저장
+  const [filesUploaderdata, setFilesUploaderdata] =
+    useState<ApplyYaraRulePeFilesUploadResponse>();
+  // STEP2 업로더 진행 상태 저장
+  const [isUploaderProgress, setIsUploaderProgress] = useState(false);
 
-  const [currStepIdx, setCurrStepIdx] = useState(0);
-
-  const next = () => {
+  const handleNextBtn = () => {
     setCurrStepIdx(currStepIdx + 1);
   };
 
-  const prev = () => {
+  const handlePrevBtn = () => {
     setCurrStepIdx(currStepIdx - 1);
   };
 
@@ -44,11 +46,11 @@ export default function AnalyzePeFilesPage() {
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
-  function handleSubmitResponse(
-    responseData: GenYaraRulePeFilesUploadResponse,
+  function handleUploaderResponse(
+    responseData: ApplyYaraRulePeFilesUploadResponse,
   ) {
-    setData(responseData);
-    console.log("res", data);
+    setFilesUploaderdata(responseData);
+    console.log("res", filesUploaderdata);
   }
 
   function handleNextStep() {}
@@ -99,15 +101,9 @@ export default function AnalyzePeFilesPage() {
               <div id="step2_contents">
                 <div className="grid w-full max-w-full gap-4 rounded-xl sm:gap-6">
                   <ApplyRuleFilesPEUploadCard
-                    onSubmit={function (
-                      data: GenYaraRulePeFilesUploadResponse,
-                    ): void {
-                      throw new Error("Function not implemented.");
-                    }}
-                    isProgress={false}
-                    setIsProgress={function (isProgress: boolean): void {
-                      throw new Error("Function not implemented.");
-                    }}
+                    onSubmit={handleUploaderResponse}
+                    isProgress={isUploaderProgress}
+                    setIsProgress={setIsUploaderProgress}
                   />
                 </div>
               </div>
@@ -125,7 +121,7 @@ export default function AnalyzePeFilesPage() {
               <button
                 type="button"
                 className="inline-flex items-center gap-x-1 rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 disabled:pointer-events-none disabled:opacity-50"
-                onClick={() => prev()}
+                onClick={() => handlePrevBtn()}
                 disabled={currStepIdx === 0}
               >
                 <svg
@@ -149,7 +145,7 @@ export default function AnalyzePeFilesPage() {
               <button
                 type="button"
                 className="inline-flex items-center gap-x-1 rounded-lg border border-transparent bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-50"
-                onClick={() => next()}
+                onClick={() => handleNextBtn()}
               >
                 다음
                 <svg
