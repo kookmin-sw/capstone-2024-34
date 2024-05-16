@@ -5,7 +5,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function InnerHeader() {
   const { data: session } = useSession();
-  console.log("session", session);
+  // console.log("session", session);
   if (session && session.user) {
     return (
       <header className="sticky inset-x-0 top-0 z-[48] flex h-16 w-full flex-wrap border-b bg-white py-2.5 text-sm sm:flex-nowrap sm:justify-start sm:py-4 lg:ps-64">

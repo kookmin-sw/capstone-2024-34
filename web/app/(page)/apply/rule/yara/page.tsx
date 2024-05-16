@@ -5,6 +5,7 @@ import SelectYaraRuleCard from "@components/apply/rule-yara-select-card";
 import ApplyRuleFilesPEUploadCard from "@components/apply/rule_yara_upload_pe_card";
 
 import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
+import { YaraRuleDB } from "@customTypes/yara/db";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -12,6 +13,8 @@ export default function AnalyzePeFilesPage() {
   let [data, setData] = useState<GenYaraRulePeFilesUploadResponse>();
   // 업로드후 로딩 상태 저장
   const [isProgress, setIsProgress] = useState(false);
+  // STEP1 선택한 Yara Rule 스트링 데이터 저장
+  const [selectedYaraRule, setSelectedYaraRule] = useState<YaraRuleDB>();
 
   function handleSubmitResponse(
     responseData: GenYaraRulePeFilesUploadResponse,
@@ -138,16 +141,18 @@ export default function AnalyzePeFilesPage() {
 
               <div className="mt-5 sm:mt-8">
                 <div data-hs-stepper-content-item='{"index": 1}'>
-                  <div className="grid w-full max-w-full gap-4 rounded-xl sm:gap-6 xl:grid-cols-3">
-                    <div>
-                      <SelectYaraRuleCard />
+                  <div className="grid min-h-96 w-full max-w-full gap-4 rounded-xl sm:gap-6 xl:grid-cols-3">
+                    <div className="h-full">
+                      <SelectYaraRuleCard
+                        selectedYaraRule={selectedYaraRule}
+                        setSelectedYaraRule={setSelectedYaraRule}
+                      />
                     </div>
-                    <div className="xl:col-span-2">
+                    <div className="h-full xl:col-span-2">
                       <YaraRulePreviewCard
                         success={true}
-                        message={undefined}
-                        data_uploader={undefined}
-                        data_yara={undefined}
+                        message={"undefined"}
+                        data_yara={selectedYaraRule}
                         isProgress={false}
                       />
                     </div>
