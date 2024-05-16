@@ -1,9 +1,8 @@
 import numpy as np
 from core.utils import minHash
-from tqdm import tqdm
 
 
-def MV2(payloads, window_size, K, M):
+def MV2(payloads, K, M):
 
     minhashed_virtual_vectors = []
 

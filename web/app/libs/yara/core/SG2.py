@@ -2,16 +2,13 @@ import hashlib
 from sklearn.cluster import DBSCAN
 import numpy as np
 
-from core.HH import THH, DHH
-from core.utils import AEchunking
-
-from tqdm import tqdm
+from core.HH import HH
 
 
-def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_size, hh3_size, ratio):
+def SG2(payloads, vector_size, eps, minpts, hh1_size, hh2_size, ratio):
     fine_vectors = []
 
-    # print('vectorization')
+    # print('chunking')
     for payload in payloads:
         chunks = payload  # AEchunking(payload, window_size)
         vector = np.zeros(vector_size, dtype=np.int8)
@@ -43,12 +40,10 @@ def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_si
     for cluster_label in cluster_dict.keys():
         payloads = cluster_dict[cluster_label]
 
-        signatures = THH(
+        signatures = HH(
             packets=payloads,
-            k=ngram,
             hh1_size=hh1_size,
             hh2_size=hh2_size,
-            hh3_size=hh3_size,
             ratio=ratio,
             deduplication=True,
         )

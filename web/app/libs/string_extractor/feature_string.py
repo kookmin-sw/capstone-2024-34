@@ -24,9 +24,10 @@ SIGNATURES = {'Delete', 'ExitProcess', 'Exception', 'System', 'GetProcAddress', 
 def extract_string(path, min_bytes=6):
     with open(os.path.join(path), 'rb') as f:
         file_data = f.read()
-        string = set(s.decode() for s in re.findall(
+        string = set(s.decode().strip().lower() for s in re.findall(
             b"[\x20-\x7e]{" + bytes(str(min_bytes), 'utf-8') + b",}", file_data))
-    return string
+        
+    return set([i for i in string if i != ''])
 
 
 if __name__ == '__main__':
