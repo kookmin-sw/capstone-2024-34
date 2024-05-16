@@ -39,10 +39,8 @@ def detect(file_folder_path, yar_file_path):
 
 
 if __name__ == "__main__":
-    # if len(sys.argv) < 2:
-    #     print("Usage: python yara_detect.py <folder_path> <yara_path>")
-    #     sys.exit(1)
+    if len(sys.argv) < 2:
+        print("Usage: python yara_detect.py <folder_path> <yara_path>")
+        sys.exit(1)
 
-    print(detect(
-        "/Users/taeyoon/Desktop/capstone-2024-34/web/public/uploads/47e6fab6-b158-4a21-87cb-4831410ac3b1",
-        "/Users/taeyoon/Desktop/capstone-2024-34/web/public/uploads/47e6fab6-b158-4a21-87cb-4831410ac3b1/my_yara_rule.yar"))
+    print(detect(sys.argv[1], sys.argv[2]))
