@@ -2,6 +2,7 @@
 
 import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
 import { FormEvent, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
 
 interface FilesUploadFormProps {
   onSubmit: (data: GenYaraRulePeFilesUploadResponse) => void;
@@ -24,6 +25,8 @@ const FilesPEUploadCard = ({
   const [data, setData] = useState<GenYaraRulePeFilesUploadResponse>();
   // 파일 업로드 개수 제한
   const maxFileCount = 1000;
+  // 세션 정보
+  const { data: session } = useSession();
 
   async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -37,6 +40,7 @@ const FilesPEUploadCard = ({
     await fetch("/api/generate/rule/yara/upload", {
       method: "POST",
       body: formData,
+      headers: { Authorization: `${session?.user.accessToken}` },
     })
       .then((res) => res.json())
       .then((responseData: GenYaraRulePeFilesUploadResponse) => {

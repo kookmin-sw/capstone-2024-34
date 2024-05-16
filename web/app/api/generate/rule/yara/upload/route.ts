@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import path from "path";
 
 import { FilesPeUploaderResultResponse } from "@customTypes/generate/api";
+import prisma from "@libs/common/prisma";
+import { decodeJwt, verifyJwt } from "@libs/common/jwt";
 
 export const config = {
   api: {
@@ -13,6 +15,14 @@ export const config = {
 
 export async function POST(request: Request) {
   let savedData: FilesPeUploaderResultResponse = { files: [], folderPath: "" };
+
+  const accessToken = request.headers.get("authorization");
+
+  if (!accessToken || !verifyJwt(accessToken)) {
+    return new Response(JSON.stringify({ error: "No Authorization" }), {
+      status: 401,
+    });
+  }
 
   try {
     const formData = await request.formData();
@@ -67,7 +77,17 @@ export async function POST(request: Request) {
         },
       },
     );
+
     const data_yara = await response_create_yara.json();
+
+    // DB 삽입
+    await prisma.yaraRule.create({
+      data: {
+        rulename: `rule_${folderName}.yar`,
+        rule: data_yara.output.rule,
+        userid: decodeJwt(accessToken!).id,
+      },
+    });
 
     return NextResponse.json({
       success: true,
