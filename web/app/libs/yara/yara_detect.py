@@ -42,5 +42,6 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python yara_detect.py <folder_path> <yara_path>")
         sys.exit(1)
-
-    print(detect(sys.argv[1], sys.argv[2]))
+    target_folder = sys.argv[1]
+    yara_rule = sys.argv[2]
+    print(detect(target_folder, yara_rule))

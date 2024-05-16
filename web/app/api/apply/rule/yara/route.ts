@@ -13,15 +13,12 @@ export async function POST(req: Request) {
   const pythonCommand = os.platform() === "win32" ? "python" : "python3";
 
   // 파이썬 파일 경로
-  const extractorLibPath = join(
-    process.cwd(),
-    "/app/libs/pe_miner/feature_extractor.py",
-  );
+  const extractorLibPath = join(process.cwd(), "/app/libs/yara/yara_detect.py");
 
   // 분석 대상 폴더 경로
   const targetFolderPath = join(
     process.cwd(),
-    `/public/uploads/${body.upload_file_path}`,
+    `/public/uploads/${body.folderPath}`,
   );
 
   // Yara룰 파일 생성
@@ -37,7 +34,7 @@ export async function POST(req: Request) {
       yaraFilePath,
     ]);
     let output = "";
-
+    console.log(targetFolderPath, yaraFilePath);
     // 파이썬 프로세스 정상 처리
     pythonProcess.stdout.on("data", (data) => {
       output += data.toString();
@@ -67,6 +64,7 @@ export async function POST(req: Request) {
     // Promise 처리 결과 대기후 반환
     const promiseData = await processDataPromise;
     console.log("파이썬 프로세스 결과 정상 수신");
+    console.log(promiseData);
     return NextResponse.json({ output: promiseData }, { status: 200 });
   } catch (error) {
     // 에러 핸들링

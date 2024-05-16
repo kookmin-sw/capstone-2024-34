@@ -1,6 +1,7 @@
 "use client";
 
 import { ApplyYaraRulePeFilesUploadResponse } from "@customTypes/apply/api";
+import { YaraRuleDB } from "@customTypes/yara/db";
 import { useSession } from "next-auth/react";
 import { FormEvent, useRef, useState } from "react";
 
@@ -8,12 +9,14 @@ interface FilesUploadFormProps {
   onSubmit: (data: ApplyYaraRulePeFilesUploadResponse) => void;
   isProgress: boolean;
   setIsProgress: (isProgress: boolean) => void;
+  data_yara: YaraRuleDB | undefined;
 }
 
 const ApplyRuleFilesPEUploadCard = ({
   onSubmit,
   isProgress,
   setIsProgress,
+  data_yara,
 }: FilesUploadFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<any>(null);
@@ -36,6 +39,10 @@ const ApplyRuleFilesPEUploadCard = ({
     files.forEach((file: File) => {
       formData.append("upload_file[]", file);
     });
+
+    if (data_yara) {
+      formData.append("yara", data_yara.rule);
+    }
 
     await fetch("/api/apply/rule/yara/upload/pe", {
       method: "POST",
@@ -120,8 +127,28 @@ const ApplyRuleFilesPEUploadCard = ({
   return (
     <>
       {data?.success ? (
-        <div className="flex">
-          <p className="flex-1">업로드 완료</p>
+        <div className="focus:ring-brand-300 flex min-h-96 w-full max-w-full flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-4 shadow-sm focus:outline-none focus:ring-4 md:p-5">
+          <div role="status">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="h-8 w-8 stroke-blue-600"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+            <span className="sr-only">분석 완료</span>
+          </div>
+
+          <div>
+            <div className="mt-2 text-neutral-400">파일 분석완료</div>
+          </div>
         </div>
       ) : (
         <div className="flex w-full flex-col items-center justify-center">
