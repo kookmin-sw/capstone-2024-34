@@ -4,8 +4,12 @@ import { v4 as uuidv4 } from "uuid";
 import path from "path";
 
 import { FilesPeUploaderResultResponse } from "@customTypes/generate/api";
-import prisma from "@libs/common/prisma";
+
 import { decodeJwt, verifyJwt } from "@libs/common/jwt";
+import {
+  ApplyYaraPythonAPIResponse,
+  ApplyYaraRuleFilesUploadResponse,
+} from "@customTypes/apply/api";
 
 export const config = {
   api: {
@@ -14,7 +18,11 @@ export const config = {
 };
 
 export async function POST(request: Request) {
-  let savedData: FilesPeUploaderResultResponse = { files: [], folderPath: "" };
+  let savedData: ApplyYaraRuleFilesUploadResponse = {
+    files: [],
+    folderPath: "",
+    yara: "",
+  };
 
   const accessToken = request.headers.get("authorization");
 
@@ -31,6 +39,10 @@ export async function POST(request: Request) {
     const files: File[] | null = formData.getAll(
       "upload_file[]",
     ) as unknown as File[];
+
+    const yara: string = formData.get("yara") as string;
+    savedData.yara = yara;
+
     console.log(files);
 
     if (!files) {
@@ -41,6 +53,7 @@ export async function POST(request: Request) {
     }
     const folderName = uuidv4();
     const uploadDir = path.join(process.cwd(), "public", "uploads", folderName);
+    const convFileNameDict: Record<string, string> = {};
     await mkdir(uploadDir, { recursive: true });
     savedData.folderPath = folderName;
 
@@ -56,6 +69,7 @@ export async function POST(request: Request) {
           origin_filename: file.name,
           conv_filename: convFileName,
         });
+        convFileNameDict[convFileName] = file.name;
         console.log("파일 저장 성공", savedData);
       } else {
         return NextResponse.json({
@@ -64,11 +78,11 @@ export async function POST(request: Request) {
         });
       }
     }
-    //
-    // console.log(JSON.stringify(savedData));
 
-    let response_create_yara = await fetch(
-      `http://localhost:3000/api/generate/rule/yara/auto`,
+    console.log(JSON.stringify(savedData));
+
+    const response_apply_yara = await fetch(
+      `http://localhost:3000/api/apply/rule/yara`,
       {
         method: "POST",
         body: JSON.stringify(savedData),
@@ -78,22 +92,18 @@ export async function POST(request: Request) {
       },
     );
 
-    const data_yara = await response_create_yara.json();
+    const data_apply_yara: ApplyYaraPythonAPIResponse =
+      await response_apply_yara.json();
 
-    // DB 삽입
-    await prisma.yaraRule.create({
-      data: {
-        rulename: `rule_${folderName}.yar`,
-        rule: data_yara.output.rule,
-        userid: decodeJwt(accessToken!).id,
-      },
+    data_apply_yara.output.data.map((item) => {
+      item.filename = convFileNameDict[item.filename];
     });
 
     return NextResponse.json({
       success: true,
       message: "데이터 저장 성공",
       data_uploader: savedData,
-      data_yara: data_yara.output,
+      data_apply_yara: data_apply_yara,
     });
   } catch (error) {
     console.error("데이터 저장 중 오류 발생:", error);

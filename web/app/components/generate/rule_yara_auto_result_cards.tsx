@@ -14,9 +14,24 @@ const AutoGenYaraRuleResultCard = ({
   data_yara,
   isProgress,
 }: GenYaraRulePeFilesUploadResponse & { isProgress: boolean }) => {
-  const monacoEditorWillMount = (monaco: any) => {
-    console.log("editorDidMount", monaco);
-    monaco.focus();
+  const handleDownload = (ruleString: string) => {
+    // 입력된 텍스트를 Blob 객체로 변환
+    const blob = new Blob([ruleString], { type: "text/plain" });
+    // Blob 객체를 URL.createObjectURL을 사용하여 다운로드할 수 있는 URL로 변환
+    const url =
+      typeof window != undefined ? window.URL.createObjectURL(blob) : "";
+
+    // a 태그를 동적으로 생성하여 다운로드 링크 생성
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "yara_rule.yar"; // 다운로드되는 파일명
+    document.body.appendChild(link);
+
+    // a 태그를 클릭하여 다운로드 시작
+    link.click();
+
+    // 다운로드 후 a 태그 제거
+    document.body.removeChild(link);
   };
 
   return (
@@ -68,13 +83,24 @@ const AutoGenYaraRuleResultCard = ({
                 </div>
               </div>
               <div className="max-w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm lg:col-span-2">
-                <div className="border-b border-gray-200 px-4 py-4">
-                  <h2 className="text-lg font-semibold text-gray-800">
+                <div className="flex border-b border-gray-200 px-4 py-4">
+                  <h2 className="flex-1 text-lg font-semibold text-gray-800">
                     자동 생성 탐지 Yara Rule
                   </h2>
                 </div>
+                <div className="flex w-full justify-end bg-neutral-50 px-4 py-2">
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-x-2 rounded-lg border border-transparent bg-gray-100 px-4 py-2 text-sm font-semibold text-gray-800 hover:bg-gray-200 disabled:pointer-events-none disabled:opacity-50"
+                    onClick={() => {
+                      handleDownload(data_yara?.rule || "");
+                    }}
+                  >
+                    Yar 파일 다운로드
+                  </button>
+                </div>
                 <MonacoEditor
-                  className="w-full py-4"
+                  className="my-4 w-full"
                   height="600"
                   value={data_yara?.rule}
                   language="yara"
