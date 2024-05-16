@@ -23,22 +23,17 @@ const ResultTable = () => {
           console.log(element);
           if (element.result === 1) {
             tempResult = "공격";
-            tempReason = "뭐 넣음?";
-            const tmp = JSON.stringify(element.analysis);
-            // console.log("---------", tmp);
           } else if (element.result === 0) {
             tempResult = "정상";
-            tempReason = "뭐 넣음?";
           } else {
             tempResult = "보류";
-            tempReason = "-";
           }
           const item: FileResultTableData = {
-            id: element.id,
+            id: index,
             date: element.updatedAt,
             fileName: element.filename,
             result: tempResult,
-            reason: tempReason,
+            score: element.score,
           };
           tmpData.push(item);
         }
@@ -147,9 +142,9 @@ const ResultTable = () => {
       ),
     },
     {
-      title: "탐지사유",
-      dataIndex: "reason",
-      key: "reason",
+      title: "탐지 점수",
+      dataIndex: "score",
+      key: "score",
       render: (text) => (
         <div className="px-6 py-2">
           <span className="text-sm text-gray-600">{text}</span>

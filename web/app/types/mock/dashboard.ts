@@ -3,7 +3,7 @@ export interface FileResultTableData {
   date: Date;
   fileName: string;
   result: string;
-  reason: string;
+  score: number;
 }
 export interface TrafficGraphData {
   type: string;

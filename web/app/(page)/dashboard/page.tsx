@@ -712,7 +712,7 @@ export default function Dashboard() {
                       <div className="px-6 py-2">
                         <div className="flex items-center gap-x-2">
                           <span className="text-sm text-gray-600">
-                            {data.reason}
+                            {data.score}
                           </span>
                         </div>
                       </div>
