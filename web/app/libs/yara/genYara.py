@@ -1,10 +1,8 @@
-import json
 import sys
-from tqdm import tqdm
 import re
-
-import sys
 import os
+import pickle
+
 from core.MV2 import MV2
 from core.JIG import JIG
 from core.SG2 import SG2
@@ -12,11 +10,12 @@ from core.SG2 import SG2
 
 # string feature extract
 def extract_string(path, min_bytes=6):
-	with open(os.path.join(path), 'rb') as f:
-		file_data = f.read()
-		string = set(s.decode() for s in re.findall(
-			b"[\x20-\x7e]{" + bytes(str(min_bytes), 'utf-8') + b",}", file_data))
-	return string
+    with open(os.path.join(path), 'rb') as f:
+        file_data = f.read()
+        string = set(s.decode().strip().lower() for s in re.findall(
+            b"[\x20-\x7e]{" + bytes(str(min_bytes), 'utf-8') + b",}", file_data))
+        
+    return set([i for i in string if i != ''])
 
 
 # return string feature extract list
@@ -41,9 +40,9 @@ def genStrFeature(file_path):
 
 # GIPS
 def main(str_feature,
-		 window_size, K, M,  # MV2 파라미터
+		 K, M,  # MV2 파라미터
 		 thetaJ,  # JIG 파라미터
-		 vector_size, eps, minpts, ngram, hh1_size, hh2_size, hh3_size, ratio  # SG2, AWL 파라미터
+		 vector_size, eps, minpts, hh1_size, hh2_size, ratio  # SG2, AWL 파라미터
 		 ):
 
 	# print(f'data no: {len(str_feature)}')
@@ -54,7 +53,7 @@ def main(str_feature,
 
 	# 빅 그룹 식별
 	minhashed_virtual_vectors = MV2(
-		payloads=str_feature, window_size=window_size, K=K, M=M)
+		payloads=str_feature, K=K, M=M)
 
 	big_group_indices = JIG(vectors=minhashed_virtual_vectors, thetaJ=thetaJ)
 
@@ -68,8 +67,8 @@ def main(str_feature,
 			non_big_group_paylaods.append(payload)
 
 	# 시그니처 생성
-	cluster_signatures = SG2(payloads=big_group_payloads, window_size=window_size, vector_size=vector_size,
-							 eps=eps, minpts=minpts, ngram=ngram, hh1_size=hh1_size, hh2_size=hh2_size, hh3_size=hh3_size, ratio=ratio)
+	cluster_signatures = SG2(payloads=big_group_payloads, vector_size=vector_size,
+							 eps=eps, minpts=minpts, hh1_size=hh1_size, hh2_size=hh2_size, ratio=ratio)
 
 	signatures = set()
 	for value_list in cluster_signatures.values():
@@ -129,7 +128,18 @@ if __name__ == "__main__":
 	file_path = sys.argv[1]
 
 	# make string feature
-	str_feature = genStrFeature(file_path)
+	str_feature_ = genStrFeature(file_path)
+	with open('./whitelist.pkl', 'rb') as f:
+		whitelist = pickle.load(f)
+
+	str_feature = []
+	for res in str_feature_:
+		tmp = []
+		for string in res:
+			if string not in whitelist:
+				tmp.append(string)
+
+		str_feature.append(tmp)
 
 	# make signature
 	## parameter
@@ -143,17 +153,14 @@ if __name__ == "__main__":
 	ngram = 4
 	hh1_size = 3000
 	hh2_size = 3000
-	hh3_size = 3000
 	ratio = 0.4
-	signatures = main(str_feature, window_size=window_size, K=K, M=M, thetaJ=thetaJ, vector_size=vector_size, 
-				  eps=eps, minpts=minpts, ngram=ngram, hh1_size=hh1_size, hh2_size=hh2_size, hh3_size=hh3_size, ratio=ratio)
+	signatures = main(str_feature, K=K, M=M, thetaJ=thetaJ, vector_size=vector_size, 
+				  eps=eps, minpts=minpts, hh1_size=hh1_size, hh2_size=hh2_size, ratio=ratio)
 	
 	# make yara rule
-	signatures_len = round(len(signatures) * 0.6)
+	signatures_len = 1
 	yara_rule = genYaraRule(signatures, "test1", signatures_len)
 
 	f = open('my_yara_rule.yar', 'w')
 	f.write(yara_rule)
 	f.close()
-	
-	# print(yara_rule)
