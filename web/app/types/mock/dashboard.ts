@@ -1,9 +1,9 @@
 export interface FileResultTableData {
   id: string;
-  date: Date;
+  date: string;
   fileName: string;
   result: string;
-  reason: string;
+  score: number;
 }
 export interface TrafficGraphData {
   type: string;
