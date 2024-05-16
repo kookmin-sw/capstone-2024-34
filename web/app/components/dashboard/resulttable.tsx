@@ -3,6 +3,7 @@
 import { Table, TableColumnsType, TableProps, Tag, Tooltip } from "antd";
 import { FileResultTableData } from "@customTypes/mock/dashboard";
 import { useEffect, useState } from "react";
+import moment from "moment";
 
 const ResultTable = () => {
   const [tableData, setTableData] = useState<FileResultTableData[]>([]);
@@ -29,7 +30,7 @@ const ResultTable = () => {
           }
           const item: FileResultTableData = {
             id: index,
-            date: element.updatedAt,
+            date: moment(element.updatedAt).format("YYYY-MM-DD HH:mm:ss"),
             fileName: element.filename,
             result: tempResult,
             score: element.score,

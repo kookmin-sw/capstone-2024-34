@@ -1,6 +1,6 @@
 export interface FileResultTableData {
   id: string;
-  date: Date;
+  date: string;
   fileName: string;
   result: string;
   score: number;
