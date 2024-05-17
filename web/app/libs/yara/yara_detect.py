@@ -2,7 +2,16 @@ import sys
 import yara
 import json
 import os
+import re
 
+
+def extract_string(path, min_bytes=6):
+	with open(os.path.join(path), 'rb') as f:
+		file_data = f.read()
+		string = set(s.decode().strip().lower() for s in re.findall(
+			b"[\x20-\x7e]{" + bytes(str(min_bytes), 'utf-8') + b",}", file_data))
+		
+	return set([i for i in string if i != ''])
 
 def detect(file_folder_path, yar_file_path):
     ret = {
@@ -23,7 +32,11 @@ def detect(file_folder_path, yar_file_path):
 
     rules = yara.compile(filepath=yar_file_path)
     for i, filename in enumerate(exe_file_list):
-        res = rules.match(f'{file_folder_path}/{filename}')
+        match_data = ''
+        strings = extract_string(f'{file_folder_path}/{filename}')
+        for string in strings:
+            match_data += string
+        res = rules.match(data=match_data)
         tmp = {
             "id": i,
             "filename": filename
