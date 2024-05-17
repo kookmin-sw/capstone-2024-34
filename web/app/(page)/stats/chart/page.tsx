@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import ApexChart2 from "@components/chart/chart2";
-import ApexChart3 from "@components/chart/chart3";
 import ApexChart1 from "@components/chart/chart1";
+import AttackChart from "@components/chart/AttackChart";
 
 export default function ChartPage() {
   return (
@@ -29,7 +29,7 @@ export default function ChartPage() {
           <ApexChart2></ApexChart2>
         </div>
         <div>
-          <ApexChart3></ApexChart3>
+          <AttackChart />
         </div>
       </div>
     </div>
