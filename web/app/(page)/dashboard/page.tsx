@@ -4,16 +4,9 @@ import { mockTableData } from "./mockData/table";
 import moment from "moment";
 import WordCloud from "@components/dashboard/wordcloud";
 import ResultTable from "@components/dashboard/resulttable";
-
-// export async function GetAnalysis() {
-//   await fetch(`http://localhost:3000/api/analyze/`, {
-//     method: "GET",
-//   });
-// }
+import SigCount from "@components/dashboard/sigcount";
 
 export default function Dashboard() {
-  // const tmp = GetAnalysis();
-  // console.log(tmp);
   return (
     <div className="h-full w-full max-w-full space-y-4 overflow-x-hidden px-4 py-4 sm:space-y-6 sm:px-6 sm:py-6">
       <div className="grid w-full grid-cols-2">
@@ -197,12 +190,12 @@ export default function Dashboard() {
               <div className="grow">
                 <div className="flex items-center gap-x-2">
                   <p className="text-xs uppercase tracking-wide text-gray-500">
-                    평균 처리속도
+                    탐지 시그니처 개수
                   </p>
                 </div>
                 <div className="mt-1 flex items-center gap-x-2">
                   <h3 className="text-2xl font-semibold text-gray-800">
-                    29.4S
+                    <SigCount />
                   </h3>
                 </div>
               </div>
