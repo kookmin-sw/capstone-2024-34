@@ -50,4 +50,5 @@ model Signature {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   signature String
+  count Int
 }
