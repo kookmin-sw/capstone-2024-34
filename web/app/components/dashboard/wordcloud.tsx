@@ -26,7 +26,7 @@ const WordCloud = ({ wordCloudoptions = options }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/signature", {
+        const res = await fetch("/api/signature/wordcloud", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -35,10 +35,15 @@ const WordCloud = ({ wordCloudoptions = options }) => {
 
         const data = await res.json();
         let tmpSig: WordCloudData[] = [];
+        let maxValue: number = data[0].count;
         for (const element in data) {
+          let val = data[element].count;
+          if (val < maxValue / 10) val = 1;
+          else if (val < maxValue / 5) val = 1.5;
+          else val = 2;
           const wordCloudItem: WordCloudData = {
             text: data[element].signature,
-            value: Number(element),
+            value: 10 + Math.random() * 90,
           };
           tmpSig.push(wordCloudItem);
         }

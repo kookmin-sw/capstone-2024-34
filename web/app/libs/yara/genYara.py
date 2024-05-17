@@ -94,9 +94,9 @@ def genYaraRule(input_list, output, signatures_len):
 		if j == "":
 			continue
 		tmpStr = j.replace('\\', '\\\\')
-		tmpStr = tmpStr.replace('\'', '\\\'').replace('\"', '\\\"')
+		tmpStr = tmpStr.replace('\"', '\\\"')
 		cnt += 1
-		yara += f"\t\t$sig{cnt} = \"{tmpStr}\"\n"
+		yara += f"\t\t$sig{cnt} = \"{tmpStr}\" nocase\n"
 
 	yara += "\tcondition:\n"
 	tmpStr = f"\t\t{signatures_len} of ("
