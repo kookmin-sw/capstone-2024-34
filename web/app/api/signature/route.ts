@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 interface RequestBody {
   signature: string;
+  count: number;
 }
 
 export async function POST(request: Request) {
@@ -14,6 +15,7 @@ export async function POST(request: Request) {
     const signature = await prisma.signature.create({
       data: {
         signature: body.signature,
+        count: body.count,
       },
     });
     return NextResponse.json(
