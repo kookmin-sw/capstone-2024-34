@@ -1,4 +1,5 @@
 import prisma from "@libs/common/prisma";
+import { NextRequest, NextResponse } from "next/server";
 
 interface RequestBody {
   id?: string;
@@ -27,6 +28,26 @@ export async function GET(request: Request) {
   return new Response(JSON.stringify(rules));
 }
 
+export async function PATCH(request: Request) {
+  const body: RequestBody = await request.json();
+  try {
+    const updatedRule = await prisma.yaraRule.update({
+      where: {
+        id: body.id,
+      },
+      data: {
+        ruleName: body.rulename,
+        rule: body.rule,
+      },
+    });
+    return NextResponse.json(updatedRule);
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Failed to update rule item" },
+      { status: 500 },
+    );
+  }
+}
 export async function DELETE(request: Request) {
   const body: RequestBody = await request.json();
 
@@ -37,10 +58,10 @@ export async function DELETE(request: Request) {
       },
     });
 
-    return new Response(JSON.stringify(deletedRule));
+    return NextResponse.json(deletedRule);
   } catch (error) {
-    return new Response(
-      JSON.stringify({ error: "Failed to delete rule item" }),
+    return NextResponse.json(
+      { error: "Failed to delete rule item" },
       { status: 500 },
     );
   }
