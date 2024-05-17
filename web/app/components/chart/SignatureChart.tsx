@@ -12,28 +12,30 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
 const SignatureChart = () => {
   const [sigData, setSigData] = useState<Chart2[]>([]);
 
-  // {
-  //   name: "Exception",
-  //   data: 13364,
-  // },
-  // {
-  //   name: "user32",
-  //   data: 11784,
-  // },
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/signature", {
+        const res = await fetch("/api/signature/signaturechart", {
           method: "GET",
         });
         const data = await res.json();
-        console.log(data);
+        let tmp: Chart2[] = [];
+        let etcCount = 0;
 
-        for (const index in data) {
-          const element = data[index];
-          // console.log(element.signature);
+        for (let i = 0; i < data.length; i++) {
+          const element = data[i];
+          if (i < 7) {
+            tmp.push({
+              name: element.signature,
+              data: element.count,
+            });
+          } else {
+            etcCount += element.count;
+          }
         }
+        tmp.push({ name: "etc", data: etcCount });
+
+        setSigData(tmp);
       } catch (err) {
         console.log("Failed to send request");
       }
@@ -41,8 +43,8 @@ const SignatureChart = () => {
     fetchData();
   }, []);
 
-  const seriesData = mockChart2Data.map((data) => data.data);
-  const labels = mockChart2Data.map((data) => data.name);
+  const seriesData = sigData.map((data) => data.data);
+  const labels = sigData.map((data) => data.name);
 
   const options = {
     series: seriesData,
