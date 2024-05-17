@@ -7,7 +7,7 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-const ApexChart2 = () => {
+const SignatureChart = () => {
   const seriesData = mockChart2Data.map((data) => data.data);
   const labels = mockChart2Data.map((data) => data.name);
 
@@ -72,4 +72,4 @@ const ApexChart2 = () => {
   );
 };
 
-export default ApexChart2;
+export default SignatureChart;
