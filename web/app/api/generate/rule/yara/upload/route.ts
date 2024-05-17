@@ -7,12 +7,6 @@ import { FilesPeUploaderResultResponse } from "@customTypes/generate/api";
 import prisma from "@libs/common/prisma";
 import { decodeJwt, verifyJwt } from "@libs/common/jwt";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export async function POST(request: Request) {
   let savedData: FilesPeUploaderResultResponse = { files: [], folderPath: "" };
 
@@ -68,7 +62,7 @@ export async function POST(request: Request) {
     // console.log(JSON.stringify(savedData));
 
     let response_create_yara = await fetch(
-      `http://localhost:3000/api/generate/rule/yara/auto`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/generate/rule/yara/auto`,
       {
         method: "POST",
         body: JSON.stringify(savedData),

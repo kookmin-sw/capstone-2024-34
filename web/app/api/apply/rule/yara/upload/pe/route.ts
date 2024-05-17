@@ -11,12 +11,6 @@ import {
   ApplyYaraRuleFilesUploadResponse,
 } from "@customTypes/apply/api";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export async function POST(request: Request) {
   let savedData: ApplyYaraRuleFilesUploadResponse = {
     files: [],
@@ -82,7 +76,7 @@ export async function POST(request: Request) {
     console.log(JSON.stringify(savedData));
 
     const response_apply_yara = await fetch(
-      `http://localhost:3000/api/apply/rule/yara`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/apply/rule/yara`,
       {
         method: "POST",
         body: JSON.stringify(savedData),

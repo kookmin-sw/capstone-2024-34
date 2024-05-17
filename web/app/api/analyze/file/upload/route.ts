@@ -4,12 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 import { FileInfo } from "@customTypes/analyze/api";
 import { decodeJwt, verifyJwt } from "@libs/common/jwt";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export async function POST(request: Request) {
   let savedData;
   const accessToken = request.headers.get("authorization");
@@ -56,7 +50,7 @@ export async function POST(request: Request) {
     console.log(JSON.stringify(savedData));
 
     let response_header = await fetch(
-      `http://localhost:3000/api/analyze/file/pe`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/analyze/file/pe`,
       {
         method: "POST",
         body: JSON.stringify(savedData),
@@ -68,7 +62,7 @@ export async function POST(request: Request) {
     const data_header = await response_header.json();
 
     let response_strings = await fetch(
-      `http://localhost:3000/api/analyze/file/pe-string`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/analyze/file/pe-string`,
       {
         method: "POST",
         body: JSON.stringify(savedData),
@@ -106,7 +100,7 @@ export async function POST(request: Request) {
       reason: reason,
       userid: decodeJwt(accessToken!).id,
     };
-    await fetch(`http://localhost:3000/api/analyze`, {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/analyze`, {
       method: "POST",
       body: JSON.stringify(analysisbody),
     });

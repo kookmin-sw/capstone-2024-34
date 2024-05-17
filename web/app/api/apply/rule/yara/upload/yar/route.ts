@@ -2,12 +2,6 @@ import { NextResponse } from "next/server";
 import { writeFile } from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export async function POST(request: Request) {
   let savedData;
   try {
@@ -40,7 +34,7 @@ export async function POST(request: Request) {
     console.log(JSON.stringify(savedData));
 
     let response_header = await fetch(
-      `http://localhost:3000/api/analyze/file/pe`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/analyze/file/pe`,
       {
         method: "POST",
         body: JSON.stringify(savedData),
@@ -52,7 +46,7 @@ export async function POST(request: Request) {
     const data_header = await response_header.json();
 
     let response_strings = await fetch(
-      `http://localhost:3000/api/analyze/file/pe-string`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/analyze/file/pe-string`,
       {
         method: "POST",
         body: JSON.stringify(savedData),
