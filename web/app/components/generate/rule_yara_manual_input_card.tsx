@@ -1,7 +1,7 @@
 "use client";
 import { YaraRuleCreateRespone } from "@customTypes/generate/api";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Button, Form, Input } from "antd";
 
 interface YaraInputFormProps {
@@ -82,49 +82,76 @@ const InputStringsCard = ({ onSubmit }: YaraInputFormProps) => {
   }
 
   return (
-    <div className="focus:ring-brand-300 items-left flex w-full max-w-full flex-col justify-start rounded-xl border border-gray-200 bg-white p-4 shadow-sm focus:outline-none focus:ring-4 md:p-5">
-      <h1 className="mb-4 block text-lg font-bold text-gray-800 sm:text-lg">
-        Yara Rule 조건
-      </h1>
-      <form onSubmit={handleFormSubmit}>
-        <label>Yara Rule 이름</label>
-        <input
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          placeholder={"저장할 이름"}
-          className="ml-1 rounded-md border border-gray-200 p-3 shadow-sm focus:outline-none"
-        />
-        {inputs.map((input, index) => (
-          <div key={index} className="w-full max-w-full md:p-1">
+    <div className="flex h-full max-w-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+      <div className="border-b border-gray-200 px-4 py-4">
+        <h2 className="text-lg font-semibold text-gray-800">
+          Yara Rule 생성기
+        </h2>
+      </div>
+      <form
+        onSubmit={handleFormSubmit}
+        className="flex h-full flex-col justify-between p-4"
+      >
+        <div>
+          <div className="mb-4">
+            <label className="mb-1 block text-sm font-medium">
+              Yara Rule 이름
+            </label>
             <input
-              value={input}
-              onChange={(event) => handleInputChange(index, event)}
-              placeholder={`입력 ${index + 1}`}
-              className="mr-1 w-11/12 border-2 border-dashed border-gray-100 px-2 focus:outline-none focus:ring-1 sm:h-10"
-            />
-
-            <MinusCircleOutlined
-              className="dynamic-delete-button"
-              onClick={() => removeInput(index)}
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder={"규칙 이름 입력"}
+              className="block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
             />
           </div>
-        ))}
-        <div className="mt-4 flex justify-between">
-          <Button
-            type="dashed"
-            onClick={() => addInput()}
-            icon={<PlusOutlined />}
-          >
-            입력 추가
-          </Button>
-          <button
-            type="submit"
-            className="hover:bg-brand-600 focus:ring-brand-300 bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
-          >
-            Yara Rule 생성
-          </button>
+          <div>
+            <label className="mb-1 block text-sm font-medium">
+              String 규칙 입력
+            </label>
+            <div className="flex flex-col gap-2">
+              {inputs.map((input, index) => (
+                <div key={index} className="flex w-full">
+                  <input
+                    type="text"
+                    value={input}
+                    onChange={(event) => handleInputChange(index, event)}
+                    placeholder={`스트링 규칙 입력 ${index + 1}`}
+                    className="block w-full rounded-lg rounded-e-none border border-gray-200 px-4 py-3 text-sm shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
+                  />
+                  <div
+                    className="inline-flex min-w-fit cursor-pointer items-center rounded-e-md border border-s-0 border-gray-200 bg-gray-50 px-4 hover:bg-gray-200"
+                    onClick={() => inputs.length > 1 && removeInput(index)}
+                  >
+                    <MinusCircleOutlined />
+                  </div>
+                </div>
+              ))}
+
+              <div
+                className="group flex w-full cursor-pointer"
+                onClick={() => addInput()}
+              >
+                <div className="block w-full rounded-lg rounded-e-none border border-dashed border-gray-200 px-4 py-3 text-sm text-neutral-600 shadow-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50 group-hover:bg-gray-50">
+                  규칙 추가
+                </div>
+                <div className="inline-flex min-w-fit cursor-pointer items-center rounded-e-md border border-s-0 border-dashed border-gray-200 bg-gray-50 px-4 group-hover:bg-gray-200">
+                  <PlusCircleOutlined />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <p className="text-red-400">{errMessage}</p>
+        <div>
+          <p className="text-red-400">{errMessage}</p>
+          <div className="mt-4 flex justify-between">
+            <button
+              type="submit"
+              className="block w-full rounded-lg bg-neutral-600 px-4 py-3 text-sm text-white shadow-sm hover:bg-neutral-700 focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
+            >
+              Yara Rule 생성
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   );

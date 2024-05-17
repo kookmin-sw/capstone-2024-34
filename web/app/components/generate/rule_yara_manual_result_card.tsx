@@ -14,11 +14,9 @@ const YaraRuleResultCard = ({
   message,
 }: YaraRuleCreateRespone) => {
   const [yaraRule, setYaraRule] = useState("");
-  const [editMode, setEditMode] = useState<Boolean>(false);
 
   useEffect(() => {
     setYaraRule(output.yara);
-    setEditMode(false);
   }, [output]);
 
   const handleDownload = () => {
@@ -42,63 +40,54 @@ const YaraRuleResultCard = ({
   };
 
   return (
-    <div className="focus:ring-brand-300 flex w-full max-w-full flex-col items-start justify-start whitespace-pre-wrap rounded-xl border border-gray-200 bg-white p-4 shadow-sm focus:outline-none focus:ring-4 md:p-5">
+    <>
       {output.yara != null ? (
-        <div className="w-full max-w-full flex-col">
-          <div className="flex justify-between">
-            <h1 className="mb-4 block text-lg font-bold text-gray-800 sm:text-lg">
-              생성된 Yara Rule
-            </h1>
-            <button
-              className="hover:bg-brand-600 focus:ring-brand-300 bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
-              onClick={() => setEditMode(!editMode)}
-            >
-              {editMode ? "저장" : "편집"}
-            </button>
+        <div className="flex max-w-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+          <div className="border-b border-gray-200 px-4 py-4">
+            <h2 className="text-lg font-semibold text-gray-800">
+              Yara Rule 편집
+            </h2>
           </div>
-          {editMode ? (
-            <MonacoEditor
-              onChange={(event) => setYaraRule(event)}
-              className="w-full py-4"
-              height="400"
-              value={yaraRule}
-              language="yara"
-              theme="vs"
-              editorWillMount={(monaco) => {
-                monaco.languages.register({ id: "yara" });
-                monaco.languages.setMonarchTokensProvider(
-                  "yara",
-                  YaraTokenizerConf as any,
-                );
-              }}
-              options={{
-                fontSize: 14,
-                wordWrap: "on",
-                minimap: { enabled: false },
-              }}
-            />
-          ) : (
-            <p className="ml-5">{yaraRule}</p>
-          )}
-          {editMode ? (
-            <></>
-          ) : (
+
+          <div className="flex h-full flex-col justify-between p-4">
+            <div>
+              <MonacoEditor
+                onChange={(event) => setYaraRule(event)}
+                className="w-full"
+                height={"20rem"}
+                value={yaraRule}
+                language="yara"
+                theme="vs"
+                editorWillMount={(monaco) => {
+                  monaco.languages.register({ id: "yara" });
+                  monaco.languages.setMonarchTokensProvider(
+                    "yara",
+                    YaraTokenizerConf as any,
+                  );
+                }}
+                options={{
+                  fontSize: 14,
+                  wordWrap: "on",
+                  minimap: { enabled: false },
+                }}
+              />
+            </div>
+
             <div className="flex justify-end">
               <button
-                className="hover:bg-brand-600 focus:ring-brand-300 mt-4 bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
+                type="button"
+                className="block w-full rounded-lg bg-neutral-600 px-4 py-3 text-sm text-white shadow-sm hover:bg-neutral-700 focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
                 onClick={handleDownload}
               >
-                Yara Rule 저장
+                Yara Rule 다운로드
               </button>
             </div>
-          )}
+          </div>
         </div>
       ) : (
-        <div className="mb-4 block text-lg font-bold text-gray-800 sm:text-lg">
-          Yara Rule 생성 대기중
-        </div>
+        <></>
       )}
-    </div>
+    </>
   );
 };
 export default YaraRuleResultCard;
