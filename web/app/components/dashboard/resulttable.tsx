@@ -139,7 +139,7 @@ const ResultTable = () => {
       ),
     },
     {
-      title: "탐지 점수",
+      title: "탐지 개수",
       dataIndex: "score",
       key: "score",
       render: (text) => (

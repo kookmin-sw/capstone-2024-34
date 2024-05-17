@@ -50,10 +50,7 @@ if __name__ == '__main__':
             score += 1
         else:
             normal.append(string)
-
-    score /= len(SIGNATURES)
-    score = round(score * 100, 2)
-
+    
     respone['score'] = score
     respone['attack'] = attack
     respone['normal'] = normal

@@ -168,13 +168,13 @@ const FilePEResultCard = ({
                 <div className="max-w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
                   <div className="border-b border-gray-200 px-4 py-4">
                     <h2 className="text-lg font-semibold text-gray-800">
-                      공격 분석 점수
+                      공격 개수
                     </h2>
                     {/* <p className="text-sm text-gray-600 ">String 영역 분석</p> */}
                   </div>
                   <div className="flex w-full items-center justify-center px-4 py-4 ">
                     <p className="w-full text-xl">
-                      {data.data_strings.output.score}점
+                      {data.data_strings.output.score}개
                     </p>
                   </div>
                 </div>
