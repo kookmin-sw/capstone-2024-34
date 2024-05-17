@@ -6,6 +6,7 @@ export interface YaraRuleCreateRespone {
 
 export interface YaraRule {
   yara: string;
+  ruleName: string;
 }
 
 export interface GenYaraRulePeFilesUploadResponse {
