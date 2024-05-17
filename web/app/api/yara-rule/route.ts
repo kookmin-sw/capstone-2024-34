@@ -1,30 +1,47 @@
 import prisma from "@libs/common/prisma";
+import { decodeJwt, verifyJwt } from "@libs/common/jwt";
+import { NextRequest, NextResponse } from "next/server";
 
 interface RequestBody {
-  id?: string;
-  rulename: string;
+  ruleName: string;
   rule: string;
-  userid: string;
 }
 
-export async function POST(request: Request) {
-  const body: RequestBody = await request.json();
+export async function POST(request: NextRequest) {
+  try {
+    const accessToken = request.headers.get("authorization");
 
-  const rule = await prisma.yaraRule.create({
-    data: {
-      rulename: body.rulename,
-      rule: body.rule,
-      userid: body.userid,
-    },
-  });
+    if (!accessToken || !verifyJwt(accessToken)) {
+      return NextResponse.json(
+        { error: "No Authorization" },
+        {
+          status: 401,
+        },
+      );
+    }
+    const body: RequestBody = await request.json();
+    await prisma.yaraRule.create({
+      data: {
+        rulename: `${body.ruleName}.yar`,
+        rule: body.rule,
+        userid: decodeJwt(accessToken!).id,
+      },
+    });
 
-  return new Response(JSON.stringify(rule));
+    return NextResponse.json({
+      success: true,
+      message: "파일 업로드 성공",
+    });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
 }
 
 export async function GET(request: Request) {
-  const rules = await prisma.yaraRule.findMany();
+  const signatures = await prisma.YaraRule.findMany();
 
-  return new Response(JSON.stringify(rules));
+  return new Response(JSON.stringify(signatures));
 }
 
 export async function DELETE(request: Request) {
@@ -33,7 +50,7 @@ export async function DELETE(request: Request) {
   try {
     const deletedRule = await prisma.yaraRule.delete({
       where: {
-        id: body.id,
+        id: body.ruleName,
       },
     });
 

@@ -2,7 +2,9 @@
 import { YaraRuleCreateRespone } from "@customTypes/generate/api";
 import { YaraTokenizerConf } from "@customTypes/yara/monaco_editor";
 import dynamic from "next/dynamic";
+import { stringify } from "querystring";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 const MonacoEditor = dynamic(() => import("react-monaco-editor"), {
   ssr: false,
@@ -14,6 +16,7 @@ const YaraRuleResultCard = ({
   message,
 }: YaraRuleCreateRespone) => {
   const [yaraRule, setYaraRule] = useState("");
+  const { data: session } = useSession();
 
   useEffect(() => {
     setYaraRule(output.yara);
@@ -37,7 +40,19 @@ const YaraRuleResultCard = ({
     // 다운로드 후 a 태그 제거
     document.body.removeChild(link);
   };
-  const handlePlatformDownload = () => {};
+  const handlePlatformUpload = async () => {
+    const res = await fetch("/api/yara-rule/", {
+      method: "POST",
+      body: JSON.stringify({ rule: yaraRule, ruleName: output.ruleName }),
+      headers: { Authorization: `${session?.user.accessToken}` },
+    });
+    if (res.ok) {
+      alert("Yara Rule 업로드 성공!");
+    } else {
+      const errorData = await res.json();
+      console.error("Error uploading to platform:", errorData);
+    }
+  };
 
   return (
     <>
@@ -85,7 +100,7 @@ const YaraRuleResultCard = ({
               <button
                 type="button"
                 className="block w-full rounded-lg bg-neutral-600 px-4 py-3 text-sm text-white shadow-sm hover:bg-neutral-700 focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                onClick={handlePlatformDownload}
+                onClick={handlePlatformUpload}
               >
                 Yara Rule 플랫폼 업로드
               </button>
