@@ -1,7 +1,6 @@
 import DigitalClock from "@components/dashboard/clock";
 import TrafficGraph from "@components/dashboard/graphs";
-import { mockTableData } from "./mockData/table";
-import moment from "moment";
+
 import WordCloud from "@components/dashboard/wordcloud";
 import ResultTable from "@components/dashboard/resulttable";
 import SigCount from "@components/dashboard/sigcount";
