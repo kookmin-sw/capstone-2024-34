@@ -1,15 +1,54 @@
 "use client";
 
 import dynamic from "next/dynamic";
-// import ReactApexChart from "react-apexcharts";
 import { mockChart3Data } from "../../(page)/stats/chart/mockData/chart3";
+import { useEffect, useState } from "react";
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-const ApexChart3 = () => {
-  const seriesData = mockChart3Data;
+const AttackChart = () => {
+  const [attackCount, setAttackCount] = useState(0);
+  const [normalCount, setNormalCount] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/analyze", {
+          method: "GET",
+        });
+        const data = await res.json();
+        let tmpAttack = 0;
+        let tmpNormal = 0;
+
+        for (const index in data) {
+          const element = data[index];
+          if (element.result === 1) {
+            tmpAttack += 1;
+          } else if (element.result === 0) {
+            tmpNormal += 1;
+          }
+        }
+        setAttackCount(tmpAttack);
+        setNormalCount(tmpNormal);
+      } catch (err) {
+        console.log("Failed to send request");
+      }
+    };
+    fetchData();
+  }, []);
+
+  const seriesData = [
+    {
+      name: "attack",
+      data: [attackCount],
+    },
+    {
+      name: "normal",
+      data: [normalCount],
+    },
+  ];
   const chartOptions = {
     series: seriesData,
     dataLabels: {
@@ -67,4 +106,4 @@ const ApexChart3 = () => {
   );
 };
 
-export default ApexChart3;
+export default AttackChart;
