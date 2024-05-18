@@ -203,8 +203,7 @@ const ApplyRuleFilesPEUploadCard = ({
           {files.length != 0 ? (
             <div className="mt-2 w-full">
               <p className="ml-1">
-                <span className="text-blue-600">{files.length}개</span> /{" "}
-                {maxFileCount}개
+                <span className="text-blue-600">{files.length}개</span>
               </p>
               <div className="mt-1 flex max-h-36 w-full flex-col items-center space-y-2 overflow-y-scroll">
                 {files.map((file: File, idx: any) => (
