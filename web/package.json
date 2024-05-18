@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --hostname 0.0.0.0",
     "lint": "next lint"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18",
     "react-monaco-editor": "^0.55.0",
+    "sharp": "^0.33.4",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
