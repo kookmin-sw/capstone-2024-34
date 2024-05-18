@@ -14,9 +14,12 @@ const SignatureChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/signature/signaturechart", {
-          method: "GET",
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/signature/signaturechart`,
+          {
+            method: "GET",
+          },
+        );
         const data = await res.json();
         let tmp: Chart2[] = [];
         let etcCount = 0;

@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { mockChart3Data } from "../../(page)/stats/chart/mockData/chart3";
 import { useEffect, useState } from "react";
 
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
@@ -15,9 +14,12 @@ const AttackChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/analyze", {
-          method: "GET",
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/analyze`,
+          {
+            method: "GET",
+          },
+        );
         const data = await res.json();
         let tmpAttack = 0;
         let tmpNormal = 0;
