@@ -59,6 +59,7 @@ export async function PATCH(request: Request) {
     });
     return NextResponse.json(updatedRule);
   } catch (error) {
+    console.log(error);
     return NextResponse.json(
       { error: "Failed to update rule item" },
       { status: 500 },
@@ -71,7 +72,7 @@ export async function DELETE(request: Request) {
   try {
     const deletedRule = await prisma.yaraRule.delete({
       where: {
-        id: body.ruleName,
+        id: body.id,
       },
     });
 

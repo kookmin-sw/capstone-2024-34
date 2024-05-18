@@ -2,8 +2,9 @@
 import { YaraTokenizerConf } from "@customTypes/yara/monaco_editor";
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
-import { YaraRuleDB } from "@customTypes/yara/db";
+
 import { YaraRuleUpdate } from "@customTypes/generate/api";
+import { message } from "antd";
 
 const MonacoEditor = dynamic(() => import("react-monaco-editor"), {
   ssr: false,
@@ -11,6 +12,7 @@ const MonacoEditor = dynamic(() => import("react-monaco-editor"), {
 
 const YaraRuleUpdateCard = ({ id, ruleName, rule }: YaraRuleUpdate) => {
   const [yaraRule, setYaraRule] = useState("");
+  const [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
     setYaraRule(rule);
@@ -22,8 +24,12 @@ const YaraRuleUpdateCard = ({ id, ruleName, rule }: YaraRuleUpdate) => {
       body: JSON.stringify({ id: id, rule: yaraRule, ruleName: ruleName }),
     });
     if (res.ok) {
-      alert("Yara Rule 적용 성공!");
+      messageApi.success("수정 성공!");
+      setTimeout(function () {
+        window.location.reload();
+      }, 2000);
     } else {
+      messageApi.error("오류 발생");
       const errorData = await res.json();
       console.error("Error uploading to platform:", errorData);
     }
@@ -35,8 +41,12 @@ const YaraRuleUpdateCard = ({ id, ruleName, rule }: YaraRuleUpdate) => {
       body: JSON.stringify({ id: id }),
     });
     if (res.ok) {
-      alert("Yara Rule 삭제 성공!");
+      messageApi.success("삭제 성공!");
+      setTimeout(function () {
+        window.location.reload();
+      }, 2000);
     } else {
+      messageApi.error("오류 발생");
       const errorData = await res.json();
       console.error("Error uploading to platform:", errorData);
     }
@@ -47,8 +57,8 @@ const YaraRuleUpdateCard = ({ id, ruleName, rule }: YaraRuleUpdate) => {
       <div className="border-b border-gray-200 px-4 py-4">
         <h2 className="text-lg font-semibold text-gray-800">Yara Rule 편집</h2>
       </div>
-
-      <div className="flex h-full flex-col justify-between p-4">
+      {contextHolder}
+      <div className="flex h-full min-h-80 flex-col justify-between p-4">
         <div>
           <MonacoEditor
             onChange={(event) => setYaraRule(event)}
@@ -83,7 +93,7 @@ const YaraRuleUpdateCard = ({ id, ruleName, rule }: YaraRuleUpdate) => {
           <div className="w-5" />
           <button
             type="button"
-            className="block w-full rounded-lg bg-neutral-600 px-4 py-3 text-sm text-white shadow-sm hover:bg-neutral-700 focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
+            className="block w-full rounded-lg border border-neutral-600 px-4 py-3 text-sm text-neutral-600 shadow-sm hover:bg-neutral-700 hover:text-white focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
             onClick={handleDelete}
           >
             Yara Rule 삭제

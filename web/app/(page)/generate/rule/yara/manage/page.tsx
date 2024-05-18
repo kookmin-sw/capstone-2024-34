@@ -24,7 +24,7 @@ export default function YaraRuleDeletePage() {
           </header>
           <div className="place-items-end items-end place-self-end"></div>
         </div>
-        <div className="mt-5 grid h-full w-full max-w-full gap-4 rounded-xl sm:gap-6 xl:grid-cols-3">
+        <div className="mt-5 grid h-full w-full max-w-full gap-4 rounded-xl sm:gap-6 xl:min-h-80 xl:grid-cols-3">
           <div className="h-full">
             <SelectYaraRuleCard
               selectedYaraRule={selectedYaraRule}
