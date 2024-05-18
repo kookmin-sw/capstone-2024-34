@@ -1,10 +1,11 @@
 export interface FileResultTableData {
-  key: string;
-  id: string;
+  key: number;
+  id: number;
   date: string;
-  fileName: string;
+  filename: string;
   result: string;
   score: number;
+  updatedAt: string;
 }
 export interface TrafficGraphData {
   type: string;

@@ -81,27 +81,20 @@ const AttackChart = () => {
       width: 1,
       colors: ["#fff"],
     },
-    tooltip: {
-      // 포커스시 뷰 데이터 설정
-      shared: true,
-      intersect: false,
-    },
     xaxis: {
       // 차트이름
       categories: ["공격여부"],
     },
   };
   return (
-    <div>
-      <div>
-        <ReactApexChart
-          options={chartOptions}
-          series={seriesData}
-          type="bar"
-          height={200}
-          width={"100%"}
-        />
-      </div>
+    <div className="w-full">
+      <ReactApexChart
+        options={chartOptions}
+        series={seriesData}
+        type="bar"
+        height={"100%"}
+        width={"100%"}
+      />
     </div>
   );
 };
