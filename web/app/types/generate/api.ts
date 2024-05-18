@@ -10,6 +10,7 @@ export interface YaraRuleUpdate {
 }
 export interface YaraRule {
   yara: string;
+  ruleName: string;
 }
 
 export interface GenYaraRulePeFilesUploadResponse {

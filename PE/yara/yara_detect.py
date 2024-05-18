@@ -29,17 +29,14 @@ def detect(file_folder_path, yar_file_path):
     # yar_folder_path = yar_folder_path.rstrip('/')
     # for rule in yar_file_list:
     #     rules = yara.compile(filepath=f'{yar_folder_path}/{rule}')
-	
-    with open('./whitelist.pkl', 'rb') as f:
-        whitelist = pickle.load(f)
-    
+
     rules = yara.compile(filepath=yar_file_path)
     for i, filename in enumerate(exe_file_list):
         match_data = ''
         strings = extract_string(f'{file_folder_path}/{filename}')
         for string in strings:
-            if string not in whitelist:
-                match_data += string
+            match_data += string
+        print(match_data[: 500])
         res = rules.match(data=match_data)
         tmp = {
             "id": i,

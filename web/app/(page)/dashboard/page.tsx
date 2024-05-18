@@ -557,7 +557,7 @@ export default function Dashboard() {
             </div>
           </div>
           <div>
-            <ResultTable></ResultTable>
+            <ResultTable />
           </div>
         </div>
       </div>

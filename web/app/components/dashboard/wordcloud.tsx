@@ -43,7 +43,7 @@ const WordCloud = ({ wordCloudoptions = options }) => {
           else val = 2;
           const wordCloudItem: WordCloudData = {
             text: data[element].signature,
-            value: 10 + Math.random() * 90,
+            value: 10 + Math.random() * val * 90,
           };
           tmpSig.push(wordCloudItem);
         }
