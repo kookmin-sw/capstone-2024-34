@@ -3,6 +3,7 @@ import yara
 import json
 import os
 import re
+import pickle
 
 
 def extract_string(path, min_bytes=6):
