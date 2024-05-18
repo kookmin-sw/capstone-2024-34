@@ -1,30 +1,16 @@
-"use client";
+const SigCount = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/signature`, {
+    method: "GET",
+  });
 
-import { useEffect, useState } from "react";
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
 
-const SigCount = () => {
-  const [sigCount, setSigCount] = useState(10);
+  const data = await res.json();
+  const sigCount = data.length;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/signature`,
-          {
-            method: "GET",
-          },
-        );
-        const data = await res.json();
-        setSigCount(data.length);
-      } catch (err) {
-        console.log("Failed to send request");
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return <div>{sigCount}</div>;
+  return <div>{sigCount.toLocaleString("ko-KR")}</div>;
 };
 
 export default SigCount;
