@@ -1,45 +1,45 @@
 "use client";
 
+import { ApplyYaraRuleYarFileUploadResponse } from "@customTypes/apply/api";
 import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
+import { YaraRuleDB } from "@customTypes/yara/db";
+import { useSession } from "next-auth/react";
 import { FormEvent, useRef, useState } from "react";
 
 interface FilesUploadFormProps {
-  onSubmit: (data: GenYaraRulePeFilesUploadResponse) => void;
-  isProgress: boolean;
-  setIsProgress: (isProgress: boolean) => void;
+  onSubmit: (data: ApplyYaraRuleYarFileUploadResponse) => void;
 }
 
-const ApplyRuleFilesYarUploadCard = ({
-  onSubmit,
-  isProgress,
-  setIsProgress,
-}: FilesUploadFormProps) => {
+const ApplyRuleFilesYarUploadCard = ({ onSubmit }: FilesUploadFormProps) => {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<any>(null);
   // 드래그 상태저장
   const [dragActive, setDragActive] = useState<boolean>(false);
   // input 파일 저장
   const [files, setFiles] = useState<any>([]);
-  // 분석 api 호출결과 데이터 저장
-  const [data, setData] = useState<GenYaraRulePeFilesUploadResponse>();
+  // api 호출결과 데이터 저장
+  const [data, setData] = useState<ApplyYaraRuleYarFileUploadResponse>();
   // 파일 업로드 개수 제한
   const maxFileCount = 1;
+  // 세션 정보
+  const { data: session } = useSession();
 
   async function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsProgress(true);
+    // setIsProgress(true);
 
     const formData = new FormData();
     files.forEach((file: File) => {
-      formData.append("upload_file[]", file);
+      formData.append("upload_file", file);
     });
 
-    await fetch("/api/generate/rule/yara/upload", {
+    await fetch("/api/apply/rule/yara/upload/yar", {
       method: "POST",
       body: formData,
+      headers: { Authorization: `${session?.user.accessToken}` },
     })
       .then((res) => res.json())
-      .then((responseData: GenYaraRulePeFilesUploadResponse) => {
+      .then((responseData: ApplyYaraRuleYarFileUploadResponse) => {
         // Update the type of responseData
         onSubmit(responseData);
         if (formRef.current) {
@@ -51,7 +51,7 @@ const ApplyRuleFilesYarUploadCard = ({
         console.error("Error:", error);
       })
       .finally(() => {
-        setIsProgress(false);
+        // setIsProgress(false);
       });
   }
 
@@ -117,8 +117,7 @@ const ApplyRuleFilesYarUploadCard = ({
   return (
     <>
       {data?.success ? (
-        <div className="flex">
-          <p className="flex-1"></p>
+        <div className="flex h-full items-center justify-center">
           <button
             type="button"
             className="inline-flex items-center gap-x-2 rounded-lg border border-gray-200 bg-white px-4 py-3 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50"
@@ -218,7 +217,7 @@ const ApplyRuleFilesYarUploadCard = ({
               </div>
               <button
                 type="submit"
-                form="multiple_file_upload_form"
+                form="file_upload_form"
                 className="hover:bg-brand-600 focus:ring-brand-300 mt-3 w-full rounded-lg bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
               >
                 적용하기

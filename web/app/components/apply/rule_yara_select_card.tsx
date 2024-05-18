@@ -4,6 +4,7 @@ import ApplyRuleFilesYarUploadCard from "./rule_yara_upload_yar_card";
 import { GenYaraRulePeFilesUploadResponse } from "@customTypes/generate/api";
 import { useEffect, useState } from "react";
 import { YaraRuleDB } from "@customTypes/yara/db";
+import { ApplyYaraRuleYarFileUploadResponse } from "@customTypes/apply/api";
 
 interface SelectYaraRuleCardProps {
   selectedYaraRule: YaraRuleDB | undefined;
@@ -37,6 +38,14 @@ const SelectYaraRuleCard = ({
 
     getPlatformYaraRules();
   }, []);
+
+  function handleYarUploaderResponse(
+    responseData: ApplyYaraRuleYarFileUploadResponse,
+  ) {
+    if (responseData.data_db) {
+      setSelectedYaraRule(responseData.data_db);
+    }
+  }
 
   return (
     <div className="flex h-full max-w-full flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
@@ -138,17 +147,7 @@ const SelectYaraRuleCard = ({
             role="tabpanel"
             aria-labelledby="basic-tabs-item-2"
           >
-            <ApplyRuleFilesYarUploadCard
-              onSubmit={function (
-                data: GenYaraRulePeFilesUploadResponse,
-              ): void {
-                throw new Error("Function not implemented.");
-              }}
-              isProgress={false}
-              setIsProgress={function (isProgress: boolean): void {
-                throw new Error("Function not implemented.");
-              }}
-            />
+            <ApplyRuleFilesYarUploadCard onSubmit={handleYarUploaderResponse} />
           </div>
         </div>
       </div>

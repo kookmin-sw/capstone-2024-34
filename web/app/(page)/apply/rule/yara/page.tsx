@@ -54,8 +54,6 @@ export default function AnalyzePeFilesPage() {
     console.log("res", filesUploaderdata);
   }
 
-  function handleNextStep() {}
-
   return (
     <div className="overflow-x- h-full w-full max-w-full space-y-4 px-4 py-4 sm:space-y-6 sm:px-6 sm:py-6">
       <div className="h-full min-h-full w-full">
