@@ -1,4 +1,5 @@
 export interface FileResultTableData {
+  key: string;
   id: string;
   date: string;
   fileName: string;

@@ -28,7 +28,9 @@ const ResultTable = () => {
           } else {
             tempResult = "보류";
           }
+
           const item: FileResultTableData = {
+            key: index,
             id: index,
             date: moment(element.updatedAt).format("YYYY-MM-DD HH:mm:ss"),
             fileName: element.filename,
@@ -50,9 +52,9 @@ const ResultTable = () => {
       title: "번호",
       dataIndex: "id",
       key: "id",
-      render: (text) => (
-        <div className="px-6 py-2">
-          <span className="text-sm text-gray-600">{text}</span>
+      render: (_, { id }) => (
+        <div className="px-6 py-2" key={id + Math.random()}>
+          <span className="text-sm text-gray-600">{id}</span>
         </div>
       ),
     },
@@ -65,9 +67,9 @@ const ResultTable = () => {
       title: "파일명",
       dataIndex: "fileName",
       key: "fileName",
-      render: (text) => (
-        <div className="px-6 py-2">
-          <span className="text-sm text-gray-600">{text}</span>
+      render: (_, { fileName }) => (
+        <div className="px-6 py-2" key={fileName + Math.random()}>
+          <span className="text-sm text-gray-600">{fileName}</span>
         </div>
       ),
     },
@@ -90,9 +92,9 @@ const ResultTable = () => {
         },
       ],
       onFilter: (value, record) => record.result === value,
-      render: (text: string) => (
-        <div className="px-6 py-2">
-          {text === "정상" ? (
+      render: (_, { result }) => (
+        <div className="px-6 py-2" key={result + Math.random()}>
+          {result === "정상" ? (
             <span className="inline-flex items-center gap-x-1 rounded-full bg-teal-100 px-1.5 py-1 text-xs font-medium text-teal-800">
               <svg
                 className="size-2.5"
@@ -106,7 +108,7 @@ const ResultTable = () => {
               </svg>
               정상
             </span>
-          ) : text === "공격" ? (
+          ) : result === "공격" ? (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-800">
               <svg
                 className="size-2.5"
@@ -142,9 +144,9 @@ const ResultTable = () => {
       title: "탐지 개수",
       dataIndex: "score",
       key: "score",
-      render: (text) => (
-        <div className="px-6 py-2">
-          <span className="text-sm text-gray-600">{text}</span>
+      render: (_, { score }) => (
+        <div className="px-6 py-2" key={`${score} + ${Math.random()}`}>
+          <span className="text-sm text-gray-600">{score}</span>
         </div>
       ),
     },
