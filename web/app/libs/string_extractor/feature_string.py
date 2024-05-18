@@ -5,13 +5,13 @@ import json
 import pickle
 
 # 수정 되어
-SIGNATURES = []
+SIGNATURES = {'trickler'}
 
 pickle_file_path = r"web\app\libs\string_extractor\sig_counter.pkl"
 
 with open(pickle_file_path, "rb") as f:
     additional_signatures = pickle.load(f)
-    SIGNATURES += additional_signatures
+    SIGNATURES.update(additional_signatures)
 
 # string feature extract
 def extract_string(path, min_bytes=6):
