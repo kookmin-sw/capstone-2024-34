@@ -1,12 +1,21 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function SideBar() {
+  const pathName = usePathname();
+
+  const isCurrentPath = (path: string) => {
+    return pathName.startsWith(path);
+  };
+
   return (
     <div
       id="application-sidebar"
       className="hs-overlay fixed inset-y-0 start-0 z-[60] hidden w-64 -translate-x-full transform border-e border-gray-700 bg-gray-900 transition-all duration-300 [--auto-close:lg] hs-overlay-open:translate-x-0 lg:bottom-0 lg:end-auto lg:block lg:translate-x-0"
     >
-      <div className="px-6 pt-4">
+      <div className="px-6 pt-3">
         <Link
           className="flex-none text-xl font-bold text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
           href="/dashboard"
@@ -17,14 +26,11 @@ export default function SideBar() {
         <p className="text-white">생성형 침입방지 보안 플랫폼</p>
       </div>
 
-      <nav
-        className="hs-accordion-group flex w-full flex-col flex-wrap p-6"
-        data-hs-accordion-always-open
-      >
-        <ul className="space-y-1.5">
+      <nav className="flex w-full flex-col flex-wrap p-6">
+        <ul className="space-y-2">
           <li>
             <Link
-              className="flex items-center gap-x-3 rounded-lg bg-gray-700 px-2.5 py-2 text-sm text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+              className={`flex w-full items-center gap-x-3 px-2.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gray-600 ${isCurrentPath("/dashboard") ? "rounded-lg bg-gray-700 text-white" : "text-gray-400"}`}
               href="/dashboard"
             >
               <svg
@@ -45,10 +51,9 @@ export default function SideBar() {
             </Link>
           </li>
 
-          <li className="hs-accordion" id="users-accordion">
-            <button
-              type="button"
-              className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
+          <li>
+            <div
+              className={`flex w-full items-center gap-x-3 px-2.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gray-600 ${isCurrentPath("/generate") ? "rounded-lg text-white" : "text-gray-400"}`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,44 +70,13 @@ export default function SideBar() {
                 />
               </svg>
               탐지규칙 생성
-              <svg
-                className="ms-auto hidden size-4 hs-accordion-active:block"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m18 15-6-6-6 6" />
-              </svg>
-              <svg
-                className="ms-auto block size-4 hs-accordion-active:hidden"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </button>
+            </div>
 
-            <div
-              id="users-accordion-child"
-              className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
-            >
-              <ul className="ps-2 pt-2">
+            <div className="w-full overflow-hidden transition-[height] duration-300">
+              <ul className="ps-8 pt-1">
                 <li>
                   <Link
-                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className={`flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm hover:bg-gray-800 hover:text-white ${isCurrentPath("/generate/rule/yara/manual") ? "bg-gray-700 text-white" : "text-gray-500"}`}
                     href="/generate/rule/yara/manual"
                   >
                     Yara Rule 수동생성
@@ -110,7 +84,7 @@ export default function SideBar() {
                 </li>
                 <li>
                   <Link
-                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className={`flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm hover:bg-gray-800 hover:text-white ${isCurrentPath("/generate/rule/yara/auto") ? "bg-gray-700 text-white" : "text-gray-500"}`}
                     href="/generate/rule/yara/auto"
                   >
                     Yara Rule 자동생성
@@ -120,10 +94,9 @@ export default function SideBar() {
             </div>
           </li>
 
-          <li className="hs-accordion" id="apply-rule-accordion">
-            <button
-              type="button"
-              className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
+          <li>
+            <div
+              className={`flex w-full items-center gap-x-3 px-2.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gray-600 ${isCurrentPath("/apply") ? "rounded-lg text-white" : "text-gray-400"}`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -140,44 +113,13 @@ export default function SideBar() {
                 />
               </svg>
               탐지규칙 적용
-              <svg
-                className="ms-auto hidden size-4 hs-accordion-active:block"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m18 15-6-6-6 6" />
-              </svg>
-              <svg
-                className="ms-auto block size-4 hs-accordion-active:hidden"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </button>
+            </div>
 
-            <div
-              id="apply-rule-accordion-child"
-              className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
-            >
-              <ul className="ps-2 pt-2">
+            <div className=" w-full overflow-hidden transition-[height] duration-300">
+              <ul className="ps-8 pt-1">
                 <li>
                   <Link
-                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className={`flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm hover:bg-gray-800 hover:text-white ${isCurrentPath("/apply/rule/yara") ? "bg-gray-700 text-white" : "text-gray-500"}`}
                     href="/apply/rule/yara"
                   >
                     Yara Rule 적용
@@ -187,10 +129,9 @@ export default function SideBar() {
             </div>
           </li>
 
-          <li className="hs-accordion" id="analyze-accordion">
-            <button
-              type="button"
-              className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
+          <li>
+            <div
+              className={`flex w-full items-center gap-x-3 px-2.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gray-600 ${isCurrentPath("/analyze") ? "rounded-lg text-white" : "text-gray-400"}`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -207,44 +148,13 @@ export default function SideBar() {
                 />
               </svg>
               정적파일 분석
-              <svg
-                className="ms-auto hidden size-4 hs-accordion-active:block"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m18 15-6-6-6 6" />
-              </svg>
-              <svg
-                className="ms-auto block size-4 hs-accordion-active:hidden"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </button>
+            </div>
 
-            <div
-              id="analyze-accordion-child"
-              className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
-            >
-              <ul className="ps-2 pt-2">
+            <div className="w-full overflow-hidden transition-[height] duration-300">
+              <ul className="ps-8 pt-1">
                 <li>
                   <Link
-                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className={`flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm hover:bg-gray-800 hover:text-white ${isCurrentPath("/analyze/file/pe") ? "bg-gray-700 text-white" : "text-gray-500"}`}
                     href="/analyze/file/pe"
                   >
                     단일 PE 파일 분석
@@ -254,10 +164,9 @@ export default function SideBar() {
             </div>
           </li>
 
-          <li className="hs-accordion" id="account-accordion">
-            <button
-              type="button"
-              className="hs-accordion-toggle flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-start text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600 hs-accordion-active:text-white hs-accordion-active:hover:bg-transparent"
+          <li>
+            <div
+              className={`flex w-full items-center gap-x-3 px-2.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gray-600 ${isCurrentPath("/stats") ? "rounded-lg text-white" : "text-gray-400"}`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -274,44 +183,13 @@ export default function SideBar() {
                 />
               </svg>
               탐지통계 조회
-              <svg
-                className="ms-auto hidden size-4 hs-accordion-active:block"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m18 15-6-6-6 6" />
-              </svg>
-              <svg
-                className="ms-auto block size-4 hs-accordion-active:hidden"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="m6 9 6 6 6-6" />
-              </svg>
-            </button>
+            </div>
 
-            <div
-              id="account-accordion-child"
-              className="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300"
-            >
-              <ul className="ps-2 pt-2">
+            <div className="w-full overflow-hidden transition-[height] duration-300">
+              <ul className="ps-8 pt-1">
                 <li>
                   <Link
-                    className="flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 hover:text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+                    className={`flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm hover:bg-gray-800 hover:text-white ${isCurrentPath("/stats/chart") ? "bg-gray-700 text-white" : "text-gray-500"}`}
                     href="/stats/chart"
                   >
                     통계 시각화
@@ -319,29 +197,6 @@ export default function SideBar() {
                 </li>
               </ul>
             </div>
-          </li>
-
-          <li>
-            <a
-              className="hover:text-white-300 flex w-full items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm text-gray-400 hover:bg-gray-800 focus:outline-none focus:ring-1 focus:ring-gray-600"
-              href="#"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="size-5 flex-shrink-0"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
-                />
-              </svg>
-              환경설정
-            </a>
           </li>
         </ul>
       </nav>
