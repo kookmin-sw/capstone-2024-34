@@ -90,6 +90,14 @@ export default function SideBar() {
                     Yara Rule 자동생성
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    className={`flex items-center gap-x-3.5 rounded-lg px-2.5 py-2 text-sm hover:bg-gray-800 hover:text-white ${isCurrentPath("/generate/rule/yara/manage") ? "bg-gray-700 text-white" : "text-gray-500"}`}
+                    href="/generate/rule/yara/manage"
+                  >
+                    Yara Rule DB관리
+                  </Link>
+                </li>
               </ul>
             </div>
           </li>

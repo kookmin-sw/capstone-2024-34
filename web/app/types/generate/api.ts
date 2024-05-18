@@ -3,7 +3,11 @@ export interface YaraRuleCreateRespone {
   message: string;
   output: YaraRule;
 }
-
+export interface YaraRuleUpdate {
+  id: string;
+  ruleName: string;
+  rule: string;
+}
 export interface YaraRule {
   yara: string;
   ruleName: string;

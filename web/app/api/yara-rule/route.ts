@@ -3,6 +3,7 @@ import { decodeJwt, verifyJwt } from "@libs/common/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 interface RequestBody {
+  id: string;
   ruleName: string;
   rule: string;
 }
@@ -39,25 +40,46 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: Request) {
-  const signatures = await prisma.YaraRule.findMany();
+  const signatures = await prisma.yaraRule.findMany();
 
   return new Response(JSON.stringify(signatures));
 }
 
+export async function PATCH(request: Request) {
+  const body: RequestBody = await request.json();
+  try {
+    const updatedRule = await prisma.yaraRule.update({
+      where: {
+        id: body.id,
+      },
+      data: {
+        rulename: body.ruleName,
+        rule: body.rule,
+      },
+    });
+    return NextResponse.json(updatedRule);
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json(
+      { error: "Failed to update rule item" },
+      { status: 500 },
+    );
+  }
+}
 export async function DELETE(request: Request) {
   const body: RequestBody = await request.json();
 
   try {
     const deletedRule = await prisma.yaraRule.delete({
       where: {
-        id: body.ruleName,
+        id: body.id,
       },
     });
 
-    return new Response(JSON.stringify(deletedRule));
+    return NextResponse.json(deletedRule);
   } catch (error) {
-    return new Response(
-      JSON.stringify({ error: "Failed to delete rule item" }),
+    return NextResponse.json(
+      { error: "Failed to delete rule item" },
       { status: 500 },
     );
   }
