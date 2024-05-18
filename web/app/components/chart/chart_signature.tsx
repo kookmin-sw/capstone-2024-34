@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { mockChart2Data } from "../../(page)/stats/chart/mockData/chart2";
 import { useEffect, useState } from "react";
 import { Chart2 } from "@customTypes/mock/chart";
 
@@ -15,9 +14,12 @@ const SignatureChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/signature/signaturechart", {
-          method: "GET",
-        });
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/signature/signaturechart`,
+          {
+            method: "GET",
+          },
+        );
         const data = await res.json();
         let tmp: Chart2[] = [];
         let etcCount = 0;
@@ -33,7 +35,7 @@ const SignatureChart = () => {
             etcCount += element.count;
           }
         }
-        tmp.push({ name: "etc", data: etcCount });
+        // tmp.push({ name: "etc", data: etcCount });
 
         setSigData(tmp);
       } catch (err) {
@@ -46,37 +48,17 @@ const SignatureChart = () => {
   const seriesData = sigData.map((data) => data.data);
   const labels = sigData.map((data) => data.name);
 
-  const options = {
-    series: seriesData,
-    labels: labels,
-    theme: {
-      monochrome: {
-        enabled: true,
-      },
-    },
-    plotOptions: {
-      pie: {
-        dataLabels: {
-          offset: -5,
-        },
-      },
-    },
-    title: {
-      text: "추출 시그니쳐",
-    },
-    legend: {
-      show: false,
-    },
-  };
-
   const chartOptions = {
-    series: seriesData,
     labels: labels,
-    theme: {
-      monochrome: {
-        enabled: true,
-      },
-    },
+    colors: [
+      "#b429f9",
+      "#9c43f8",
+      "#855df7",
+      "#6d77f6",
+      "#5591f5",
+      "#3eabf4",
+      "#26c5f3",
+    ],
     plotOptions: {
       pie: {
         dataLabels: {
@@ -84,25 +66,20 @@ const SignatureChart = () => {
         },
       },
     },
-    title: {
-      text: "추출 시그니쳐",
-    },
     legend: {
-      show: false,
+      position: "bottom" as "bottom",
     },
   };
 
   return (
-    <div>
-      <div>
-        <ReactApexChart
-          options={chartOptions}
-          series={seriesData}
-          width={"100%"}
-          height={"100%"}
-          type="pie"
-        />
-      </div>
+    <div className="h-72 w-full">
+      <ReactApexChart
+        options={chartOptions}
+        series={seriesData}
+        width={"100%"}
+        height={"100%"}
+        type="pie"
+      />
     </div>
   );
 };

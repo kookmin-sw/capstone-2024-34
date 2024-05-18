@@ -4,6 +4,7 @@ import { Table, TableColumnsType, TableProps, Tag, Tooltip } from "antd";
 import { FileResultTableData } from "@customTypes/mock/dashboard";
 import { useEffect, useState } from "react";
 import moment from "moment";
+import { Analysis } from "@prisma/client";
 
 const ResultTable = () => {
   const [tableData, setTableData] = useState<FileResultTableData[]>([]);
@@ -16,9 +17,8 @@ const ResultTable = () => {
         });
         const data = await res.json();
 
-        let tmpData: FileResultTableData[] = [];
-        for (const index in data) {
-          const element = data[index];
+        // let tmpData: FileResultTableData[] = [];
+        const tmpData = data.map((element: Analysis, index: number) => {
           let tempResult;
 
           if (element.result === 1) {
@@ -29,16 +29,16 @@ const ResultTable = () => {
             tempResult = "보류";
           }
 
-          const item: FileResultTableData = {
+          return {
             key: index,
             id: index,
             date: moment(element.updatedAt).format("YYYY-MM-DD HH:mm:ss"),
-            fileName: element.filename,
+            filename: element.filename,
             result: tempResult,
             score: element.score,
           };
-          tmpData.push(item);
-        }
+        });
+
         setTableData(tmpData);
       } catch (err) {
         console.log("Failed to send request");
@@ -52,9 +52,10 @@ const ResultTable = () => {
       title: "번호",
       dataIndex: "id",
       key: "id",
+      align: "center",
       render: (_, { id }) => (
-        <div className="px-6 py-2" key={id + Math.random()}>
-          <span className="text-sm text-gray-600">{id}</span>
+        <div key={id + Math.random()}>
+          <span className="text-sm text-gray-600">{id + 1}</span>
         </div>
       ),
     },
@@ -65,11 +66,11 @@ const ResultTable = () => {
     },
     {
       title: "파일명",
-      dataIndex: "fileName",
-      key: "fileName",
-      render: (_, { fileName }) => (
-        <div className="px-6 py-2" key={fileName + Math.random()}>
-          <span className="text-sm text-gray-600">{fileName}</span>
+      dataIndex: "filename",
+      key: "filename",
+      render: (_, { filename }) => (
+        <div key={filename + Math.random()}>
+          <span className="text-sm text-gray-600">{filename}</span>
         </div>
       ),
     },
@@ -93,7 +94,7 @@ const ResultTable = () => {
       ],
       onFilter: (value, record) => record.result === value,
       render: (_, { result }) => (
-        <div className="px-6 py-2" key={result + Math.random()}>
+        <div key={result + Math.random()}>
           {result === "정상" ? (
             <span className="inline-flex items-center gap-x-1 rounded-full bg-teal-100 px-1.5 py-1 text-xs font-medium text-teal-800">
               <svg
