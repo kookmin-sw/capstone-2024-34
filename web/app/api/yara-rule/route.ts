@@ -3,6 +3,7 @@ import { decodeJwt, verifyJwt } from "@libs/common/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 interface RequestBody {
+  id: string;
   ruleName: string;
   rule: string;
 }
@@ -39,7 +40,7 @@ export async function POST(request: NextRequest) {
 }
 
 export async function GET(request: Request) {
-  const signatures = await prisma.YaraRule.findMany();
+  const signatures = await prisma.yaraRule.findMany();
 
   return new Response(JSON.stringify(signatures));
 }
@@ -52,7 +53,7 @@ export async function PATCH(request: Request) {
         id: body.id,
       },
       data: {
-        ruleName: body.rulename,
+        rulename: body.ruleName,
         rule: body.rule,
       },
     });
