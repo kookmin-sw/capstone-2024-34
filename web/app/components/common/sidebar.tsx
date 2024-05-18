@@ -17,7 +17,7 @@ export default function SideBar() {
     >
       <div className="px-6 pt-3">
         <Link
-          className="flex-none text-xl font-bold text-white focus:outline-none focus:ring-1 focus:ring-gray-600"
+          className="flex-none text-xl font-bold text-white hover:text-neutral-400"
           href="/dashboard"
           aria-label="Brand"
         >
@@ -30,7 +30,7 @@ export default function SideBar() {
         <ul className="space-y-2">
           <li>
             <Link
-              className={`flex w-full items-center gap-x-3 px-2.5 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-gray-600 ${isCurrentPath("/dashboard") ? "rounded-lg bg-gray-700 text-white" : "text-gray-400"}`}
+              className={`flex w-full items-center gap-x-3 rounded-lg px-2.5 py-2 text-sm hover:bg-gray-800 ${isCurrentPath("/dashboard") ? "bg-gray-700 text-white" : "text-gray-400"}`}
               href="/dashboard"
             >
               <svg
