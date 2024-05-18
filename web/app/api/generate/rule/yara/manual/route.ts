@@ -37,7 +37,7 @@ export async function POST(req: Request) {
     try {
       return NextResponse.json(
         {
-          output: { yara: yara_rule },
+          output: { yara: yara_rule, ruleName: yaraName },
           seccuess: true,
           message: "Yara 룰 생성 성공",
         },

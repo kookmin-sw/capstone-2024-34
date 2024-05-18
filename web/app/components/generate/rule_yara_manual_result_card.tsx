@@ -2,7 +2,9 @@
 import { YaraRuleCreateRespone } from "@customTypes/generate/api";
 import { YaraTokenizerConf } from "@customTypes/yara/monaco_editor";
 import dynamic from "next/dynamic";
+import { stringify } from "querystring";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 const MonacoEditor = dynamic(() => import("react-monaco-editor"), {
   ssr: false,
@@ -14,12 +16,12 @@ const YaraRuleResultCard = ({
   message,
 }: YaraRuleCreateRespone) => {
   const [yaraRule, setYaraRule] = useState("");
+  const { data: session } = useSession();
 
   useEffect(() => {
     setYaraRule(output.yara);
   }, [output]);
-
-  const handleDownload = () => {
+  const handleLocalDownload = (fileName = "") => {
     // 입력된 텍스트를 Blob 객체로 변환
     const blob = new Blob([yaraRule], { type: "text/plain" });
     // Blob 객체를 URL.createObjectURL을 사용하여 다운로드할 수 있는 URL로 변환
@@ -29,7 +31,7 @@ const YaraRuleResultCard = ({
     // a 태그를 동적으로 생성하여 다운로드 링크 생성
     const link = document.createElement("a");
     link.href = url;
-    link.download = "yara_rule.yar"; // 다운로드되는 파일명
+    link.download = `${fileName}.yar`; // 다운로드되는 파일명
     document.body.appendChild(link);
 
     // a 태그를 클릭하여 다운로드 시작
@@ -37,6 +39,19 @@ const YaraRuleResultCard = ({
 
     // 다운로드 후 a 태그 제거
     document.body.removeChild(link);
+  };
+  const handlePlatformUpload = async () => {
+    const res = await fetch("/api/yara-rule/", {
+      method: "POST",
+      body: JSON.stringify({ rule: yaraRule, ruleName: output.ruleName }),
+      headers: { Authorization: `${session?.user.accessToken}` },
+    });
+    if (res.ok) {
+      alert("Yara Rule 업로드 성공!");
+    } else {
+      const errorData = await res.json();
+      console.error("Error uploading to platform:", errorData);
+    }
   };
 
   return (
@@ -77,9 +92,17 @@ const YaraRuleResultCard = ({
               <button
                 type="button"
                 className="block w-full rounded-lg bg-neutral-600 px-4 py-3 text-sm text-white shadow-sm hover:bg-neutral-700 focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
-                onClick={handleDownload}
+                onClick={() => handleLocalDownload(output.ruleName)}
               >
-                Yara Rule 다운로드
+                Yara Rule 내 컴퓨터 다운로드
+              </button>
+              <div className="w-5" />
+              <button
+                type="button"
+                className="block w-full rounded-lg bg-neutral-600 px-4 py-3 text-sm text-white shadow-sm hover:bg-neutral-700 focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:pointer-events-none disabled:opacity-50"
+                onClick={handlePlatformUpload}
+              >
+                Yara Rule 플랫폼 업로드
               </button>
             </div>
           </div>
