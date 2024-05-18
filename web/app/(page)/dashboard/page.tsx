@@ -5,6 +5,8 @@ import WordCloud from "@components/dashboard/wordcloud";
 import ResultTable from "@components/dashboard/resulttable";
 import SigCount from "@components/dashboard/sigcount";
 
+export const dynamic = "force-dynamic";
+
 export default function Dashboard() {
   return (
     <div className="h-full w-full max-w-full space-y-4 overflow-x-hidden px-4 py-4 sm:space-y-6 sm:px-6 sm:py-6">
