@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import SelectYaraRuleCard from "@components/apply/rule-yara-select-card";
+import SelectYaraRuleCard from "@components/apply/rule_yara_select_card";
 import { YaraRuleCreateRespone, YaraRule } from "@customTypes/generate/api";
 import YaraRuleUpdateCard from "@components/generate/rule_yara_manual_update_card";
 import { YaraRuleDB } from "@customTypes/yara/db";

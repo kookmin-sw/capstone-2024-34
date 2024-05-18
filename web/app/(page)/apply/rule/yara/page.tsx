@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Steps } from "antd";
 
-import YaraRulePreviewCard from "@components/apply/rule-yara-preview-card";
-import SelectYaraRuleCard from "@components/apply/rule-yara-select-card";
+import YaraRulePreviewCard from "@components/apply/rule_yara_preview_card";
+import SelectYaraRuleCard from "@components/apply/rule_yara_select_card";
 import ApplyRuleFilesPEUploadCard from "@components/apply/rule_yara_upload_pe_card";
 
 import { ApplyYaraRulePeFilesUploadResponse } from "@customTypes/apply/api";
@@ -53,8 +53,6 @@ export default function AnalyzePeFilesPage() {
     setFilesUploaderdata(responseData);
     console.log("res", filesUploaderdata);
   }
-
-  function handleNextStep() {}
 
   return (
     <div className="overflow-x- h-full w-full max-w-full space-y-4 px-4 py-4 sm:space-y-6 sm:px-6 sm:py-6">

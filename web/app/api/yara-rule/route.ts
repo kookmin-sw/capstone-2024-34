@@ -20,6 +20,7 @@ export async function POST(request: NextRequest) {
         },
       );
     }
+
     const body: RequestBody = await request.json();
     await prisma.yaraRule.create({
       data: {

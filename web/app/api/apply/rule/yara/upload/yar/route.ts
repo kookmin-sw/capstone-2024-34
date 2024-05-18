@@ -1,9 +1,23 @@
 import { NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
+import { writeFile, readFile } from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 
+import prisma from "@libs/common/prisma";
+import { decodeJwt, verifyJwt } from "@libs/common/jwt";
+
 export async function POST(request: Request) {
-  let savedData;
+  let dbData;
+  const accessToken = request.headers.get("authorization");
+
+  if (!accessToken || !verifyJwt(accessToken)) {
+    return NextResponse.json(
+      { error: "No Authorization" },
+      {
+        status: 401,
+      },
+    );
+  }
+
   try {
     const formData = await request.formData();
     console.log(formData);
@@ -18,12 +32,16 @@ export async function POST(request: Request) {
       const path = `${process.cwd()}/public/uploads/tmp/${convFileName}`;
       await writeFile(path, buffer);
 
-      savedData = {
-        upload_file_path: convFileName,
-        upload_file_filename: file.name,
-      };
+      const yarTextData = await readFile(path, "utf-8");
 
-      console.log("파일 저장 성공", savedData);
+      dbData = await prisma.yaraRule.create({
+        data: {
+          rulename: `${file.name}`,
+          rule: yarTextData,
+          userid: decodeJwt(accessToken!).id,
+        },
+      });
+      console.log("룰 DB 삽입 성공", dbData);
     } else {
       return NextResponse.json({
         success: false,
@@ -31,36 +49,10 @@ export async function POST(request: Request) {
       });
     }
 
-    console.log(JSON.stringify(savedData));
-
-    let response_header = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/analyze/file/pe`,
-      {
-        method: "POST",
-        body: JSON.stringify(savedData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-    const data_header = await response_header.json();
-
-    let response_strings = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/analyze/file/pe-string`,
-      {
-        method: "POST",
-        body: JSON.stringify(savedData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
-    const data_strings = await response_strings.json();
-
     return NextResponse.json({
       success: true,
       message: "데이터 저장 성공",
-      data: { data_header, data_strings },
+      data_db: dbData,
     });
   } catch (error) {
     console.error("데이터 저장 중 오류 발생:", error);
