@@ -13,6 +13,7 @@ const ApplyRuleYaraResultCard = ({
   const matchedFiles = data_apply_yara?.output.data.filter(
     (item) => item.match,
   );
+  const totalFiles = data_apply_yara?.output.data.length ?? 1 - 1;
   return (
     <div className="grid min-h-72 w-full max-w-full gap-4 rounded-xl sm:gap-6 xl:grid-cols-2">
       <div className="xl:col-span-2">
@@ -23,7 +24,7 @@ const ApplyRuleYaraResultCard = ({
             </h2>
           </div>
           <div className="flex w-full flex-1 flex-col items-start justify-start p-4">
-            {data_apply_yara?.output.data.length}개
+            {totalFiles}개
           </div>
         </div>
       </div>
