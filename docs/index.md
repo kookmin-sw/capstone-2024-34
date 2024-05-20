@@ -55,3 +55,5 @@ permalink: /
 ## 최종 보고서
 
 <iframe src="https://docs.google.com/document/d/e/2PACX-1vQovaWStsH88zFPypksb1aZGoLQ43n3MINVHRJAfKTcDtBPJVLl7uiTfldt2pIjlA/pub?embedded=true" width="100%" height="640"></iframe>
+
+[다운로드](https://docs.google.com/document/d/1Y33LOOnfOJzVk8KoJbmtY3fDKWwjQ1I2/edit?usp=sharing&ouid=103924041548193543174&rtpof=true&sd=true){: .btn .fs-5 .mb-4 .mb-md-0 }
