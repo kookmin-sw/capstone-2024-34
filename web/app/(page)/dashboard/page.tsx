@@ -270,10 +270,10 @@ export default function Dashboard() {
           <div className="h-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
             <div className="border-b border-gray-200 px-6 py-4">
               <h2 className="text-xl font-semibold text-gray-800">
-                유입량 통계
+                탐지 파일 종류
               </h2>
               <p className="text-sm text-gray-600 ">
-                일일 트래픽 유입경로를 확인해보세요.
+                어떤 파일을 탐지했는지 확인해보세요.
               </p>
             </div>
             {/* 그래프 라이브러리 삽입 영역 */}

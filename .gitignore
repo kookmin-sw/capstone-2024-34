@@ -218,15 +218,14 @@ tempCodeRunnerFile.py
 !/vectorDB/chroma/README.md
 
 # private malware dataset
-/PE/datasets/PE_malware/*
+/PE/datasets/*
 !/PE/datasets/PE_malware/README.md
-/PE/datasets/ben/*
 !/PE/datasets/ben/README.md
+!/PE/datasets/pkl/README.md
 
 /PE/res/*big_group.pkl
 /PE/res/*_vector.pkl
-/PE/datasets/pkl/*
-!/PE/datasets/pkl/README.md
+
 
 # yara rule make test dataset
 /web/app/libs/yara/test/*
