@@ -6,7 +6,7 @@ description: "캡스톤디자인 2024"
 permalink: /
 ---
 
-# PROJECT GIPS - 생성형 침입 방지 기술기반 보안 플랫폼
+# **PLATFORM GIPS** | 생성형 침입 방지 기술기반 보안 플랫폼
 
 {: .fs-9 }
 
@@ -23,25 +23,29 @@ permalink: /
 ## 중간발표 자료
 
 <object data="./assets/files/capstone_t34_mid_pt.pdf" type="application/pdf" alt="midterm pt" width="100%" height="480" >
-<p>PDF 파일을 불러오는 데 실패했습니다.</p>
+<p>PDF 미리보기를 지원하지 않는 환경입니다.</p>
+[다운로드](./assets/files/capstone_t34_mid_pt.pdf){: .btn .fs-5 .mb-4 .mb-md-0 }
 </object>
 
 ## 중간 보고서
 
 <object data="./assets/files/capstone_t34_mid_report.pdf" type="application/pdf" alt="midterm pt" width="100%" height="640" >
-<p>PDF 파일을 불러오는 데 실패했습니다.</p>
+<p>PDF 미리보기를 지원하지 않는 환경입니다.</p>
+[다운로드](./assets/files/capstone_t34_mid_report.pdf){: .btn .fs-5 .mb-4 .mb-md-0 }
 </object>
 
 ## 최종 발표자료
 
 <object data="./assets/files/T34_캡스톤_최종발표.pdf" type="application/pdf" alt="final pt" width="100%" height="480" >
-<p>PDF 파일을 불러오는 데 실패했습니다.</p>
+<p>PDF 미리보기를 지원하지 않는 환경입니다.</p>
+[다운로드](./assets/files/T34_캡스톤_최종발표.pdf){: .btn .fs-5 .mb-4 .mb-md-0 }
 </object>
 
 ## 포스터
 
 <object data="./assets/files/T34_캡스톤_포스터.pdf" type="application/pdf" alt="final poster" width="100%" height="640" >
-<p>PDF 파일을 불러오는 데 실패했습니다.</p>
+<p>PDF 미리보기를 지원하지 않는 환경입니다.</p>
+[다운로드](./assets/files/T34_캡스톤_포스터.pdf){: .btn .fs-5 .mb-4 .mb-md-0 }
 </object>
 
 ## 최종 보고서
