@@ -273,7 +273,7 @@ export default function Dashboard() {
                 탐지 파일 종류
               </h2>
               <p className="text-sm text-gray-600 ">
-                어떤 파일을 탐지했는지 확인해보세요.
+                탐지한 파일 유형을 확인해보세요.
               </p>
             </div>
             {/* 그래프 라이브러리 삽입 영역 */}
