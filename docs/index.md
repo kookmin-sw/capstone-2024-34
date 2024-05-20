@@ -40,7 +40,7 @@ permalink: /
 
 ## 포스터
 
-<object data="./assets/files/T34_캡스톤_포스터_outline.pdf" type="application/pdf" alt="final poster" width="100%" height="640" >
+<object data="./assets/files/T34_캡스톤_포스터.pdf" type="application/pdf" alt="final poster" width="100%" height="640" >
 <p>PDF 파일을 불러오는 데 실패했습니다.</p>
 </object>
 
