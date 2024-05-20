@@ -31,3 +31,19 @@ permalink: /
 <object data="./assets/files/capstone_t34_mid_report.pdf" type="application/pdf" alt="midterm pt" width="100%" height="640" >
 <p>PDF 파일을 불러오는 데 실패했습니다.</p>
 </object>
+
+## 최종 발표자료
+
+<object data="./assets/files/T34_캡스톤_최종발표.pdf" type="application/pdf" alt="final pt" width="100%" height="480" >
+<p>PDF 파일을 불러오는 데 실패했습니다.</p>
+</object>
+
+## 포스터
+
+<object data="./assets/files/T34_캡스톤_포스터_outline.pdf" type="application/pdf" alt="final poster" width="100%" height="640" >
+<p>PDF 파일을 불러오는 데 실패했습니다.</p>
+</object>
+
+## 최종 보고서
+
+<iframe src="https://docs.google.com/document/d/e/2PACX-1vQovaWStsH88zFPypksb1aZGoLQ43n3MINVHRJAfKTcDtBPJVLl7uiTfldt2pIjlA/pub?embedded=true" width="100%" height="640"></iframe>
