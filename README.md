@@ -39,7 +39,7 @@ npm run dev
 2. env 설정
    /web 폴더에 .env 환경설정 파일을 생성합니다.
 
-```json
+```ini
 DATABASE_URL = "file:./infosec_platform.db"
 JWT_SECRET_KEY = "시크릿키 생성"
 NEXTAUTH_SECRET= "시크릿키 생성"
