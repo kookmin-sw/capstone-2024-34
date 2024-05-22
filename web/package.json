@@ -2,7 +2,6 @@
   "name": "kmucs-capstone-2024-34",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
