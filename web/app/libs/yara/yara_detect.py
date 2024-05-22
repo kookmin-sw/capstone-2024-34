@@ -4,15 +4,17 @@ import json
 import os
 import re
 import pickle
+from dotenv import load_dotenv
 
 
 def extract_string(path, min_bytes=6):
-	with open(os.path.join(path), 'rb') as f:
-		file_data = f.read()
-		string = set(s.decode().strip().lower() for s in re.findall(
-			b"[\x20-\x7e]{" + bytes(str(min_bytes), 'utf-8') + b",}", file_data))
-		
-	return set([i for i in string if i != ''])
+    with open(os.path.join(path), 'rb') as f:
+        file_data = f.read()
+        string = set(s.decode().strip().lower() for s in re.findall(
+            b"[\x20-\x7e]{" + bytes(str(min_bytes), 'utf-8') + b",}", file_data))
+
+    return set([i for i in string if i != ''])
+
 
 def detect(file_folder_path, yar_file_path):
     ret = {
@@ -30,10 +32,12 @@ def detect(file_folder_path, yar_file_path):
     # yar_folder_path = yar_folder_path.rstrip('/')
     # for rule in yar_file_list:
     #     rules = yara.compile(filepath=f'{yar_folder_path}/{rule}')
-	
-    with open('./whitelist.pkl', 'rb') as f:
+    load_dotenv()
+    whitelist_path = os.getenv('PKL_WHITELIST_PATH')
+
+    with open(whitelist_path, 'rb') as f:
         whitelist = pickle.load(f)
-    
+
     rules = yara.compile(filepath=yar_file_path)
     for i, filename in enumerate(exe_file_list):
         match_data = ''
