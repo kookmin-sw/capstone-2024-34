@@ -6,7 +6,7 @@ import pickle
 from dotenv import load_dotenv
 
 # 수정 되어
-SIGNATURES = {}
+SIGNATURES = {'trickler'}
 
 load_dotenv()
 pkl_sig_path = os.getenv('PKL_SIG_PATH')
