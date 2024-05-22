@@ -58,7 +58,10 @@ const AutoGenYaraRuleResultCard = ({
             <span className="sr-only">Loading...</span>
           </div>
           <div>
-            <p className="mt-2 text-neutral-400">파일 분석중</p>
+            <div className="mt-2 text-center text-neutral-400">파일 분석중</div>
+            <div className="text-center text-neutral-400">
+              파일에 따라 시간이 소요될 수 있습니다...
+            </div>
           </div>
         </div>
       ) : (

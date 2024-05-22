@@ -146,91 +146,98 @@ const FilesPEUploadCard = ({
           </button>
         </div>
       ) : (
-        <div className="flex w-full flex-col items-center justify-center">
-          <form
-            id={"multiple_file_upload_form"}
-            className={`${
-              dragActive ? "bg-blue-400" : "bg-neutral-100"
-            }  focus:ring-brand-300 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gray-200 bg-white p-4 text-center shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-4 md:p-5`}
-            ref={formRef}
-            onSubmit={handleFormSubmit}
-            onDragEnter={handleDragEnter}
-            onDrop={handleDrop}
-            onDragLeave={handleDragLeave}
-            onDragOver={handleDragOver}
-          >
-            <input
-              type="file"
-              name="upload_file"
-              id="upload_file"
-              accept=".acm, .ax, .cpl, .dll, .drv, .efi, .exe, .mui, .ocx, .scr, .sys, .tsp"
-              ref={inputRef}
-              className="hidden"
-              multiple={true}
-              onChange={handleChange}
-            />
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              className="h-8 w-8 stroke-neutral-400"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m6.75 12-3-3m0 0-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-              />
-            </svg>
-
-            <p className="pt-2">
-              분석을 원하는 파일을 끌어오거나{" "}
-              <span
-                className="cursor-pointer font-bold text-blue-600"
-                onClick={openFileExplorer}
+        <>
+          {!isProgress ? (
+            <div className="flex w-full flex-col items-center justify-center">
+              <form
+                id={"multiple_file_upload_form"}
+                className={`${
+                  dragActive ? "bg-blue-400" : "bg-neutral-100"
+                }  focus:ring-brand-300 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gray-200 bg-white p-4 text-center shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-4 md:p-5`}
+                ref={formRef}
+                onSubmit={handleFormSubmit}
+                onDragEnter={handleDragEnter}
+                onDrop={handleDrop}
+                onDragLeave={handleDragLeave}
+                onDragOver={handleDragOver}
               >
-                <u>클릭</u>
-              </span>
-              해 업로드해주세요.
-            </p>
-          </form>
-          {files.length != 0 ? (
-            <div className="mt-2 w-full">
-              <p className="ml-1">
-                <span className="text-blue-600">{files.length}개</span>
-              </p>
-              <div className="mt-1 flex max-h-72 w-full flex-col items-center space-y-2 overflow-y-scroll">
-                {files.map((file: File, idx: any) => (
-                  <div
-                    key={idx}
-                    className="flex w-full flex-row space-x-5 rounded-lg border border-gray-200 bg-white px-4 py-3 shadow-sm"
+                <input
+                  type="file"
+                  name="upload_file"
+                  id="upload_file"
+                  accept=".acm, .ax, .cpl, .dll, .drv, .efi, .exe, .mui, .ocx, .scr, .sys, .tsp"
+                  ref={inputRef}
+                  className="hidden"
+                  multiple={true}
+                  onChange={handleChange}
+                />
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  className="h-8 w-8 stroke-neutral-400"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m6.75 12-3-3m0 0-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+                  />
+                </svg>
+
+                <p className="pt-2">
+                  분석을 원하는 파일을 끌어오거나{" "}
+                  <span
+                    className="cursor-pointer font-bold text-blue-600"
+                    onClick={openFileExplorer}
                   >
-                    <span className="flex-1 text-base">
-                      {file.name} [
-                      {Math.round((file.size / (1024 * 1024)) * 100) / 100}MB]
-                    </span>
-                    <span
-                      className="cursor-pointer hover:text-red-500"
-                      onClick={() => removeFile(file.name, idx)}
-                    >
-                      × 삭제
-                    </span>
+                    <u>클릭</u>
+                  </span>
+                  해 업로드해주세요.
+                </p>
+              </form>
+              {files.length != 0 ? (
+                <div className="mt-2 w-full">
+                  <p className="ml-1">
+                    <span className="text-blue-600">{files.length}개</span>
+                  </p>
+                  <div className="mt-1 flex max-h-72 w-full flex-col items-center space-y-2 overflow-y-scroll">
+                    {files.map((file: File, idx: any) => (
+                      <div
+                        key={idx}
+                        className="flex w-full flex-row space-x-5 rounded-lg border border-gray-200 bg-white px-4 py-3 shadow-sm"
+                      >
+                        <span className="flex-1 text-base">
+                          {file.name} [
+                          {Math.round((file.size / (1024 * 1024)) * 100) / 100}
+                          MB]
+                        </span>
+                        <span
+                          className="cursor-pointer hover:text-red-500"
+                          onClick={() => removeFile(file.name, idx)}
+                        >
+                          × 삭제
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              <button
-                type="submit"
-                form="multiple_file_upload_form"
-                className="hover:bg-brand-600 focus:ring-brand-300 mt-3 w-full rounded-lg bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
-              >
-                분석하기
-              </button>
+                  <button
+                    type="submit"
+                    form="multiple_file_upload_form"
+                    className="hover:bg-brand-600 focus:ring-brand-300 mt-3 w-full rounded-lg bg-neutral-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4"
+                  >
+                    분석하기
+                  </button>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           ) : (
             <></>
           )}
-        </div>
+        </>
       )}
     </>
   );
