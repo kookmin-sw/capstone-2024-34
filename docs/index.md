@@ -22,9 +22,7 @@ permalink: /
 
 ## 포스터
 
-<object data="./assets/files/T34_캡스톤_포스터.pdf" type="application/pdf" alt="final poster" width="100%" height="960" >
-<p>PDF 미리보기를 지원하지 않는 환경입니다.</p>
-</object>
+![poster](./assets/files/T34_포스터.png)
 
 [다운로드](./assets/files/T34_캡스톤_포스터.pdf){: .btn .fs-5 .mb-4 .mb-md-0 }
 
@@ -35,6 +33,10 @@ permalink: /
 </object>
 
 [다운로드](./assets/files/T34_캡스톤_최종발표.pdf){: .btn .fs-5 .mb-4 .mb-md-0 }
+
+## 시연 영상
+
+<video src="./assets/files/T34_시연영상.mp4" alt="final video" width="100%" height="100%" >
 
 ## 최종 수행결과 보고서
 
