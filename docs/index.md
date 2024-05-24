@@ -11,6 +11,7 @@ permalink: /
 {: .fs-9 }
 
 [View it on GitHub](https://github.com/kookmin-sw/capstone-2024-34){: .btn .fs-5 .mb-4 .mb-md-0 }
+2024 국민대학교 소프트웨어학부 캡스톤 디자인 | 산학협력 34조 | 국민대학교 정보보호연구실 & (주)누리랩
 
 ---
 
