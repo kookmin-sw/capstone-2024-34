@@ -37,9 +37,12 @@ permalink: /
 ## 시연 영상
 
 <video src="./assets/files/T34_시연영상.mp4" alt="final video" width="100%" height="100%" controls>
+</video>
 
 ## 최종 수행결과 보고서
 
-<object data="./assets/files/T34_수행결과보고서.pdf" type="application/pdf" alt="final report" width="100%" height="640" >
+<object data="./assets/files/T34_수행결과보고서.pdf" type="application/pdf" alt="final report" width="100%" height="640">
+<p>PDF 미리보기를 지원하지 않는 환경입니다.</p>
+</object>
 
 [다운로드](./assets/files/T34_수행결과보고서.pdf){: .btn .fs-5 .mb-4 .mb-md-0 }
