@@ -36,7 +36,7 @@ permalink: /
 
 ## 시연 영상
 
-<video src="./assets/files/T34_시연영상.mp4" alt="final video" width="100%" height="100%" >
+<video src="./assets/files/T34_시연영상.mp4" alt="final video" width="100%" height="100%" controls>
 
 ## 최종 수행결과 보고서
 
