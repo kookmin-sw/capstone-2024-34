@@ -6,7 +6,7 @@
 
 - 악성 PE파일 만으로 시그니처 생성
 
-#### PE_benign_test.ipynb
+#### PE_benign_malware.ipynb
 
 - 정상 파일과 악성 파일을 합쳐서 시그니처 생성
 
