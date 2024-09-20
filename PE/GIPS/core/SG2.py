@@ -7,16 +7,15 @@ from core.HH import HH
 from tqdm import tqdm
 
 
-def SG2(payloads, window_size, vector_size, eps, minpts, ngram, hh1_size, hh2_size, hh3_size, ratio):
+def SG2(payloads, vector_size, eps, minpts, hh1_size, hh2_size, ratio):
     fine_vectors = []
 
     print('chunking')
     for payload in tqdm(payloads):
-        chunks = payload  # AEchunking(payload, window_size)
+        chunks = payload
         vector = np.zeros(vector_size, dtype=np.int8)
         for chunk in chunks:
-            idx = int(hashlib.md5(chunk.encode()).hexdigest(),
-                      16) % vector_size
+            idx = int(hashlib.md5(chunk.encode()).hexdigest(), 16) % vector_size
             vector[idx] += 1
 
         fine_vectors.append(vector)
