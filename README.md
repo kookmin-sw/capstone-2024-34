@@ -72,3 +72,6 @@ npm run dev
 #### 참고문헌
 
 HyungBin Seo, and MyungKeun Yoon. ["Generative intrusion detection and prevention on data stream."](https://www.usenix.org/conference/usenixsecurity23/presentation/seo) 32nd USENIX Security Symposium (USENIX Security 23). 2023.
+
+> 본 프로젝트는 2024년 과학기술정보통신부 및 정보통신기획평가원의 SW중심대학사업 지원을 받아 수행되었음. This project was supported by the MSIT(Ministry of Science and ICT), Korea, under the National Program for Excellence in SW) supervised by the IITP(Institute of Information & Communications Technology Planning & Evaluation) in 2024
+
